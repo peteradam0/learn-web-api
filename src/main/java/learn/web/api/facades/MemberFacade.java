@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface MemberFacade {
     public List<MemberData> getMemberData();
+
+    public MemberData createMember(String name);
 }

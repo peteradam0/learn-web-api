@@ -1,14 +1,20 @@
 package learn.web.api.models;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Document(collection = "Member")
+public class Member{
 
-@Setter
-@Getter
-@ToString
-public class Member extends BaseEntity{
+    @Id
+    private String id;
     private String userName;
+
 }

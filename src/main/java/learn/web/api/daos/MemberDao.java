@@ -1,10 +1,8 @@
 package learn.web.api.daos;
 
 import learn.web.api.models.Member;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
-import java.util.List;
+public interface MemberDao extends MongoRepository<Member, String> {
 
-public interface MemberDao {
-
-    public List<Member> getMembers();
 }

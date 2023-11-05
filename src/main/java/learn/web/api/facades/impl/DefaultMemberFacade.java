@@ -31,4 +31,10 @@ public class DefaultMemberFacade implements MemberFacade {
 
         return memberDataListData;
     }
+
+    @Override
+    public MemberData createMember(String name) {
+        Member result = memberService.createMember(new Member("1",name));
+        return new MemberData( result.getUserName());
+    }
 }

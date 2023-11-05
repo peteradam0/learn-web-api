@@ -16,6 +16,11 @@ public class DefaultMemberService implements MemberService {
 
     @Override
     public List<Member> getMembers() {
-        return memberDao.getMembers();
+        return memberDao.findAll();
+    }
+
+    @Override
+    public Member createMember(Member member) {
+        return memberDao.save(member);
     }
 }

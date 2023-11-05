@@ -23,4 +23,9 @@ public class MemberController {
     public ResponseEntity<List<MemberData>> handleGetMembers() {
         return ResponseEntity.ok(memberFacade.getMemberData());
     }
+
+    @GetMapping("/member")
+    public ResponseEntity<MemberData> createMember() {
+        return ResponseEntity.ok(memberFacade.createMember("Peter"));
+    }
 }
