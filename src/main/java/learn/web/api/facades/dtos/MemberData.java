@@ -1,7 +1,9 @@
 package learn.web.api.facades.dtos;
 
+import lombok.Getter;
 import org.springframework.boot.jackson.JsonComponent;
 
+@Getter
 @JsonComponent
 public class MemberData {
 
@@ -13,11 +15,6 @@ public class MemberData {
     public MemberData(String userName) {
         this.userName = userName;
     }
-
-    public String getUserName() {
-        return userName;
-    }
-
 
 
     public void setUserName(String userName) {
