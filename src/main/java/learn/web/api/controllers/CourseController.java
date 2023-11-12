@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true", allowedHeaders = "true")
 public class CourseController {
 
-    private final Logger logger = LoggerFactory.getLogger(CourseController.class);
+    private final Logger LOGGER = LoggerFactory.getLogger(CourseController.class);
 
     @Autowired
     private CourseFacade courseFacade;
@@ -26,7 +26,7 @@ public class CourseController {
         try {
             createdCourse = courseFacade.createCourse(courseData);
         } catch (Exception e) {
-            logger.error("Course not created", e);
+            LOGGER.error("Course not created", e);
             ResponseEntity.noContent();
         }
         return ResponseEntity.ok(createdCourse);
