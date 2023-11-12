@@ -3,7 +3,6 @@ package learn.web.api.controllers;
 import jakarta.servlet.http.HttpServletRequest;
 import learn.web.api.facades.CourseFacade;
 import learn.web.api.facades.dtos.CourseData;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +18,14 @@ public class CourseController {
 
     @Autowired
     private CourseFacade courseFacade;
+
     @PostMapping("/course")
-    public ResponseEntity<CourseData> handleGetMembers(HttpServletRequest request, @RequestBody CourseData courseData) {
+    public ResponseEntity<CourseData> handleGetMembers(@RequestBody CourseData courseData) {
 
         CourseData createdCourse = null;
-        try{
+        try {
             createdCourse = courseFacade.createCourse(courseData);
-        }catch (Exception e){
+        } catch (Exception e) {
             logger.error("Course not created", e);
             ResponseEntity.noContent();
         }

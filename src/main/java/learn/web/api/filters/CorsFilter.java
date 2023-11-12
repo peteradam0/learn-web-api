@@ -1,4 +1,4 @@
-package learn.web.api.filter;
+package learn.web.api.filters;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

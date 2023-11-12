@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @AllArgsConstructor
 @Document(collection = "Attachment")
-public class Attachment extends AuditData{
+public class Attachment {
 
     @Id
     private String id;

@@ -14,7 +14,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Course extends AuditData{
+public class Course {
 
     @Id
     private String id;
