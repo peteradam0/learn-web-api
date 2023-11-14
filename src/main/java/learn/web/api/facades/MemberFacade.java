@@ -5,7 +5,7 @@ import learn.web.api.facades.dtos.MemberData;
 import java.util.List;
 
 public interface MemberFacade {
-    public List<MemberData> getMemberData();
+    List<MemberData> getMemberData();
 
-    public MemberData createMember(String name);
+    MemberData createMember(String name);
 }

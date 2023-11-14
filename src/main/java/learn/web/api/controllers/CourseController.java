@@ -1,6 +1,5 @@
 package learn.web.api.controllers;
 
-import jakarta.servlet.http.HttpServletRequest;
 import learn.web.api.facades.CourseFacade;
 import learn.web.api.facades.dtos.CourseData;
 import org.slf4j.Logger;
