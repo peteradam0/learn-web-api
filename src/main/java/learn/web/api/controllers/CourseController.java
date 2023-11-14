@@ -1,6 +1,7 @@
 package learn.web.api.controllers;
 
 import learn.web.api.facades.CourseFacade;
+import learn.web.api.facades.dtos.CourseCreateResponseData;
 import learn.web.api.facades.dtos.CourseData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,9 +20,9 @@ public class CourseController {
     private CourseFacade courseFacade;
 
     @PostMapping("/course")
-    public ResponseEntity<CourseData> handleGetMembers(@RequestBody CourseData courseData) {
+    public ResponseEntity<CourseCreateResponseData> handleGetMembers(@RequestBody CourseData courseData) {
 
-        CourseData createdCourse = null;
+        CourseCreateResponseData createdCourse = null;
         try {
             createdCourse = courseFacade.createCourse(courseData);
         } catch (Exception e) {
