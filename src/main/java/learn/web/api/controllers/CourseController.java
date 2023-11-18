@@ -20,7 +20,7 @@ public class CourseController {
     private CourseFacade courseFacade;
 
     @PostMapping("/course")
-    public ResponseEntity<CourseCreateResponseData> handleGetMembers(@RequestBody CourseData courseData) {
+    public ResponseEntity<CourseCreateResponseData> handleCreateCourse(@RequestBody CourseData courseData) {
 
         CourseCreateResponseData createdCourse = null;
         try {

@@ -16,5 +16,8 @@ public class CourseDataToCoursePopulator implements Populator<CourseData, Course
     public void populate(CourseData source, Course target) {
         target.setTitle(source.getTitle());
         target.setUserId(sessionFacade.getCurrentUserId());
+        target.setDescription(source.getDescription());
+        target.setImageUrl(source.getImageUrl());
+        target.setCategoryId(source.getCategory());
     }
 }

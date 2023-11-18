@@ -9,4 +9,7 @@ import org.springframework.boot.jackson.JsonComponent;
 @Setter
 public class CourseData {
     private String title;
+    private String description;
+    private String imageUrl;
+    private String category;
 }
