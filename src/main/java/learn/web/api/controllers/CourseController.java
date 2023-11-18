@@ -36,12 +36,24 @@ public class CourseController {
         return ResponseEntity.ok(createdCourse);
     }
 
-    @GetMapping("/courses")
+    @GetMapping("/administration/courses")
     public ResponseEntity<List<CourseData>> handleGetCoursesForUser() {
 
         List<CourseData> courseDataList = new ArrayList<>();
         try {
             courseDataList = courseFacade.getCourseDataForUser();
+        } catch (Exception e) {
+            LOGGER.error("Get courses for user failed", e);
+            ResponseEntity.noContent();
+        }
+        return ResponseEntity.ok(courseDataList);
+    }
+
+    @GetMapping("/courses")
+    public ResponseEntity<List<CourseData>> handleGetCourses() {
+        List<CourseData> courseDataList = new ArrayList<>();
+        try {
+            courseDataList = courseFacade.getCourses();
         } catch (Exception e) {
             LOGGER.error("Get courses for user failed", e);
             ResponseEntity.noContent();

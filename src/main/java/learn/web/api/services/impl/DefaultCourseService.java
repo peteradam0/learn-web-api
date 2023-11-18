@@ -24,4 +24,9 @@ public class DefaultCourseService implements CourseService {
     public List<Course> getCoursesForUser(String userId) {
         return courseDao.findByUserId(userId);
     }
+
+    @Override
+    public List<Course> getCourses() {
+        return courseDao.findAll();
+    }
 }

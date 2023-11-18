@@ -9,4 +9,6 @@ import java.util.List;
 public interface CourseFacade {
     CourseCreateResponseData createCourse(CourseCreateRequestData courseCreateRequestData);
     List<CourseData> getCourseDataForUser();
+
+    List<CourseData> getCourses();
 }
