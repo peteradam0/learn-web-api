@@ -7,9 +7,7 @@ import org.springframework.boot.jackson.JsonComponent;
 @JsonComponent
 @Getter
 @Setter
-public class CourseData {
-
-    private String id;
+public class CourseCreateRequestData {
     private String title;
     private String description;
     private String imageUrl;
