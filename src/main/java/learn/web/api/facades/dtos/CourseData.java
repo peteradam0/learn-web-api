@@ -14,4 +14,5 @@ public class CourseData {
     private String description;
     private String imageUrl;
     private String category;
+    private boolean isPublished;
 }

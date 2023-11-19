@@ -14,5 +14,6 @@ public class CourseToCourseDataPopulator implements Populator<Course, CourseData
             target.setCategory(source.getCategoryId());
             target.setImageUrl(source.getImageUrl());
             target.setDescription(source.getDescription());
+            target.setPublished(source.isPublished());
     }
 }
