@@ -61,5 +61,17 @@ public class CourseController {
         return ResponseEntity.ok(courseDataList);
     }
 
+    @GetMapping("/courses/{courseId}")
+    public ResponseEntity<CourseData> handleGetCourses(@PathVariable String courseId) {
+        CourseData courseData = new CourseData();
+        try {
+            courseData = courseFacade.getCourseData(courseId);
+        } catch (Exception e) {
+            LOGGER.error("Get courses for user failed", e);
+            ResponseEntity.noContent();
+        }
+        return ResponseEntity.ok(courseData);
+    }
+
 
 }

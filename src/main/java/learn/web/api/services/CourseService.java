@@ -8,4 +8,6 @@ public interface CourseService {
     Course createCourse(Course course);
     List<Course> getCoursesForUser(String userId);
     List<Course> getCourses();
+
+    Course getCourse(String courseId);
 }

@@ -8,4 +8,6 @@ import java.util.List;
 public interface CourseDao extends MongoRepository<Course, String> {
 
     List<Course> findByUserId(String userId);
+
+    Course findCoursesById(String courseId);
 }

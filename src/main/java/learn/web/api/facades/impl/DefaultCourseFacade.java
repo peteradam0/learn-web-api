@@ -72,5 +72,14 @@ public class DefaultCourseFacade implements CourseFacade {
         }
         return courseDataListData;
     }
+
+    @Override
+    public CourseData getCourseData(String courseId) {
+        Course course = courseService.getCourse(courseId);
+        CourseData courseData = new CourseData();
+        courseToCourseDataPopulator.populate(course,courseData);
+
+        return courseData;
+    }
 }
 
