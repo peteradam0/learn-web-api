@@ -75,6 +75,18 @@ public class CourseController {
         return ResponseEntity.ok(courseData);
     }
 
+    @GetMapping("/courses/{courseId}/chapters")
+    public ResponseEntity<List<ChapterData>> handleGetChapterOfCourses(@PathVariable String courseId) {
+        List<ChapterData> chapterData = new ArrayList<>();
+        try {
+            chapterData = chapterFacade.getChapterData(courseId);
+        } catch (Exception e) {
+            LOGGER.error("Get chapters for user failed", e);
+            ResponseEntity.noContent();
+        }
+        return ResponseEntity.ok(chapterData);
+    }
+
     @PostMapping("/courses/{courseId}/chapters")
     public ResponseEntity<ChapterData> handleCreateCourseChapters(@PathVariable String courseId, @RequestBody CreateChapterData createChapterData) {
         ChapterData chapterData = new ChapterData();
@@ -98,6 +110,17 @@ public class CourseController {
         }
         return ResponseEntity.ok("Chapter deleted");
     }
+    @PutMapping("/courses/{courseId}/chapters/{chapterId}")
+    public ResponseEntity<ChapterData> handlePutCourseChapters(@PathVariable String courseId, @PathVariable String chapterId, @RequestBody ChapterData chapterData) {
+        try {
+            chapterFacade.updateChapter(chapterData);
+        } catch (Exception e) {
+            LOGGER.error("Chapter update error ", e);
+            ResponseEntity.noContent();
+        }
+        return ResponseEntity.ok(chapterData);
+    }
+
 
 
 }

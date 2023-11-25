@@ -13,5 +13,6 @@ public class ChapterData {
     private String title;
     private String description;
     private String videoUrl;
+    private String courseId;
 
 }

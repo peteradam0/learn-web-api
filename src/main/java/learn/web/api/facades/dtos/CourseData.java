@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.jackson.JsonComponent;
 
+import java.util.List;
+
 @JsonComponent
 @Getter
 @Setter
@@ -15,4 +17,5 @@ public class CourseData {
     private String imageUrl;
     private String category;
     private boolean isPublished;
+    private List<ChapterData> chapterData;
 }

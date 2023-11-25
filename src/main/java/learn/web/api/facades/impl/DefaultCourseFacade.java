@@ -1,13 +1,15 @@
 package learn.web.api.facades.impl;
 
+import learn.web.api.facades.ChapterFacade;
 import learn.web.api.facades.CourseFacade;
 import learn.web.api.facades.SessionFacade;
-import learn.web.api.facades.dtos.*;
-import learn.web.api.facades.populators.impl.CreateChapterDataToChapterPopulator;
+import learn.web.api.facades.dtos.ChapterData;
+import learn.web.api.facades.dtos.CourseCreateRequestData;
+import learn.web.api.facades.dtos.CourseCreateResponseData;
+import learn.web.api.facades.dtos.CourseData;
 import learn.web.api.facades.populators.impl.CourseDataToCoursePopulator;
 import learn.web.api.facades.populators.impl.CourseToCourseDataPopulator;
 import learn.web.api.facades.populators.impl.CourseToCourseDataResponsePopulator;
-import learn.web.api.models.Chapter;
 import learn.web.api.models.Course;
 import learn.web.api.services.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,9 @@ public class DefaultCourseFacade implements CourseFacade {
     private SessionFacade sessionFacade;
 
     @Autowired
+    private ChapterFacade chapterFacade;
+
+    @Autowired
     private CourseService courseService;
 
     @Override
@@ -53,9 +58,9 @@ public class DefaultCourseFacade implements CourseFacade {
         String userId = sessionFacade.getCurrentUserId();
 
         List<CourseData> courseDataListData = new ArrayList<>();
-        for(Course course : courseService.getCoursesForUser(userId)){
+        for (Course course : courseService.getCoursesForUser(userId)) {
             CourseData courseData = new CourseData();
-            courseToCourseDataPopulator.populate(course,courseData);
+            courseToCourseDataPopulator.populate(course, courseData);
             courseDataListData.add(courseData);
         }
         return courseDataListData;
@@ -65,9 +70,9 @@ public class DefaultCourseFacade implements CourseFacade {
     public List<CourseData> getCourses() {
 
         List<CourseData> courseDataListData = new ArrayList<>();
-        for(Course course : courseService.getCourses()){
+        for (Course course : courseService.getCourses()) {
             CourseData courseData = new CourseData();
-            courseToCourseDataPopulator.populate(course,courseData);
+            courseToCourseDataPopulator.populate(course, courseData);
             courseDataListData.add(courseData);
         }
         return courseDataListData;
@@ -77,7 +82,11 @@ public class DefaultCourseFacade implements CourseFacade {
     public CourseData getCourseData(String courseId) {
         Course course = courseService.getCourse(courseId);
         CourseData courseData = new CourseData();
-        courseToCourseDataPopulator.populate(course,courseData);
+        courseToCourseDataPopulator.populate(course, courseData);
+
+        List<ChapterData> chapterData = new ArrayList<>();
+        chapterData = chapterFacade.getChapterData(courseId);
+        courseData.setChapterData(chapterData);
 
         return courseData;
     }
