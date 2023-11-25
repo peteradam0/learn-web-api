@@ -2,12 +2,12 @@ package learn.web.api.facades.impl;
 
 import learn.web.api.facades.CourseFacade;
 import learn.web.api.facades.SessionFacade;
-import learn.web.api.facades.dtos.CourseCreateResponseData;
-import learn.web.api.facades.dtos.CourseCreateRequestData;
-import learn.web.api.facades.dtos.CourseData;
+import learn.web.api.facades.dtos.*;
+import learn.web.api.facades.populators.impl.CreateChapterDataToChapterPopulator;
 import learn.web.api.facades.populators.impl.CourseDataToCoursePopulator;
 import learn.web.api.facades.populators.impl.CourseToCourseDataPopulator;
 import learn.web.api.facades.populators.impl.CourseToCourseDataResponsePopulator;
+import learn.web.api.models.Chapter;
 import learn.web.api.models.Course;
 import learn.web.api.services.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,5 +81,6 @@ public class DefaultCourseFacade implements CourseFacade {
 
         return courseData;
     }
+
 }
 

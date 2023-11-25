@@ -34,4 +34,5 @@ public class DefaultCourseService implements CourseService {
     public Course getCourse(String courseId) {
         return courseDao.findCoursesById(courseId);
     }
+
 }

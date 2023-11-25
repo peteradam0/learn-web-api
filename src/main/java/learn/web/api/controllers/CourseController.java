@@ -1,9 +1,8 @@
 package learn.web.api.controllers;
 
+import learn.web.api.facades.ChapterFacade;
 import learn.web.api.facades.CourseFacade;
-import learn.web.api.facades.dtos.CourseCreateResponseData;
-import learn.web.api.facades.dtos.CourseCreateRequestData;
-import learn.web.api.facades.dtos.CourseData;
+import learn.web.api.facades.dtos.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +21,9 @@ public class CourseController {
 
     @Autowired
     private CourseFacade courseFacade;
+
+    @Autowired
+    private ChapterFacade chapterFacade;
 
     @PostMapping("/courses")
     public ResponseEntity<CourseCreateResponseData> handleCreateCourse(@RequestBody CourseCreateRequestData courseCreateRequestData) {
@@ -71,6 +73,30 @@ public class CourseController {
             ResponseEntity.noContent();
         }
         return ResponseEntity.ok(courseData);
+    }
+
+    @PostMapping("/courses/{courseId}/chapters")
+    public ResponseEntity<ChapterData> handleCreateCourseChapters(@PathVariable String courseId, @RequestBody CreateChapterData createChapterData) {
+        ChapterData chapterData = new ChapterData();
+        try {
+            chapterData = chapterFacade.createChapter(courseId, createChapterData);
+        } catch (Exception e) {
+            LOGGER.error("Create chapter error ", e);
+            ResponseEntity.noContent();
+        }
+        return ResponseEntity.ok(chapterData);
+    }
+
+    @DeleteMapping("/courses/{courseId}/chapters/{chapterId}")
+    public ResponseEntity<String> handleDeleteCourseChapters(@PathVariable String courseId, @PathVariable String chapterId) {
+
+        try {
+            chapterFacade.deleteChapter(chapterId);
+        } catch (Exception e) {
+            LOGGER.error("Create chapter error ", e);
+            ResponseEntity.noContent();
+        }
+        return ResponseEntity.ok("Chapter deleted");
     }
 
 

@@ -1,8 +1,6 @@
 package learn.web.api.facades;
 
-import learn.web.api.facades.dtos.CourseCreateResponseData;
-import learn.web.api.facades.dtos.CourseCreateRequestData;
-import learn.web.api.facades.dtos.CourseData;
+import learn.web.api.facades.dtos.*;
 
 import java.util.List;
 
