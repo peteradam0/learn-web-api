@@ -35,4 +35,11 @@ public class DefaultCourseService implements CourseService {
         return courseDao.findCoursesById(courseId);
     }
 
+    @Override
+    public void changePublication(String courseId) {
+        Course course = courseDao.findCoursesById(courseId);
+        course.setPublished(!course.isPublished());
+        courseDao.save(course);
+    }
+
 }

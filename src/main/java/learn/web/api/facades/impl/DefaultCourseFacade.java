@@ -91,5 +91,10 @@ public class DefaultCourseFacade implements CourseFacade {
         return courseData;
     }
 
+    @Override
+    public void changePublication(String courseId) {
+        courseService.changePublication(courseId);
+    }
+
 }
 

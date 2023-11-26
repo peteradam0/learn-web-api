@@ -12,4 +12,6 @@ public interface CourseFacade {
 
     //TODO: A course should be only editable by a admin or maintainer
     CourseData getCourseData(String courseId);
+
+    void changePublication(String courseId);
 }

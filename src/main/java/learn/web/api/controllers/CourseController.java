@@ -75,6 +75,19 @@ public class CourseController {
         return ResponseEntity.ok(courseData);
     }
 
+    @PutMapping("/courses/{courseId}")
+    public ResponseEntity<String> handlePublication(@PathVariable String courseId, @RequestBody PublicationData publicationData) {
+
+        try {
+            courseFacade.changePublication(courseId);
+        } catch (Exception e) {
+            LOGGER.error("Get courses for user failed", e);
+            ResponseEntity.noContent();
+        }
+        return ResponseEntity.ok("Change publication success");
+
+    }
+
     @GetMapping("/courses/{courseId}/chapters")
     public ResponseEntity<List<ChapterData>> handleGetChapterOfCourses(@PathVariable String courseId) {
         List<ChapterData> chapterData = new ArrayList<>();
@@ -110,6 +123,7 @@ public class CourseController {
         }
         return ResponseEntity.ok("Chapter deleted");
     }
+
     @PutMapping("/courses/{courseId}/chapters/{chapterId}")
     public ResponseEntity<ChapterData> handlePutCourseChapters(@PathVariable String courseId, @PathVariable String chapterId, @RequestBody ChapterData chapterData) {
         try {
@@ -120,7 +134,6 @@ public class CourseController {
         }
         return ResponseEntity.ok(chapterData);
     }
-
 
 
 }

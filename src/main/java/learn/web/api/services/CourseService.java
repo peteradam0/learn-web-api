@@ -13,4 +13,5 @@ public interface CourseService {
 
     Course getCourse(String courseId);
 
+    void changePublication(String courseId);
 }
