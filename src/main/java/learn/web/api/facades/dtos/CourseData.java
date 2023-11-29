@@ -15,6 +15,7 @@ public class CourseData {
     private String title;
     private String description;
     private String imageUrl;
+    private String videoUrl;
     private String category;
     private boolean isPublished;
     private List<ChapterData> chapterData;

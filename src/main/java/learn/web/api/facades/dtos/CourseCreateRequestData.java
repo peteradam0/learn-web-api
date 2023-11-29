@@ -12,4 +12,5 @@ public class CourseCreateRequestData {
     private String description;
     private String imageUrl;
     private String category;
+    private String videoUrl;
 }

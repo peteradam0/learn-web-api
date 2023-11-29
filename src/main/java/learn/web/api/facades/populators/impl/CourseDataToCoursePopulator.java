@@ -18,6 +18,7 @@ public class CourseDataToCoursePopulator implements Populator<CourseCreateReques
         target.setUserId(sessionFacade.getCurrentUserId());
         target.setDescription(source.getDescription());
         target.setImageUrl(source.getImageUrl());
+        target.setVideoUrl(source.getVideoUrl());
         target.setCategoryId(source.getCategory());
     }
 }
