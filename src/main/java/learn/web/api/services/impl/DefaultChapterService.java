@@ -6,6 +6,7 @@ import learn.web.api.services.ChapterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.Instant;
 import java.util.List;
 
 @Component
@@ -16,6 +17,7 @@ public class DefaultChapterService implements ChapterService {
 
     @Override
     public Chapter createChapter(Chapter chapter) {
+        chapter.setCreatedAt(Instant.now());
         return chapterDao.save(chapter);
     }
 
@@ -31,6 +33,7 @@ public class DefaultChapterService implements ChapterService {
 
     @Override
     public Chapter updateChapter(Chapter chapter) {
+        chapter.setUpdatedAt(Instant.now());
         return chapterDao.save(chapter);
     }
 }

@@ -6,6 +6,7 @@ import learn.web.api.services.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.Instant;
 import java.util.List;
 
 @Component
@@ -17,6 +18,7 @@ public class DefaultCourseService implements CourseService {
 
     @Override
     public Course createCourse(Course course) {
+        course.setCreatedAt(Instant.now());
         return courseDao.save(course);
     }
 

@@ -17,6 +17,7 @@ public class CourseData {
     private String imageUrl;
     private String videoUrl;
     private String category;
+    private String createdAt;
     private boolean isPublished;
     private List<ChapterData> chapterData;
 }
