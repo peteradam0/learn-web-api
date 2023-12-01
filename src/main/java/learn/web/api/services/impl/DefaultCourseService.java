@@ -44,4 +44,9 @@ public class DefaultCourseService implements CourseService {
         courseDao.save(course);
     }
 
+    @Override
+    public List<Course> getPublishedCourses() {
+        return courseDao.findCoursesByIsPublished(true);
+    }
+
 }

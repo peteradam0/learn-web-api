@@ -10,6 +10,8 @@ public interface CourseFacade {
 
     List<CourseData> getCourses();
 
+    List<CourseData> getPublishedCourses();
+
     //TODO: A course should be only editable by a admin or maintainer
     CourseData getCourseData(String courseId);
 

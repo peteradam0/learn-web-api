@@ -12,5 +12,6 @@ import java.util.List;
 public class EmailData {
     List<EmailAddress> email_addresses;
     String id;
+    String username;
 }
 

@@ -16,4 +16,5 @@ public class User {
     private String id;
     private String clerkId;
     private String email;
+    private String username;
 }

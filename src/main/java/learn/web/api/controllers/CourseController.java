@@ -63,6 +63,18 @@ public class CourseController {
         return ResponseEntity.ok(courseDataList);
     }
 
+    @GetMapping("/courses/published")
+    public ResponseEntity<List<CourseData>> handleGetPublishedCourses() {
+        List<CourseData> courseDataList = new ArrayList<>();
+        try {
+            courseDataList = courseFacade.getPublishedCourses();
+        } catch (Exception e) {
+            LOGGER.error("Get published courses for user failed", e);
+            ResponseEntity.noContent();
+        }
+        return ResponseEntity.ok(courseDataList);
+    }
+
     @GetMapping("/courses/{courseId}")
     public ResponseEntity<CourseData> handleGetCourses(@PathVariable String courseId) {
         CourseData courseData = new CourseData();
