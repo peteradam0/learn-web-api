@@ -11,13 +11,12 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "User")
-public class User {
+@Document(collection = "CourseParticipation")
+public class CourseParticipation {
 
     @Id
     private String id;
-    private String clerkId;
-    private String email;
-    private String username;
-    private List<CourseParticipation> courseParticipations;
+    private String userId;
+    private String courseId;
+    private List<String> completedChapterIds;
 }
