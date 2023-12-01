@@ -16,4 +16,9 @@ public class DefaultUserService implements UserService {
     public void createUser(User user) {
         userDao.save(user);
     }
+
+    @Override
+    public User getUserById(String userId) {
+        return userDao.findByClerkId(userId);
+    }
 }

@@ -11,8 +11,19 @@ public class DefaultCourseParticipationService implements CourseParticipationSer
 
     @Autowired
     private CourseParticipationDao courseParticipationDao;
+
     @Override
     public void createParticipation(CourseParticipation courseParticipation) {
         courseParticipationDao.save(courseParticipation);
+    }
+
+    @Override
+    public CourseParticipation getParticipation(String courseId, String currentUserId) {
+        CourseParticipation courseParticipation = courseParticipationDao.getCourseParticipationByCourseIdAndAndUserId(courseId, currentUserId);
+
+        if (courseParticipation.getCourseId() != null) {
+            return courseParticipation;
+        }
+        throw new RuntimeException("No participation found");
     }
 }

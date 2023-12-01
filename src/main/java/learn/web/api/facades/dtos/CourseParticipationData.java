@@ -7,8 +7,9 @@ import org.springframework.boot.jackson.JsonComponent;
 @JsonComponent
 @Getter
 @Setter
-public class UserData {
+public class CourseParticipationData {
 
-    private String username;
-    private String email;
+    private String id;
+    private String courseId;
+    private String userId;
 }
