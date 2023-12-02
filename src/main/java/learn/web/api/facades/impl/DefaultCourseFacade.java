@@ -2,11 +2,9 @@ package learn.web.api.facades.impl;
 
 import learn.web.api.facades.ChapterFacade;
 import learn.web.api.facades.CourseFacade;
+import learn.web.api.facades.CourseParticipationFacade;
 import learn.web.api.facades.SessionFacade;
-import learn.web.api.facades.dtos.ChapterData;
-import learn.web.api.facades.dtos.CourseCreateRequestData;
-import learn.web.api.facades.dtos.CourseCreateResponseData;
-import learn.web.api.facades.dtos.CourseData;
+import learn.web.api.facades.dtos.*;
 import learn.web.api.facades.populators.impl.CourseDataToCoursePopulator;
 import learn.web.api.facades.populators.impl.CourseToCourseDataPopulator;
 import learn.web.api.facades.populators.impl.CourseToCourseDataResponsePopulator;
@@ -38,6 +36,9 @@ public class DefaultCourseFacade implements CourseFacade {
 
     @Autowired
     private CourseService courseService;
+
+    @Autowired
+    private CourseParticipationFacade courseParticipationFacade;
 
     @Override
     public CourseCreateResponseData createCourse(CourseCreateRequestData courseCreateRequestData) {
@@ -93,7 +94,9 @@ public class DefaultCourseFacade implements CourseFacade {
     public CourseData getCourseData(String courseId) {
         Course course = courseService.getCourse(courseId);
         CourseData courseData = new CourseData();
-        courseToCourseDataPopulator.populate(course, courseData);
+        if(course != null){
+            courseToCourseDataPopulator.populate(course, courseData);
+        }
 
         List<ChapterData> chapterData = new ArrayList<>();
         chapterData = chapterFacade.getChapterData(courseId);
@@ -107,5 +110,13 @@ public class DefaultCourseFacade implements CourseFacade {
         courseService.changePublication(courseId);
     }
 
+    @Override
+    public List<CourseData> getInProgressCourses() {
+        List<String> courseIdList = courseParticipationFacade.getAllParticipations().stream()
+                .map(CourseParticipationData::getCourseId).toList();
+
+        return getCourses().stream()
+                .filter(courseData -> courseIdList.contains(courseData.getId())).toList();
+    }
 }
 

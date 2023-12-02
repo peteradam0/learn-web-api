@@ -1,12 +1,17 @@
 package learn.web.api.facades.populators.impl;
 
+import learn.web.api.facades.ChapterFacade;
 import learn.web.api.facades.dtos.CourseData;
 import learn.web.api.facades.populators.Populator;
 import learn.web.api.models.Course;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class CourseToCourseDataPopulator implements Populator<Course, CourseData> {
+
+    @Autowired
+    private ChapterFacade chapterFacade;
     @Override
     public void populate(Course source, CourseData target) {
             target.setTitle(source.getTitle());
@@ -17,5 +22,6 @@ public class CourseToCourseDataPopulator implements Populator<Course, CourseData
             target.setPublished(source.isPublished());
             target.setVideoUrl(source.getVideoUrl());
             target.setCreatedAt(String.valueOf(source.getCreatedAt()));
+            target.setChapterData(chapterFacade.getChapterData(source.getId()));
     }
 }

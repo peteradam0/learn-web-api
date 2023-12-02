@@ -9,6 +9,9 @@ import learn.web.api.services.CourseParticipationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class DefaultCourseParticipationFacade implements CourseParticipationFacade {
 
@@ -33,8 +36,24 @@ public class DefaultCourseParticipationFacade implements CourseParticipationFaca
     public CourseParticipationData getParticipation(String courseId) {
         CourseParticipation courseParticipation = courseParticipationService.getParticipation(courseId, sessionFacade.getCurrentUserId());
         CourseParticipationData courseParticipationData = new CourseParticipationData();
-        participationToParticipationDataPopulator.populate(courseParticipation,courseParticipationData);
+        participationToParticipationDataPopulator.populate(courseParticipation, courseParticipationData);
         return courseParticipationData;
+    }
+
+    @Override
+    public List<CourseParticipationData> getAllParticipations() {
+        List<CourseParticipation> courseParticipations = courseParticipationService.getParticipations(sessionFacade.getCurrentUserId());
+
+        List<CourseParticipationData> courseParticipationDataList = new ArrayList<>();
+        if (courseParticipations != null) {
+            for (CourseParticipation participation : courseParticipations) {
+                CourseParticipationData courseParticipationData = new CourseParticipationData();
+                participationToParticipationDataPopulator.populate(participation, courseParticipationData);
+                courseParticipationDataList.add(courseParticipationData);
+            }
+        }
+
+        return courseParticipationDataList;
     }
 
     @Override

@@ -36,6 +36,11 @@ public class DefaultCourseParticipationService implements CourseParticipationSer
     }
 
     @Override
+    public List<CourseParticipation> getParticipations(String currentUserId) {
+        return courseParticipationDao.getCourseParticipationByUserId(currentUserId);
+    }
+
+    @Override
     public void createChapterParticipation(String courseId, String chapterId, String currentUserId) {
         CourseParticipation courseParticipation = courseParticipationDao.getCourseParticipationByCourseIdAndAndUserId(courseId, currentUserId);
         List<String> completedChapters = courseParticipation.getCompletedChapterIds();

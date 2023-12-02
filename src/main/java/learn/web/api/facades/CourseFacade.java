@@ -16,4 +16,6 @@ public interface CourseFacade {
     CourseData getCourseData(String courseId);
 
     void changePublication(String courseId);
+
+    List<CourseData> getInProgressCourses();
 }
