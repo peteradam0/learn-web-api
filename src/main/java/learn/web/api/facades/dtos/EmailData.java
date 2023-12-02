@@ -13,5 +13,8 @@ public class EmailData {
     List<EmailAddress> email_addresses;
     String id;
     String username;
+    String image_url;
+    String first_name;
+    String last_name;
 }
 

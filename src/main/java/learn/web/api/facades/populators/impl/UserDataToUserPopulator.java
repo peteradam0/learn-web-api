@@ -12,5 +12,8 @@ public class UserDataToUserPopulator implements Populator<WebhookUserData, User>
         target.setClerkId(source.getData().getId());
         target.setEmail(source.getData().getEmail_addresses().get(0).getEmail_address());
         target.setUsername(source.getData().getUsername());
+        target.setImageUrl(source.getData().getImage_url());
+        target.setFirstname(source.getData().getFirst_name());
+        target.setLastname(source.getData().getLast_name());
     }
 }

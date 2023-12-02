@@ -24,10 +24,17 @@ public class Webhooks {
     @PostMapping("/webhooks")
     public String handlePostMembers(HttpServletRequest request, @RequestBody WebhookUserData webhookUserData) throws IOException, WebhookVerificationException {
 
-        if (webhookUserData.getType().equalsIgnoreCase("user.created") && webhookUserData.getData().getEmail_addresses() != null) {
-            userFacade.createUser(webhookUserData);
+        if(webhookUserData.getData().getEmail_addresses() != null) {
+            switch (webhookUserData.getType()) {
+                case "user.created":
+                    userFacade.createUser(webhookUserData);
+                    break;
+                case "user.updated":
+                    userFacade.updateUser(webhookUserData);
+                    break;
+                default:
+            }
         }
-
         return "hello";
     }
 }

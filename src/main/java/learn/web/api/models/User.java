@@ -20,4 +20,7 @@ public class User {
     private String email;
     private String username;
     private List<CourseParticipation> courseParticipations;
+    private String imageUrl;
+    private String firstname;
+    private String lastname;
 }

@@ -40,4 +40,11 @@ public class DefaultUserFacade implements UserFacade {
         userToUserDataPopulator.populate(user,userData);
         return userData;
     }
+
+    @Override
+    public void updateUser(WebhookUserData webhookUserData) {
+        User user = new User();
+        userDataToUserPopulator.populate(webhookUserData, user);
+        userService.updateUser(user);
+    }
 }

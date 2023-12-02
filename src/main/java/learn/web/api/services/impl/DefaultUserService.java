@@ -21,4 +21,14 @@ public class DefaultUserService implements UserService {
     public User getUserById(String userId) {
         return userDao.findByClerkId(userId);
     }
+
+    @Override
+    public void updateUser(User user) {
+       User foundUser = userDao.findUserByEmail(user.getEmail());
+        if(foundUser != null){
+            userDao.delete(foundUser);
+        }
+
+       userDao.save(user);
+    }
 }
