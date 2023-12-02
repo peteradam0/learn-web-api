@@ -11,5 +11,6 @@ public class ParticipationToParticipationDataPopulator implements Populator<Cour
     public void populate(CourseParticipation source, CourseParticipationData target) {
         target.setCourseId(source.getCourseId());
         target.setUserId(source.getUserId());
+        target.setCompletedChapterIds(source.getCompletedChapterIds());
     }
 }

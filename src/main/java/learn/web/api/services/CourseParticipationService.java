@@ -6,4 +6,6 @@ public interface CourseParticipationService {
     void createParticipation(CourseParticipation courseParticipation);
 
     CourseParticipation getParticipation(String courseId, String currentUserId);
+
+    void createChapterParticipation(String courseId, String chapterId, String currentUserId);
 }

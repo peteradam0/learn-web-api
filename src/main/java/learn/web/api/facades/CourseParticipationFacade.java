@@ -5,4 +5,6 @@ import learn.web.api.facades.dtos.CourseParticipationData;
 public interface CourseParticipationFacade {
     void createParticipation(String courseId);
     CourseParticipationData getParticipation(String courseId);
+
+    void createChapterParticipation(String courseId, String chapterId);
 }

@@ -36,4 +36,9 @@ public class DefaultCourseParticipationFacade implements CourseParticipationFaca
         participationToParticipationDataPopulator.populate(courseParticipation,courseParticipationData);
         return courseParticipationData;
     }
+
+    @Override
+    public void createChapterParticipation(String courseId, String chapterId) {
+        courseParticipationService.createChapterParticipation(courseId, chapterId, sessionFacade.getCurrentUserId());
+    }
 }

@@ -32,11 +32,22 @@ public class CourseParticipationController {
     public ResponseEntity<CourseParticipationData> handleGetParticipation(@PathVariable String courseId) {
         CourseParticipationData courseParticipationData = new CourseParticipationData();
         try {
-             courseParticipationData = courseParticipationFacade.getParticipation(courseId);
+            courseParticipationData = courseParticipationFacade.getParticipation(courseId);
         } catch (Exception e) {
             LOGGER.debug("Participation not found", e);
             ResponseEntity.noContent();
         }
         return ResponseEntity.ok(courseParticipationData);
+    }
+
+    @PostMapping("/chapter/{chapterId}/participation")
+    public ResponseEntity<String> handleCreateChapterParticipation(@PathVariable String courseId, @PathVariable String chapterId) {
+        try {
+            courseParticipationFacade.createChapterParticipation(courseId, chapterId);
+        } catch (Exception e) {
+            LOGGER.debug("Participation not found", e);
+            ResponseEntity.noContent();
+        }
+        return ResponseEntity.ok("Successfull participation");
     }
 }
