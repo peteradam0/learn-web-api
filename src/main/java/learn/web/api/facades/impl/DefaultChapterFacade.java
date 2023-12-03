@@ -31,8 +31,6 @@ public class DefaultChapterFacade implements ChapterFacade {
 
     @Override
     public ChapterData createChapter(String courseId, CreateChapterData createChapterData) {
-
-
         Chapter chapter = new Chapter();
         chapter.setCourseId(courseId);
         CreateChapterDataToChapterPopulator.populate(createChapterData, chapter);
@@ -54,7 +52,7 @@ public class DefaultChapterFacade implements ChapterFacade {
         List<Chapter> chapterList = chapterService.getChaptersOfCourse(courseId);
         List<ChapterData> chapterDataList = new ArrayList<>();
 
-        for (Chapter chapter: chapterList){
+        for (Chapter chapter : chapterList) {
             ChapterData chapterData = new ChapterData();
             chapterToChapterDataPopulator.populate(chapter, chapterData);
             chapterDataList.add(chapterData);
@@ -66,10 +64,10 @@ public class DefaultChapterFacade implements ChapterFacade {
     @Override
     public ChapterData updateChapter(ChapterData chapterData) {
         Chapter chapterToUpdateTo = new Chapter();
-        chapterDataToChapterPopulator.populate(chapterData,chapterToUpdateTo);
+        chapterDataToChapterPopulator.populate(chapterData, chapterToUpdateTo);
         Chapter chapter = chapterService.updateChapter(chapterToUpdateTo);
 
-        chapterToChapterDataPopulator.populate(chapter,chapterData);
+        chapterToChapterDataPopulator.populate(chapter, chapterData);
         return chapterData;
     }
 }

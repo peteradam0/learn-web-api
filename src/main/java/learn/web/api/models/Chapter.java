@@ -21,6 +21,7 @@ public class Chapter {
     private String title;
     private String description;
     private String videoUrl;
+    private String videoDuration;
     private String courseId;
 
     @CreatedDate

@@ -13,5 +13,6 @@ public class ChapterToChapterDataPopulator implements Populator<Chapter, Chapter
         target.setId(source.getId());
         target.setVideoUrl(source.getVideoUrl());
         target.setTitle(source.getTitle());
+        target.setVideoDuration(source.getVideoDuration());
     }
 }

@@ -12,5 +12,6 @@ public class CreateChapterData {
     private String title;
     private String description;
     private String videoUrl;
+    private String videoDuration;
 
 }

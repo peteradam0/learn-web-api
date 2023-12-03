@@ -1,7 +1,6 @@
 package learn.web.api.facades.populators.impl;
 
 import learn.web.api.facades.dtos.ChapterData;
-import learn.web.api.facades.dtos.CreateChapterData;
 import learn.web.api.facades.populators.Populator;
 import learn.web.api.models.Chapter;
 import org.springframework.stereotype.Component;
@@ -14,6 +13,7 @@ public class ChapterDataToChapterPopulator implements Populator<ChapterData, Cha
         target.setCourseId(source.getCourseId());
         target.setDescription(source.getDescription());
         target.setVideoUrl(source.getVideoUrl());
+        target.setVideoDuration(source.getVideoDuration());
         target.setTitle(source.getTitle());
     }
 }

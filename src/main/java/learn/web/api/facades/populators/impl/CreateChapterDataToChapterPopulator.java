@@ -12,5 +12,6 @@ public class CreateChapterDataToChapterPopulator implements Populator<CreateChap
         target.setDescription(source.getDescription());
         target.setVideoUrl(source.getVideoUrl());
         target.setTitle(source.getTitle());
+        target.setVideoDuration(source.getVideoDuration());
     }
 }
