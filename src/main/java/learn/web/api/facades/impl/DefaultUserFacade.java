@@ -37,7 +37,7 @@ public class DefaultUserFacade implements UserFacade {
     public UserData getCurrentUserData() {
         User user = userService.getUserById(sessionFacade.getCurrentUserId());
         UserData userData = new UserData();
-        userToUserDataPopulator.populate(user,userData);
+        userToUserDataPopulator.populate(user, userData);
         return userData;
     }
 
@@ -46,5 +46,15 @@ public class DefaultUserFacade implements UserFacade {
         User user = new User();
         userDataToUserPopulator.populate(webhookUserData, user);
         userService.updateUser(user);
+    }
+
+    @Override
+    public UserData getUserDataById(String userId) {
+        User user = userService.getUserById(userId);
+        UserData userData = new UserData();
+        if(user != null){
+            userToUserDataPopulator.populate(user, userData);
+        }
+        return userData;
     }
 }

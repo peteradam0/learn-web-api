@@ -14,6 +14,7 @@ public class CourseData {
     private String id;
     private String title;
     private String description;
+    private CourseAuthorData courseAuthorData;
     private String imageUrl;
     private String videoUrl;
     private String category;

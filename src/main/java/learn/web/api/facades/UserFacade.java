@@ -9,4 +9,6 @@ public interface UserFacade {
     public UserData getCurrentUserData();
 
     void updateUser(WebhookUserData webhookUserData);
+
+    UserData getUserDataById(String userId);
 }

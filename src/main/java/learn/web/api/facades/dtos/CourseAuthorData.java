@@ -7,10 +7,7 @@ import org.springframework.boot.jackson.JsonComponent;
 @JsonComponent
 @Getter
 @Setter
-public class UserData {
-
-    private String username;
-    private String email;
+public class CourseAuthorData {
     private String firstName;
     private String lastName;
     private String imageUrl;

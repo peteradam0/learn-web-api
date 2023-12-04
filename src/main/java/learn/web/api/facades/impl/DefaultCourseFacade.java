@@ -1,13 +1,11 @@
 package learn.web.api.facades.impl;
 
-import learn.web.api.facades.ChapterFacade;
-import learn.web.api.facades.CourseFacade;
-import learn.web.api.facades.CourseParticipationFacade;
-import learn.web.api.facades.SessionFacade;
+import learn.web.api.facades.*;
 import learn.web.api.facades.dtos.*;
 import learn.web.api.facades.populators.impl.CourseDataToCoursePopulator;
 import learn.web.api.facades.populators.impl.CourseToCourseDataPopulator;
 import learn.web.api.facades.populators.impl.CourseToCourseDataResponsePopulator;
+import learn.web.api.facades.populators.impl.UserDataToCourseAuthorData;
 import learn.web.api.models.Course;
 import learn.web.api.services.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +24,9 @@ public class DefaultCourseFacade implements CourseFacade {
     private CourseToCourseDataResponsePopulator courseToCourseDataResponsePopulator;
 
     @Autowired
+    private UserDataToCourseAuthorData userDataToCourseAuthorData;
+
+    @Autowired
     private CourseToCourseDataPopulator courseToCourseDataPopulator;
 
     @Autowired
@@ -36,6 +37,9 @@ public class DefaultCourseFacade implements CourseFacade {
 
     @Autowired
     private CourseService courseService;
+
+    @Autowired
+    private UserFacade userFacade;
 
     @Autowired
     private CourseParticipationFacade courseParticipationFacade;
@@ -72,9 +76,7 @@ public class DefaultCourseFacade implements CourseFacade {
 
         List<CourseData> courseDataListData = new ArrayList<>();
         for (Course course : courseService.getCourses()) {
-            CourseData courseData = new CourseData();
-            courseToCourseDataPopulator.populate(course, courseData);
-            courseDataListData.add(courseData);
+            populateCourseData(courseDataListData, course);
         }
         return courseDataListData;
     }
@@ -83,9 +85,7 @@ public class DefaultCourseFacade implements CourseFacade {
     public List<CourseData> getPublishedCourses() {
         List<CourseData> courseDataListData = new ArrayList<>();
         for (Course course : courseService.getPublishedCourses()) {
-            CourseData courseData = new CourseData();
-            courseToCourseDataPopulator.populate(course, courseData);
-            courseDataListData.add(courseData);
+            populateCourseData(courseDataListData, course);
         }
         return courseDataListData;
     }
@@ -93,8 +93,10 @@ public class DefaultCourseFacade implements CourseFacade {
     @Override
     public CourseData getCourseData(String courseId) {
         Course course = courseService.getCourse(courseId);
+        CourseAuthorData courseAuthorData = getCourseAuthorData(course);
         CourseData courseData = new CourseData();
-        if(course != null){
+        courseData.setCourseAuthorData(courseAuthorData);
+        if (course != null) {
             courseToCourseDataPopulator.populate(course, courseData);
         }
 
@@ -117,6 +119,22 @@ public class DefaultCourseFacade implements CourseFacade {
 
         return getCourses().stream()
                 .filter(courseData -> courseIdList.contains(courseData.getId())).toList();
+    }
+
+    private void populateCourseData(List<CourseData> courseDataListData, Course course) {
+        CourseAuthorData courseAuthorData = getCourseAuthorData(course);
+
+        CourseData courseData = new CourseData();
+        courseData.setCourseAuthorData(courseAuthorData);
+        courseToCourseDataPopulator.populate(course, courseData);
+        courseDataListData.add(courseData);
+    }
+
+    private CourseAuthorData getCourseAuthorData(Course course) {
+        UserData userData = userFacade.getUserDataById(course.getUserId());
+        CourseAuthorData courseAuthorData = new CourseAuthorData();
+        userDataToCourseAuthorData.populate(userData, courseAuthorData);
+        return courseAuthorData;
     }
 }
 

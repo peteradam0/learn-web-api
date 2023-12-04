@@ -11,5 +11,8 @@ public class UserToUserDataPopulator implements Populator<User, UserData> {
     public void populate(User source, UserData target) {
         target.setUsername(source.getUsername());
         target.setEmail(source.getEmail());
+        target.setFirstName(source.getFirstname());
+        target.setLastName(source.getLastname());
+        target.setImageUrl(source.getImageUrl());
     }
 }
