@@ -16,5 +16,6 @@ public class UserToUserDataPopulator implements Populator<User, UserData> {
         target.setImageUrl(source.getImageUrl());
         target.setId(source.getId());
         target.setUserRole(source.getUserRole());
+        target.setClerkId(source.getClerkId());
     }
 }

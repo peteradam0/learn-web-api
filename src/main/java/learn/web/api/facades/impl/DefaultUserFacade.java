@@ -74,4 +74,9 @@ public class DefaultUserFacade implements UserFacade {
         }
         return userDataLister;
     }
+
+    @Override
+    public void deleteUser(String id) {
+        userService.deleteUser(id);
+    }
 }

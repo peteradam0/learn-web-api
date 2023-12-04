@@ -17,4 +17,5 @@ public class UserData {
     private String lastName;
     private String imageUrl;
     private UserRole userRole;
+    private String clerkId;
 }
