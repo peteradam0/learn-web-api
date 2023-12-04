@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1")
 public class UserController {
@@ -25,6 +28,18 @@ public class UserController {
         UserData userData = new UserData();
         try {
             userData = userFacade.getCurrentUserData();
+        } catch (Exception e) {
+            LOGGER.debug("Participation not found", e);
+            ResponseEntity.noContent();
+        }
+        return ResponseEntity.ok(userData);
+    }
+
+    @GetMapping("/users")
+    public ResponseEntity<List<UserData>> handleGetUsers() {
+        List<UserData> userData = new ArrayList<>();
+        try {
+            userData = userFacade.getUsers();
         } catch (Exception e) {
             LOGGER.debug("Participation not found", e);
             ResponseEntity.noContent();

@@ -6,6 +6,8 @@ import learn.web.api.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class DefaultUserService implements UserService {
 
@@ -30,5 +32,10 @@ public class DefaultUserService implements UserService {
         }
 
        userDao.save(user);
+    }
+
+    @Override
+    public List<User> getUsers() {
+        return userDao.findAll();
     }
 }

@@ -3,6 +3,8 @@ package learn.web.api.facades;
 import learn.web.api.facades.dtos.UserData;
 import learn.web.api.facades.dtos.WebhookUserData;
 
+import java.util.List;
+
 public interface UserFacade {
     public void createUser(WebhookUserData user);
 
@@ -11,4 +13,6 @@ public interface UserFacade {
     void updateUser(WebhookUserData webhookUserData);
 
     UserData getUserDataById(String userId);
+
+    List<UserData> getUsers();
 }

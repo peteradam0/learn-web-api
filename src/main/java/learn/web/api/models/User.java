@@ -23,4 +23,5 @@ public class User {
     private String imageUrl;
     private String firstname;
     private String lastname;
+    private UserRole userRole;
 }
