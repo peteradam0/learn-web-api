@@ -46,10 +46,7 @@ public class DefaultOrganizationFacade implements OrganizationFacade {
     }
 
     @Override
-    public OrganizationData deleteOrganization(OrganizationData organizationData) {
-        Organization organization = new Organization();
-        organizationDataToOrganizationPopulator.populate(organizationData, organization);
-        organizationService.deleteOrganization(organization);
-        return organizationData;
+    public void deleteOrganization(String name) {
+        organizationService.deleteOrganization(name);
     }
 }

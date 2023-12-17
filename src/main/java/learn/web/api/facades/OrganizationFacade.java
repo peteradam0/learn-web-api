@@ -9,5 +9,5 @@ public interface OrganizationFacade {
 
     List<OrganizationData> getOrganizations();
 
-    OrganizationData deleteOrganization(OrganizationData organizationData);
+    void deleteOrganization(String name);
 }

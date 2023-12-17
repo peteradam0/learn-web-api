@@ -9,6 +9,6 @@ public interface OrganizationService {
 
     List<Organization> getOrganizations();
 
-    void deleteOrganization(Organization organization);
+    void deleteOrganization(String name);
 }
 

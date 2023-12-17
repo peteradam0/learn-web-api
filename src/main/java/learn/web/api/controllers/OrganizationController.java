@@ -32,20 +32,20 @@ public class OrganizationController {
             LOGGER.error("Organization not created", e);
             ResponseEntity.noContent();
         }
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdOrganization);
+        return ResponseEntity.ok(createdOrganization);
     }
 
-    @DeleteMapping("/organizations")
-    public ResponseEntity<OrganizationData> handleDeleteOrganization(@RequestBody OrganizationData organizationData) {
+    @DeleteMapping("/organizations/{name}")
+    public ResponseEntity<OrganizationData> handleDeleteOrganization(@PathVariable String name) {
 
         OrganizationData deletedOrganization = new OrganizationData();
         try {
-            deletedOrganization = organizationFacade.deleteOrganization(organizationData);
+             organizationFacade.deleteOrganization(name);
         } catch (Exception e) {
             LOGGER.error("Organization not deleted", e);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(deletedOrganization);
         }
-        return ResponseEntity.status(HttpStatus.GONE).body(deletedOrganization);
+        return ResponseEntity.ok(deletedOrganization);
     }
 
     @GetMapping("/organizations")
@@ -58,6 +58,6 @@ public class OrganizationController {
             LOGGER.error("Organizations not found", e);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(organizationDataList);
         }
-        return ResponseEntity.status(HttpStatus.FOUND).body(organizationDataList);
+        return ResponseEntity.ok(organizationDataList);
     }
 }

@@ -16,7 +16,7 @@ public class DefaultOrganizationService implements OrganizationService {
 
     @Override
     public Organization createOrganization(Organization organization) {
-        Organization foundOrganizations = organizationDao.findCoursesByName(organization.getName());
+        Organization foundOrganizations = organizationDao.findOrganizationByName(organization.getName());
 
         if (foundOrganizations == null) {
             return organizationDao.save(organization);
@@ -30,7 +30,12 @@ public class DefaultOrganizationService implements OrganizationService {
     }
 
     @Override
-    public void deleteOrganization(Organization organization) {
-        organizationDao.delete(organization);
+    public void deleteOrganization(String name) {
+        Organization foundOrganizations = organizationDao.findOrganizationByName(name);
+        if(foundOrganizations != null){
+            organizationDao.delete(foundOrganizations);
+        }else{
+            throw new RuntimeException("Deletion failed ");
+        }
     }
 }
