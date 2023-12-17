@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -36,7 +35,7 @@ public class OrganizationController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdOrganization);
     }
 
-    @PostMapping("/organizations")
+    @DeleteMapping("/organizations")
     public ResponseEntity<OrganizationData> handleDeleteOrganization(@RequestBody OrganizationData organizationData) {
 
         OrganizationData deletedOrganization = new OrganizationData();
@@ -44,7 +43,7 @@ public class OrganizationController {
             deletedOrganization = organizationFacade.deleteOrganization(organizationData);
         } catch (Exception e) {
             LOGGER.error("Organization not deleted", e);
-          return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(deletedOrganization);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(deletedOrganization);
         }
         return ResponseEntity.status(HttpStatus.GONE).body(deletedOrganization);
     }
