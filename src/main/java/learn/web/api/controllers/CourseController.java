@@ -6,6 +6,7 @@ import learn.web.api.facades.dtos.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,7 +34,7 @@ public class CourseController {
             createdCourse = courseFacade.createCourse(courseCreateRequestData);
         } catch (Exception e) {
             LOGGER.error("Course not created", e);
-            ResponseEntity.noContent();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(createdCourse);
         }
         return ResponseEntity.ok(createdCourse);
     }
@@ -46,7 +47,7 @@ public class CourseController {
             courseDataList = courseFacade.getCourseDataForUser();
         } catch (Exception e) {
             LOGGER.error("Get courses for user failed", e);
-            ResponseEntity.noContent();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(courseDataList);
         }
         return ResponseEntity.ok(courseDataList);
     }
@@ -58,7 +59,7 @@ public class CourseController {
             courseDataList = courseFacade.getCourses();
         } catch (Exception e) {
             LOGGER.error("Get courses for user failed", e);
-            ResponseEntity.noContent();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(courseDataList);
         }
         return ResponseEntity.ok(courseDataList);
     }
@@ -70,7 +71,7 @@ public class CourseController {
             courseDataList = courseFacade.getPublishedCourses();
         } catch (Exception e) {
             LOGGER.error("Get published courses for user failed", e);
-            ResponseEntity.noContent();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(courseDataList);
         }
         return ResponseEntity.ok(courseDataList);
     }
@@ -82,7 +83,7 @@ public class CourseController {
             courseDataList = courseFacade.getInProgressCourses();
         } catch (Exception e) {
             LOGGER.error("Get in progress courses for user failed", e);
-            ResponseEntity.noContent();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(courseDataList);
         }
         return ResponseEntity.ok(courseDataList);
     }
@@ -94,7 +95,7 @@ public class CourseController {
             courseData = courseFacade.getCourseData(courseId);
         } catch (Exception e) {
             LOGGER.error("Get courses for user failed", e);
-            ResponseEntity.noContent();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(courseData);
         }
         return ResponseEntity.ok(courseData);
     }
@@ -106,7 +107,7 @@ public class CourseController {
             courseFacade.changePublication(courseId);
         } catch (Exception e) {
             LOGGER.error("Get courses for user failed", e);
-            ResponseEntity.noContent();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("");
         }
         return ResponseEntity.ok("Change publication success");
 
@@ -119,7 +120,7 @@ public class CourseController {
             chapterData = chapterFacade.getChapterData(courseId);
         } catch (Exception e) {
             LOGGER.error("Get chapters for user failed", e);
-            ResponseEntity.noContent();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(chapterData);
         }
         return ResponseEntity.ok(chapterData);
     }
@@ -131,30 +132,30 @@ public class CourseController {
             chapterData = chapterFacade.createChapter(courseId, createChapterData);
         } catch (Exception e) {
             LOGGER.error("Create chapter error ", e);
-            ResponseEntity.noContent();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(chapterData);
         }
         return ResponseEntity.ok(chapterData);
     }
 
     @DeleteMapping("/courses/{courseId}/chapters/{chapterId}")
     public ResponseEntity<String> handleDeleteCourseChapters(@PathVariable String courseId, @PathVariable String chapterId) {
-
         try {
             chapterFacade.deleteChapter(chapterId);
         } catch (Exception e) {
             LOGGER.error("Create chapter error ", e);
-            ResponseEntity.noContent();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("");
         }
         return ResponseEntity.ok("Chapter deleted");
     }
 
     @PutMapping("/courses/{courseId}/chapters/{chapterId}")
     public ResponseEntity<ChapterData> handlePutCourseChapters(@PathVariable String courseId, @PathVariable String chapterId, @RequestBody ChapterData chapterData) {
+        ChapterData chapterDataResult = new ChapterData();
         try {
-            chapterFacade.updateChapter(chapterData);
+            chapterDataResult = chapterFacade.updateChapter(chapterData);
         } catch (Exception e) {
             LOGGER.error("Chapter update error ", e);
-            ResponseEntity.noContent();
+            return ResponseEntity.status(HttpStatus.NOT_MODIFIED).body(new ChapterData());
         }
         return ResponseEntity.ok(chapterData);
     }
