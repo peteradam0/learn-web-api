@@ -8,4 +8,6 @@ public interface OrganizationFacade {
     OrganizationData createOrganization(OrganizationData organizationData);
 
     List<OrganizationData> getOrganizations();
+
+    OrganizationData deleteOrganization(OrganizationData organizationData);
 }

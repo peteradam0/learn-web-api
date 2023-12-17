@@ -8,5 +8,7 @@ public interface OrganizationService {
     Organization createOrganization(Organization organization);
 
     List<Organization> getOrganizations();
+
+    void deleteOrganization(Organization organization);
 }
 

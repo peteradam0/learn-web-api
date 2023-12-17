@@ -16,11 +16,21 @@ public class DefaultOrganizationService implements OrganizationService {
 
     @Override
     public Organization createOrganization(Organization organization) {
-        return organizationDao.save(organization);
+        Organization foundOrganizations = organizationDao.findCoursesByName(organization.getName());
+
+        if (foundOrganizations == null) {
+            return organizationDao.save(organization);
+        }
+        throw new RuntimeException("Organization already exists, create failed");
     }
 
     @Override
     public List<Organization> getOrganizations() {
         return organizationDao.findAll();
+    }
+
+    @Override
+    public void deleteOrganization(Organization organization) {
+        organizationDao.delete(organization);
     }
 }

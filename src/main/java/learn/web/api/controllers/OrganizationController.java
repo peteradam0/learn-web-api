@@ -5,11 +5,13 @@ import learn.web.api.facades.dtos.OrganizationData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -31,7 +33,20 @@ public class OrganizationController {
             LOGGER.error("Organization not created", e);
             ResponseEntity.noContent();
         }
-        return ResponseEntity.ok(createdOrganization);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdOrganization);
+    }
+
+    @PostMapping("/organizations")
+    public ResponseEntity<OrganizationData> handleDeleteOrganization(@RequestBody OrganizationData organizationData) {
+
+        OrganizationData deletedOrganization = new OrganizationData();
+        try {
+            deletedOrganization = organizationFacade.deleteOrganization(organizationData);
+        } catch (Exception e) {
+            LOGGER.error("Organization not deleted", e);
+          return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(deletedOrganization);
+        }
+        return ResponseEntity.status(HttpStatus.GONE).body(deletedOrganization);
     }
 
     @GetMapping("/organizations")
@@ -42,8 +57,8 @@ public class OrganizationController {
             organizationDataList = organizationFacade.getOrganizations();
         } catch (Exception e) {
             LOGGER.error("Organizations not found", e);
-            ResponseEntity.noContent();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(organizationDataList);
         }
-        return ResponseEntity.ok(organizationDataList);
+        return ResponseEntity.status(HttpStatus.FOUND).body(organizationDataList);
     }
 }
