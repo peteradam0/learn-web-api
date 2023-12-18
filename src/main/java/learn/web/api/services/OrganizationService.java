@@ -10,5 +10,7 @@ public interface OrganizationService {
     List<Organization> getOrganizations();
 
     void deleteOrganization(String name);
+
+    Organization getOrganizationByName(String name);
 }
 

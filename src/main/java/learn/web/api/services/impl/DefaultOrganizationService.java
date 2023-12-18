@@ -38,4 +38,9 @@ public class DefaultOrganizationService implements OrganizationService {
             throw new RuntimeException("Deletion failed ");
         }
     }
+
+    @Override
+    public Organization getOrganizationByName(String name) {
+        return organizationDao.findOrganizationByName(name);
+    }
 }

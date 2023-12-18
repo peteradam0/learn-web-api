@@ -2,6 +2,7 @@ package learn.web.api.controllers;
 
 import learn.web.api.facades.OrganizationFacade;
 import learn.web.api.facades.dtos.OrganizationData;
+import learn.web.api.facades.dtos.OrganizationMemberData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,7 @@ public class OrganizationController {
 
         OrganizationData deletedOrganization = new OrganizationData();
         try {
-             organizationFacade.deleteOrganization(name);
+            organizationFacade.deleteOrganization(name);
         } catch (Exception e) {
             LOGGER.error("Organization not deleted", e);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(deletedOrganization);
@@ -59,5 +60,16 @@ public class OrganizationController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(organizationDataList);
         }
         return ResponseEntity.ok(organizationDataList);
+    }
+
+    @PostMapping("/organizations/member")
+    public ResponseEntity<String> handleCreateOrganizationMember(@RequestBody OrganizationMemberData organizationMemberData) {
+        try {
+           organizationFacade.addMemberToOrganization(organizationMemberData);
+        } catch (Exception e) {
+            LOGGER.error("Organization not created", e);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Organization member creation failed");
+        }
+        return ResponseEntity.ok("created");
     }
 }

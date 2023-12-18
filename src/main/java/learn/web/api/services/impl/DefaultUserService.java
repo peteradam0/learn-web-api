@@ -44,4 +44,9 @@ public class DefaultUserService implements UserService {
         User user = userDao.findByClerkId(id);
         userDao.delete(user);
     }
+
+    @Override
+    public User getUserByEmail(String email) {
+        return userDao.findUserByEmail(email);
+    }
 }
