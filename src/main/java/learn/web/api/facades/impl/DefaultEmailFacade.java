@@ -13,6 +13,6 @@ public class DefaultEmailFacade implements EmailFacade {
 
     @Override
     public void sendOrganizationMemberInvitation() {
-        emailService.sengOrganizationInvite("adampeter2015@gmail.com","Hello world", "Hello world");
+        emailService.sengOrganizationInvite("adampeter2015@gmail.com", "Hello world");
     }
 }

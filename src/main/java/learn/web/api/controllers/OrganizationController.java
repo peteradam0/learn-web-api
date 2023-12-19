@@ -3,8 +3,6 @@ package learn.web.api.controllers;
 import learn.web.api.facades.EmailFacade;
 import learn.web.api.facades.OrganizationFacade;
 import learn.web.api.facades.dtos.OrganizationData;
-
-import learn.web.api.services.EmailService;
 import learn.web.api.facades.dtos.OrganizationMemberData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,7 +43,7 @@ public class OrganizationController {
     @GetMapping("/organizations/send")
     public ResponseEntity<String> handleAddOrganizationMember() {
         emailFacade.sendOrganizationMemberInvitation();
-        return  ResponseEntity.ok("sent");
+        return ResponseEntity.ok("sent");
     }
 
     @DeleteMapping("/organizations/{name}")
@@ -77,7 +75,7 @@ public class OrganizationController {
     @PostMapping("/organizations/member")
     public ResponseEntity<String> handleCreateOrganizationMember(@RequestBody OrganizationMemberData organizationMemberData) {
         try {
-           organizationFacade.addMemberToOrganization(organizationMemberData);
+            organizationFacade.addMemberToOrganization(organizationMemberData);
         } catch (Exception e) {
             LOGGER.error("Organization not created", e);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Organization member creation failed");
