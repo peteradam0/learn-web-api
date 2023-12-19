@@ -23,20 +23,22 @@ public class AuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-        return new AntPathMatcher().match("/api/v1/webhooks", request.getServletPath());
+        return new AntPathMatcher().match("/api/v1/webhooks", request.getServletPath()) ||
+                new AntPathMatcher().match("/api/v1/organizations/send", request.getServletPath());
     }
-    @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain){
 
-        try{
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) {
+
+        try {
             String authTokenHeader = request.getHeader("Authorization");
             String token = TokenExtractor.extractToken(authTokenHeader);
             String userId = jwtValidator.getUserIdfromToken(token);
 
-            request.getSession().setAttribute("userId",userId);
+            request.getSession().setAttribute("userId", userId);
 
             filterChain.doFilter(request, response);
-        }catch (Exception e){
+        } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             LOGGER.info(e.getMessage());
         }

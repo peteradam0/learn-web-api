@@ -1,7 +1,10 @@
 package learn.web.api.controllers;
 
+import learn.web.api.facades.EmailFacade;
 import learn.web.api.facades.OrganizationFacade;
 import learn.web.api.facades.dtos.OrganizationData;
+
+import learn.web.api.services.EmailService;
 import learn.web.api.facades.dtos.OrganizationMemberData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +26,9 @@ public class OrganizationController {
     @Autowired
     private OrganizationFacade organizationFacade;
 
+    @Autowired
+    private EmailFacade emailFacade;
+
     @PostMapping("/organizations")
     public ResponseEntity<OrganizationData> handleCreateOrganization(@RequestBody OrganizationData organizationData) {
 
@@ -34,6 +40,12 @@ public class OrganizationController {
             ResponseEntity.noContent();
         }
         return ResponseEntity.ok(createdOrganization);
+    }
+
+    @GetMapping("/organizations/send")
+    public ResponseEntity<String> handleAddOrganizationMember() {
+        emailFacade.sendOrganizationMemberInvitation();
+        return  ResponseEntity.ok("sent");
     }
 
     @DeleteMapping("/organizations/{name}")
