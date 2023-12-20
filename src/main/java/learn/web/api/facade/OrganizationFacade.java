@@ -1,7 +1,7 @@
 package learn.web.api.facade;
 
-import learn.web.api.facade.dtos.OrganizationData;
-import learn.web.api.facade.dtos.OrganizationMemberData;
+import learn.web.api.facade.dto.OrganizationData;
+import learn.web.api.facade.dto.OrganizationMemberData;
 
 import java.util.List;
 

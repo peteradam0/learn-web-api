@@ -2,7 +2,7 @@ package learn.web.api.facade.impl;
 
 import learn.web.api.facade.CourseParticipationFacade;
 import learn.web.api.facade.SessionFacade;
-import learn.web.api.facade.dtos.CourseParticipationData;
+import learn.web.api.facade.dto.CourseParticipationData;
 import learn.web.api.facade.populator.impl.ParticipationToParticipationDataPopulator;
 import learn.web.api.model.CourseParticipation;
 import learn.web.api.service.CourseParticipationService;

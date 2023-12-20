@@ -1,6 +1,6 @@
 package learn.web.api.facade.populator.impl;
 
-import learn.web.api.facade.dtos.CreateChapterData;
+import learn.web.api.facade.dto.CreateChapterData;
 import learn.web.api.facade.populator.Populator;
 import learn.web.api.model.Chapter;
 import org.springframework.stereotype.Component;

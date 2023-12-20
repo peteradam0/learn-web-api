@@ -1,7 +1,7 @@
 package learn.web.api.facade;
 
-import learn.web.api.facade.dtos.UserData;
-import learn.web.api.facade.dtos.WebhookUserData;
+import learn.web.api.facade.dto.UserData;
+import learn.web.api.facade.dto.WebhookUserData;
 
 import java.util.List;
 

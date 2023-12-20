@@ -2,8 +2,8 @@ package learn.web.api.facade.impl;
 
 import learn.web.api.facade.SessionFacade;
 import learn.web.api.facade.UserFacade;
-import learn.web.api.facade.dtos.UserData;
-import learn.web.api.facade.dtos.WebhookUserData;
+import learn.web.api.facade.dto.UserData;
+import learn.web.api.facade.dto.WebhookUserData;
 import learn.web.api.facade.populator.impl.UserDataToUserPopulator;
 import learn.web.api.facade.populator.impl.UserToUserDataPopulator;
 import learn.web.api.model.User;

@@ -1,7 +1,7 @@
 package learn.web.api.controller;
 
 import learn.web.api.facade.CourseParticipationFacade;
-import learn.web.api.facade.dtos.CourseParticipationData;
+import learn.web.api.facade.dto.CourseParticipationData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

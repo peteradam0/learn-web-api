@@ -1,4 +1,4 @@
-package learn.web.api.facade.dtos;
+package learn.web.api.facade.dto;
 
 import lombok.Getter;
 import lombok.Setter;

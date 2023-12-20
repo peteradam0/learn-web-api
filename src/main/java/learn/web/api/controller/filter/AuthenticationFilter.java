@@ -42,7 +42,7 @@ public class AuthenticationFilter extends OncePerRequestFilter {
         try {
             String authTokenHeader = request.getHeader("Authorization");
             String token = TokenExtractor.extractToken(authTokenHeader);
-            String userId = jwtValidator.getUserIdfromToken(token);
+            String userId = jwtValidator.getUserfromToken(token);
 
             request.getSession().setAttribute("userId", userId);
 

@@ -40,7 +40,7 @@ public class JwtValidator {
         return StringUtils.newStringUtf8(Base64.decodeBase64(base64));
     }
 
-    public String getUserIdfromToken(final String token) {
+    public String getUserfromToken(final String token) {
         DecodedJWT validate = validate(token);
         JSONObject jsonObj = new JSONObject(decodeToJson(validate.getPayload()));
         return jsonObj.getString("userId");

@@ -1,8 +1,8 @@
 package learn.web.api.facade.impl;
 
 import learn.web.api.facade.ChapterFacade;
-import learn.web.api.facade.dtos.ChapterData;
-import learn.web.api.facade.dtos.CreateChapterData;
+import learn.web.api.facade.dto.ChapterData;
+import learn.web.api.facade.dto.CreateChapterData;
 import learn.web.api.facade.populator.impl.ChapterDataToChapterPopulator;
 import learn.web.api.facade.populator.impl.ChapterToChapterDataPopulator;
 import learn.web.api.facade.populator.impl.CreateChapterDataToChapterPopulator;

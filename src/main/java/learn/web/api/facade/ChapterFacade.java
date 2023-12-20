@@ -1,7 +1,7 @@
 package learn.web.api.facade;
 
-import learn.web.api.facade.dtos.ChapterData;
-import learn.web.api.facade.dtos.CreateChapterData;
+import learn.web.api.facade.dto.ChapterData;
+import learn.web.api.facade.dto.CreateChapterData;
 
 import java.util.List;
 

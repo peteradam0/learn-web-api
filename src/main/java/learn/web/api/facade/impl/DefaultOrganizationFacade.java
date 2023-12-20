@@ -1,8 +1,8 @@
 package learn.web.api.facade.impl;
 
 import learn.web.api.facade.OrganizationFacade;
-import learn.web.api.facade.dtos.OrganizationData;
-import learn.web.api.facade.dtos.OrganizationMemberData;
+import learn.web.api.facade.dto.OrganizationData;
+import learn.web.api.facade.dto.OrganizationMemberData;
 import learn.web.api.facade.populator.impl.OrganizationDataToOrganizationPopulator;
 import learn.web.api.facade.populator.impl.OrganizationMemberDataToOrganizationMember;
 import learn.web.api.facade.populator.impl.OrganizationToOrganizationDataPopulator;

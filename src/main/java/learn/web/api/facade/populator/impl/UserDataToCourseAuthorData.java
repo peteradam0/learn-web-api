@@ -1,7 +1,7 @@
 package learn.web.api.facade.populator.impl;
 
-import learn.web.api.facade.dtos.CourseAuthorData;
-import learn.web.api.facade.dtos.UserData;
+import learn.web.api.facade.dto.CourseAuthorData;
+import learn.web.api.facade.dto.UserData;
 import learn.web.api.facade.populator.Populator;
 import org.springframework.stereotype.Component;
 

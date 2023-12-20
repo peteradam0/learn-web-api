@@ -1,4 +1,4 @@
-package learn.web.api.facade.dtos;
+package learn.web.api.facade.dto;
 
 import learn.web.api.model.UserRole;
 import lombok.Getter;

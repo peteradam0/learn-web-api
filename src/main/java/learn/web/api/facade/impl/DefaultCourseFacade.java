@@ -1,7 +1,7 @@
 package learn.web.api.facade.impl;
 
 import learn.web.api.facade.*;
-import learn.web.api.facade.dtos.*;
+import learn.web.api.facade.dto.*;
 import learn.web.api.facade.populator.impl.CourseDataToCoursePopulator;
 import learn.web.api.facade.populator.impl.CourseToCourseDataPopulator;
 import learn.web.api.facade.populator.impl.CourseToCourseDataResponsePopulator;

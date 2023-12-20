@@ -1,6 +1,6 @@
 package learn.web.api.facade;
 
-import learn.web.api.facade.dtos.*;
+import learn.web.api.facade.dto.*;
 
 import java.util.List;
 

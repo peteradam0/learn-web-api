@@ -1,6 +1,6 @@
 package learn.web.api.facade;
 
-import learn.web.api.facade.dtos.CourseParticipationData;
+import learn.web.api.facade.dto.CourseParticipationData;
 
 import java.util.List;
 

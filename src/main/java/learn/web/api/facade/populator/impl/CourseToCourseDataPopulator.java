@@ -1,7 +1,7 @@
 package learn.web.api.facade.populator.impl;
 
 import learn.web.api.facade.ChapterFacade;
-import learn.web.api.facade.dtos.CourseData;
+import learn.web.api.facade.dto.CourseData;
 import learn.web.api.facade.populator.Populator;
 import learn.web.api.model.Course;
 import org.springframework.beans.factory.annotation.Autowired;
