@@ -1,9 +1,9 @@
 package learn.web.api.controller;
 
-import learn.web.api.facades.EmailFacade;
-import learn.web.api.facades.OrganizationFacade;
-import learn.web.api.facades.dtos.OrganizationData;
-import learn.web.api.facades.dtos.OrganizationMemberData;
+import learn.web.api.facade.EmailFacade;
+import learn.web.api.facade.OrganizationFacade;
+import learn.web.api.facade.dtos.OrganizationData;
+import learn.web.api.facade.dtos.OrganizationMemberData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
