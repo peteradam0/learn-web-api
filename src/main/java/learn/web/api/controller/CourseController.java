@@ -1,4 +1,4 @@
-package learn.web.api.controllers;
+package learn.web.api.controller;
 
 import learn.web.api.facades.ChapterFacade;
 import learn.web.api.facades.CourseFacade;

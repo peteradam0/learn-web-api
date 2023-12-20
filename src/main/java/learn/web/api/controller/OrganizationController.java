@@ -1,4 +1,4 @@
-package learn.web.api.controllers;
+package learn.web.api.controller;
 
 import learn.web.api.facades.EmailFacade;
 import learn.web.api.facades.OrganizationFacade;

@@ -1,6 +1,5 @@
 package learn.web.api.services.impl;
 
-import learn.web.api.controllers.CourseParticipationController;
 import learn.web.api.daos.CourseParticipationDao;
 import learn.web.api.models.CourseParticipation;
 import learn.web.api.services.CourseParticipationService;

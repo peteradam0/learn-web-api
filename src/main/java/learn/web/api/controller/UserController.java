@@ -1,4 +1,4 @@
-package learn.web.api.controllers;
+package learn.web.api.controller;
 
 import learn.web.api.facades.UserFacade;
 import learn.web.api.facades.dtos.UserData;

@@ -1,6 +1,6 @@
 package learn.web.api.services.impl;
 
-import learn.web.api.controllers.CourseController;
+import learn.web.api.controller.CourseController;
 import learn.web.api.services.EmailService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

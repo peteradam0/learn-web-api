@@ -24,6 +24,10 @@ public class AuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
         return new AntPathMatcher().match("/api/v1/webhooks", request.getServletPath()) ||
+                new AntPathMatcher().match("/swagger-ui/index.html", request.getServletPath()) ||
+                new AntPathMatcher().match("/learn-web-docs/swagger-config", request.getServletPath()) ||
+                new AntPathMatcher().match("/learn-web-docs", request.getServletPath()) ||
+                new AntPathMatcher().match("/swagger-ui/swagger-initializer.js", request.getServletPath()) ||
                 new AntPathMatcher().match("/api/v1/organizations/send", request.getServletPath());
     }
 
