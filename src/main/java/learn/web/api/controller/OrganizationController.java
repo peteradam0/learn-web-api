@@ -28,14 +28,14 @@ public class OrganizationController {
     private EmailFacade emailFacade;
 
     @PostMapping("/organizations")
-    public ResponseEntity<OrganizationData> handleCreateOrganization(@RequestBody OrganizationData organizationData) {
+    public ResponseEntity<?> handleCreateOrganization(@RequestBody OrganizationData organizationData) {
 
         OrganizationData createdOrganization = new OrganizationData();
         try {
             createdOrganization = organizationFacade.createOrganization(organizationData);
         } catch (Exception e) {
             LOGGER.error("Organization not created", e);
-            ResponseEntity.noContent();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Creation failed");
         }
         return ResponseEntity.ok(createdOrganization);
     }

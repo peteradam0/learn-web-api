@@ -5,6 +5,7 @@ import learn.web.api.facades.dtos.CourseParticipationData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,18 +25,19 @@ public class CourseParticipationController {
         } catch (Exception e) {
             LOGGER.error("Course not created", e);
             ResponseEntity.noContent();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to create");
         }
         return ResponseEntity.ok("Successfully created");
     }
 
     @GetMapping("/participation")
-    public ResponseEntity<CourseParticipationData> handleGetParticipation(@PathVariable String courseId) {
+    public ResponseEntity<?> handleGetParticipation(@PathVariable String courseId) {
         CourseParticipationData courseParticipationData = new CourseParticipationData();
         try {
             courseParticipationData = courseParticipationFacade.getParticipation(courseId);
         } catch (Exception e) {
             LOGGER.debug("Participation not found", e);
-            ResponseEntity.noContent();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Participation not found");
         }
         return ResponseEntity.ok(courseParticipationData);
     }
@@ -46,8 +48,8 @@ public class CourseParticipationController {
             courseParticipationFacade.createChapterParticipation(courseId, chapterId);
         } catch (Exception e) {
             LOGGER.debug("Participation not found", e);
-            ResponseEntity.noContent();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Chapter participation not found");
         }
-        return ResponseEntity.ok("Successfull participation");
+        return ResponseEntity.ok("Successfully participation");
     }
 }
