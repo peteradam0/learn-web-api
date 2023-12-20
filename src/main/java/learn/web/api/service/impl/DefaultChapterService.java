@@ -1,6 +1,6 @@
 package learn.web.api.service.impl;
 
-import learn.web.api.daos.ChapterDao;
+import learn.web.api.dao.ChapterDao;
 import learn.web.api.model.Chapter;
 import learn.web.api.service.ChapterService;
 import org.springframework.beans.factory.annotation.Autowired;

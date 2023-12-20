@@ -1,6 +1,6 @@
 package learn.web.api.service.impl;
 
-import learn.web.api.daos.CourseParticipationDao;
+import learn.web.api.dao.CourseParticipationDao;
 import learn.web.api.model.CourseParticipation;
 import learn.web.api.service.CourseParticipationService;
 import org.slf4j.Logger;

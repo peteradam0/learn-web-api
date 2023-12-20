@@ -1,4 +1,4 @@
-package learn.web.api.daos;
+package learn.web.api.dao;
 
 import learn.web.api.model.User;
 import org.springframework.data.mongodb.repository.MongoRepository;

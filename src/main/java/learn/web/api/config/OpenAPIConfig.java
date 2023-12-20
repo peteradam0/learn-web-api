@@ -25,9 +25,9 @@ public class OpenAPIConfig {
         License mitLicense = new License().name("MIT License").url("https://choosealicense.com/licenses/mit/");
 
         Info info = new Info()
-                .title("Pet Project REST API")
+                .title("Learn Web REST API")
                 .version("1.0")
-                .description("This API exposes endpoints to configure and manage a LMS system")
+                .description("This API exposes endpoints to configure and manage a LMS system.")
                 .license(mitLicense);
 
         return new OpenAPI().info(info).servers(List.of(devServer));
