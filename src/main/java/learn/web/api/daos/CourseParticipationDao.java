@@ -1,6 +1,6 @@
 package learn.web.api.daos;
 
-import learn.web.api.models.CourseParticipation;
+import learn.web.api.model.CourseParticipation;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

@@ -2,7 +2,7 @@ package learn.web.api.facade.populator.impl;
 
 import learn.web.api.facade.dtos.CourseParticipationData;
 import learn.web.api.facade.populator.Populator;
-import learn.web.api.models.CourseParticipation;
+import learn.web.api.model.CourseParticipation;
 import org.springframework.stereotype.Component;
 
 @Component

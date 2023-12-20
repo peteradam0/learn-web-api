@@ -1,7 +1,6 @@
 package learn.web.api.daos;
 
-import learn.web.api.models.Course;
-import learn.web.api.models.Organization;
+import learn.web.api.model.Organization;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface OrganizationDao extends MongoRepository<Organization, String> {

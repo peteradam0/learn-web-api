@@ -1,8 +1,8 @@
-package learn.web.api.services.impl;
+package learn.web.api.service.impl;
 
 import learn.web.api.daos.CourseParticipationDao;
-import learn.web.api.models.CourseParticipation;
-import learn.web.api.services.CourseParticipationService;
+import learn.web.api.model.CourseParticipation;
+import learn.web.api.service.CourseParticipationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

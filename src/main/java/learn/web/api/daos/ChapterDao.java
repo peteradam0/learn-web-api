@@ -1,6 +1,6 @@
 package learn.web.api.daos;
 
-import learn.web.api.models.Chapter;
+import learn.web.api.model.Chapter;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;

@@ -1,8 +1,8 @@
-package learn.web.api.services.impl;
+package learn.web.api.service.impl;
 
 import learn.web.api.daos.OrganizationDao;
-import learn.web.api.models.Organization;
-import learn.web.api.services.OrganizationService;
+import learn.web.api.model.Organization;
+import learn.web.api.service.OrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

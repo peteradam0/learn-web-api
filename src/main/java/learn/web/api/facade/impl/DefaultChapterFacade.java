@@ -6,8 +6,8 @@ import learn.web.api.facade.dtos.CreateChapterData;
 import learn.web.api.facade.populator.impl.ChapterDataToChapterPopulator;
 import learn.web.api.facade.populator.impl.ChapterToChapterDataPopulator;
 import learn.web.api.facade.populator.impl.CreateChapterDataToChapterPopulator;
-import learn.web.api.models.Chapter;
-import learn.web.api.services.ChapterService;
+import learn.web.api.model.Chapter;
+import learn.web.api.service.ChapterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

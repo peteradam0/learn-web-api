@@ -1,4 +1,4 @@
-package learn.web.api.models;
+package learn.web.api.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,12 +9,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "Attachment")
-public class Attachment {
-
+@Document(collection = "Organization")
+public class Organization {
     @Id
     private String id;
     private String name;
-    private String url;
-    private Course course;
+    private String adminId;
+    private String imageUrl;
 }

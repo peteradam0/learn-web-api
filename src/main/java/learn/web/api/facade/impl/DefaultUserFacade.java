@@ -6,9 +6,9 @@ import learn.web.api.facade.dtos.UserData;
 import learn.web.api.facade.dtos.WebhookUserData;
 import learn.web.api.facade.populator.impl.UserDataToUserPopulator;
 import learn.web.api.facade.populator.impl.UserToUserDataPopulator;
-import learn.web.api.models.User;
-import learn.web.api.models.UserRole;
-import learn.web.api.services.UserService;
+import learn.web.api.model.User;
+import learn.web.api.model.UserRole;
+import learn.web.api.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

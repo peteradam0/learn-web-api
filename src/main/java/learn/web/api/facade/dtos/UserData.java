@@ -1,6 +1,6 @@
 package learn.web.api.facade.dtos;
 
-import learn.web.api.models.UserRole;
+import learn.web.api.model.UserRole;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.jackson.JsonComponent;

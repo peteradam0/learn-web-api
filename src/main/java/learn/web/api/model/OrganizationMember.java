@@ -1,4 +1,4 @@
-package learn.web.api.models;
+package learn.web.api.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,11 +9,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "Organization")
-public class Organization {
+@Document(collection = "OrganizationMember")
+public class OrganizationMember {
     @Id
     private String id;
-    private String name;
-    private String adminId;
-    private String imageUrl;
+    private String organizationId;
+    private String userId;
 }

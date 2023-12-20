@@ -4,8 +4,8 @@ import learn.web.api.facade.CourseParticipationFacade;
 import learn.web.api.facade.SessionFacade;
 import learn.web.api.facade.dtos.CourseParticipationData;
 import learn.web.api.facade.populator.impl.ParticipationToParticipationDataPopulator;
-import learn.web.api.models.CourseParticipation;
-import learn.web.api.services.CourseParticipationService;
+import learn.web.api.model.CourseParticipation;
+import learn.web.api.service.CourseParticipationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

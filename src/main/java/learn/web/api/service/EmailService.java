@@ -1,4 +1,4 @@
-package learn.web.api.services;
+package learn.web.api.service;
 
 public interface EmailService {
     void sengOrganizationInvite(

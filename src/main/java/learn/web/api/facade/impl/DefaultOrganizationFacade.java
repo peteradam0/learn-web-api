@@ -6,10 +6,10 @@ import learn.web.api.facade.dtos.OrganizationMemberData;
 import learn.web.api.facade.populator.impl.OrganizationDataToOrganizationPopulator;
 import learn.web.api.facade.populator.impl.OrganizationMemberDataToOrganizationMember;
 import learn.web.api.facade.populator.impl.OrganizationToOrganizationDataPopulator;
-import learn.web.api.models.Organization;
-import learn.web.api.models.OrganizationMember;
-import learn.web.api.services.OrganizationMemberService;
-import learn.web.api.services.OrganizationService;
+import learn.web.api.model.Organization;
+import learn.web.api.model.OrganizationMember;
+import learn.web.api.service.OrganizationMemberService;
+import learn.web.api.service.OrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

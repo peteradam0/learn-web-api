@@ -6,8 +6,8 @@ import learn.web.api.facade.populator.impl.CourseDataToCoursePopulator;
 import learn.web.api.facade.populator.impl.CourseToCourseDataPopulator;
 import learn.web.api.facade.populator.impl.CourseToCourseDataResponsePopulator;
 import learn.web.api.facade.populator.impl.UserDataToCourseAuthorData;
-import learn.web.api.models.Course;
-import learn.web.api.services.CourseService;
+import learn.web.api.model.Course;
+import learn.web.api.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

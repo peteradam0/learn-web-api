@@ -1,7 +1,7 @@
-package learn.web.api.services.impl;
+package learn.web.api.service.impl;
 
-import learn.web.api.models.OrganizationMember;
-import learn.web.api.services.OrganizationMemberService;
+import learn.web.api.model.OrganizationMember;
+import learn.web.api.service.OrganizationMemberService;
 import org.springframework.stereotype.Service;
 
 @Service

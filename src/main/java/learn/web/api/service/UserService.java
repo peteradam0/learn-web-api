@@ -1,6 +1,6 @@
-package learn.web.api.services;
+package learn.web.api.service;
 
-import learn.web.api.models.User;
+import learn.web.api.model.User;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
-package learn.web.api.services;
+package learn.web.api.service;
 
-import learn.web.api.models.Organization;
+import learn.web.api.model.Organization;
 
 import java.util.List;
 

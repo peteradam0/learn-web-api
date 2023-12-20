@@ -1,4 +1,4 @@
-package learn.web.api.models;
+package learn.web.api.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
