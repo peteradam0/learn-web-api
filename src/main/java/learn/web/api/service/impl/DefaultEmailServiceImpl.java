@@ -48,7 +48,7 @@ public class DefaultEmailServiceImpl implements EmailService {
     private Context createContextForOrganizationMemberEmail(String organizationId, String organizationName) {
         Context context = new Context();
         context.setVariable("confirmationUrl", domainToConfirmInvitation + organizationId);
-        context.setVariable("organization.name", organizationName);
+        context.setVariable("organization", organizationName);
         return context;
     }
 

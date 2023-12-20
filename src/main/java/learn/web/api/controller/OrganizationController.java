@@ -40,7 +40,7 @@ public class OrganizationController {
         return ResponseEntity.ok(createdOrganization);
     }
 
-    @GetMapping("/organizations/send")
+    @PostMapping("/organizations/invite")
     public ResponseEntity<?> handleAddOrganizationMember(@RequestBody OrganizationMemberData organizationMemberData) {
         try{
             emailFacade.sendOrganizationMemberInvitation(organizationMemberData);

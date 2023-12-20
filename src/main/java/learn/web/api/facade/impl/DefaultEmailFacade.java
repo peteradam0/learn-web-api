@@ -25,7 +25,7 @@ public class DefaultEmailFacade implements EmailFacade {
     @Override
     public void sendOrganizationMemberInvitation(OrganizationMemberData organizationMemberData) {
         UserData userData = userFacade.getUserDataById(organizationMemberData.getUserEmail());
-        OrganizationData organizationData = organizationFacade.getOrganizationByName(organizationMemberData.getUserEmail());
-        emailService.sengOrganizationInvite(userData.getEmail(), "Organization Invitation", organizationData.getId(), organizationData.getName());
+        OrganizationData organizationData = organizationFacade.getOrganizationByName(organizationMemberData.getOrganizationName());
+        emailService.sengOrganizationInvite(organizationMemberData.getUserEmail(), "Organization Invitation", organizationData.getId(), organizationData.getName());
     }
 }
