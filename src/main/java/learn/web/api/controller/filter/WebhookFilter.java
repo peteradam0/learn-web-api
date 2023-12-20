@@ -1,4 +1,4 @@
-package learn.web.api.filters;
+package learn.web.api.controller.filter;
 
 import com.svix.Webhook;
 import com.svix.exceptions.WebhookVerificationException;
@@ -6,6 +6,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -20,10 +21,15 @@ import java.util.stream.Collectors;
 
 @Component
 public class WebhookFilter extends OncePerRequestFilter {
+
+
+    @Value("${spring.clerk.secret}")
+    private String secret;
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
          if (new AntPathMatcher().match("/api/v2/webhooks", request.getServletPath())){
-             Webhook webhook = new Webhook("whsec_L8jEQl8bY637Puw9Qv2wea50utiXA+o3");
+             Webhook webhook = new Webhook(secret);
 
              HashMap<String, List<String>> headerMap = new HashMap<String, List<String>>();
              headerMap.put("svix-id", Arrays.asList(request.getHeader("svix-id")));
