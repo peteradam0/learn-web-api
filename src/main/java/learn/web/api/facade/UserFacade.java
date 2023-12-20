@@ -14,6 +14,8 @@ public interface UserFacade {
 
     UserData getUserDataById(String userId);
 
+    UserData getUserDataEmail(String email);
+
     List<UserData> getUsers();
 
     void deleteUser(String id);

@@ -22,7 +22,8 @@
                             style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 16px; vertical-align: top; color: #fff; font-weight: 500; text-align: center; border-radius: 3px 3px 0 0; background-color: #38414a; margin: 0; padding: 20px;"
                             align="center" bgcolor="#71b6f9" valign="top">
                             <a href="#" style="font-size:32px;color:#fff;"> learn-web</a> <br>
-                            <span style="margin-top: 10px;display: block;">You have been invited to <strong th:text="${organizationName}"></strong> organization</span>
+                            <span style="margin-top: 10px;display: block;">You have been invited to <strong
+                                    th:text="${organizationName}"></strong> organization</span>
                         </td>
                     </tr>
                     <tr
@@ -38,7 +39,9 @@
                                     <td class="content-block"
                                         style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;"
                                         valign="top">
-                                        Hello <strong style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;" th:text="${name}"></strong>
+                                        Hello <strong
+                                            style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"
+                                            th:text="${name}"></strong>
                                     </td>
                                 </tr>
                                 <tr
@@ -46,7 +49,8 @@
                                     <td class="content-block"
                                         style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;"
                                         valign="top">
-                                        <p>You have been invited to an organization in order to join this organization click the link mentioned in the email</p>
+                                        <p>You have been invited to an organization in order to join this organization
+                                            click the link mentioned in the email</p>
                                     </td>
                                 </tr>
                                 <tr
@@ -57,8 +61,10 @@
                                         <img src="cid:image" style="width: 300px; display: block; margin-bottom: 35px;">
                                         <a class="btn-primary"
                                            style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; color: #FFF; text-decoration: none; line-height: 2em; font-weight: bold; text-align: center; cursor: pointer; display: inline-block; border-radius: 5px; text-transform: capitalize; background-color: #f1556c; margin: 0; border-color: #f1556c; border-style: solid; border-width: 8px 16px;"
-                                           th:href="${canvasLink}">
-                                            Join organization</a>
+                                           th:href="${confirmationUrl}">
+                                            Join <strong
+                                                style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"
+                                                th:text="${organization.name}"></strong></a>
                                     </td>
                                 </tr>
                                 <tr

@@ -64,6 +64,16 @@ public class DefaultUserFacade implements UserFacade {
     }
 
     @Override
+    public UserData getUserDataEmail(String email) {
+        User user = userService.getUserByEmail(email);
+        UserData userData = new UserData();
+        if (user != null) {
+            userToUserDataPopulator.populate(user, userData);
+        }
+        return userData;
+    }
+
+    @Override
     public List<UserData> getUsers() {
         List<UserData> userDataLister = new ArrayList<>();
 

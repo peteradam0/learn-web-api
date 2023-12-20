@@ -41,8 +41,14 @@ public class OrganizationController {
     }
 
     @GetMapping("/organizations/send")
-    public ResponseEntity<String> handleAddOrganizationMember() {
-        emailFacade.sendOrganizationMemberInvitation();
+    public ResponseEntity<?> handleAddOrganizationMember(@RequestBody OrganizationMemberData organizationMemberData) {
+        try{
+            emailFacade.sendOrganizationMemberInvitation(organizationMemberData);
+        }catch (Exception e){
+            LOGGER.error("Organization member not added", e);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Organization member not added");
+        }
+
         return ResponseEntity.ok("sent");
     }
 

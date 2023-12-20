@@ -43,6 +43,14 @@ public class DefaultOrganizationFacade implements OrganizationFacade {
     }
 
     @Override
+    public OrganizationData getOrganizationByName(String name) {
+        Organization organization = organizationService.getOrganizationByName(name);
+        OrganizationData organizationData = new OrganizationData();
+        organizationToOrganizationDataPopulator.populate(organization, organizationData);
+        return organizationData;
+    }
+
+    @Override
     public List<OrganizationData> getOrganizations() {
 
         List<OrganizationData> organizationDataList = new ArrayList<>();
@@ -63,7 +71,7 @@ public class DefaultOrganizationFacade implements OrganizationFacade {
     @Override
     public void addMemberToOrganization(OrganizationMemberData organizationMemberData) {
         OrganizationMember organizationMember = new OrganizationMember();
-        organizationMemberDataToOrganizationMember.populate(organizationMemberData,organizationMember);
+        organizationMemberDataToOrganizationMember.populate(organizationMemberData, organizationMember);
         organizationMemberService.createOrganizationMember(organizationMember);
     }
 }

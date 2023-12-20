@@ -34,10 +34,10 @@ public class DefaultEmailServiceImpl implements EmailService {
     private String domainToConfirmInvitation;
 
     @Override
-    public void sengOrganizationInvite(String to, String subject) {
+    public void sengOrganizationInvite(String to, String subject, String organizationName, String organizationId) {
 
         try {
-            String content = templateEngine.process("emailtemplate", createContextForOrganizationMemberEmail("10"));
+            String content = templateEngine.process("emailtemplate", createContextForOrganizationMemberEmail(organizationName, organizationId));
             javaMailSender.send(createMessage(subject, content, to));
         } catch (MessagingException e) {
             LOGGER.error("Message creation failed", e);
@@ -45,10 +45,10 @@ public class DefaultEmailServiceImpl implements EmailService {
 
     }
 
-    private Context createContextForOrganizationMemberEmail(String organizationId) {
+    private Context createContextForOrganizationMemberEmail(String organizationId, String organizationName) {
         Context context = new Context();
-        context.setVariable("canvasLink", domainToConfirmInvitation + organizationId);
-        context.setVariable("organization.name", "The office");
+        context.setVariable("confirmationUrl", domainToConfirmInvitation + organizationId);
+        context.setVariable("organization.name", organizationName);
         return context;
     }
 

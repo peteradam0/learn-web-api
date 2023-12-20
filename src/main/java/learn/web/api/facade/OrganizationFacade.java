@@ -8,6 +8,8 @@ import java.util.List;
 public interface OrganizationFacade {
     OrganizationData createOrganization(OrganizationData organizationData);
 
+    OrganizationData getOrganizationByName(String name);
+
     List<OrganizationData> getOrganizations();
 
     void deleteOrganization(String name);
