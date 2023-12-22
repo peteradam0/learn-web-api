@@ -28,6 +28,7 @@ public class Course {
     private Float price;
     private boolean isPublished;
     private String categoryId;
+    private Organization organization;
 
     @DBRef
     private List<Attachment> attachments;

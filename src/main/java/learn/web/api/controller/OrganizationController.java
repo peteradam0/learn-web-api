@@ -4,6 +4,7 @@ import learn.web.api.facade.EmailFacade;
 import learn.web.api.facade.OrganizationFacade;
 import learn.web.api.facade.dto.OrganizationData;
 import learn.web.api.facade.dto.OrganizationMemberData;
+import learn.web.api.facade.dto.UserData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -97,5 +98,17 @@ public class OrganizationController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Organization member creation failed");
         }
         return ResponseEntity.ok("created");
+    }
+
+    @GetMapping("/organizations/{name}/members")
+    public ResponseEntity<?> handleGetOrganizationMembers(@PathVariable String name) {
+        try {
+            List<UserData> members = organizationFacade.getOrganizationByName(name).getMembers();
+            return ResponseEntity.ok(members);
+        } catch (Exception e) {
+            LOGGER.error("Organizations members not found", e);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("");
+        }
+
     }
 }
