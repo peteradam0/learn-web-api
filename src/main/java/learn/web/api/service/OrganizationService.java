@@ -12,5 +12,6 @@ public interface OrganizationService {
     void deleteOrganization(String name);
 
     Organization getOrganizationByName(String name);
+
 }
 

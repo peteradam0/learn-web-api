@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class DefaultOrganizationFacade implements OrganizationFacade {
@@ -79,8 +80,22 @@ public class DefaultOrganizationFacade implements OrganizationFacade {
         organizationMemberDataToOrganizationMember.populate(organizationMemberData, organizationMemberInvitation);
         OrganizationMemberInvitation createdInvitation = organizationMemberService.createOrganizationMember(organizationMemberInvitation);
         OrganizationMemberInvData organizationMemberDataResult = new OrganizationMemberInvData();
-        organizationInvToOrganizationInvDataPopulator.populate(createdInvitation,organizationMemberDataResult);
+        organizationInvToOrganizationInvDataPopulator.populate(createdInvitation, organizationMemberDataResult);
         return organizationMemberDataResult;
+    }
+
+    @Override
+    public void confirmInvitation(String id) {
+        Optional<OrganizationMemberInvitation> memberInvitation = organizationMemberService.getMemberInvitationById(id);
+
+        if (memberInvitation.isPresent()) {
+            OrganizationMemberInvitation updatedInvitation = memberInvitation.get();
+            updatedInvitation.setConfirmed(true);
+            organizationMemberService.updateOrganizationMember(updatedInvitation);
+
+        } else {
+            throw new RuntimeException("Member invitation not found");
+        }
     }
 
 }

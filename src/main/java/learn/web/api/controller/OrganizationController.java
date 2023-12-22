@@ -51,6 +51,17 @@ public class OrganizationController {
         }
     }
 
+    @PostMapping("/organizations/invite/{id}/confirmation")
+    public ResponseEntity<?> handleConfirmInvitation(@PathVariable String id) {
+        try {
+            organizationFacade.confirmInvitation(id);
+            return ResponseEntity.ok("Confirmed");
+        } catch (Exception e) {
+            LOGGER.error("Organization member not added", e);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Organization member not added");
+        }
+    }
+
     @DeleteMapping("/organizations/{name}")
     public ResponseEntity<OrganizationData> handleDeleteOrganization(@PathVariable String name) {
 

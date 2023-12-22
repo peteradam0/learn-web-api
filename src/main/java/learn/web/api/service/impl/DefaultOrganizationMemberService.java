@@ -6,6 +6,8 @@ import learn.web.api.service.OrganizationMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class DefaultOrganizationMemberService implements OrganizationMemberService {
 
@@ -15,6 +17,18 @@ public class DefaultOrganizationMemberService implements OrganizationMemberServi
     @Override
     public OrganizationMemberInvitation createOrganizationMember(OrganizationMemberInvitation organizationMemberInvitation) {
         organizationMemberInvitation.setConfirmed(false);
+        return organizationMemberInvitationDao.save(organizationMemberInvitation);
+    }
+
+    @Override
+    public Optional<OrganizationMemberInvitation> getMemberInvitationById(String id) {
+        return organizationMemberInvitationDao.findById(id);
+    }
+
+    @Override
+    public OrganizationMemberInvitation updateOrganizationMember(OrganizationMemberInvitation organizationMemberInvitation) {
+        Optional<OrganizationMemberInvitation> toDelete = organizationMemberInvitationDao.findById(organizationMemberInvitation.getId());
+        toDelete.ifPresent(memberInvitation -> organizationMemberInvitationDao.delete(memberInvitation));
         return organizationMemberInvitationDao.save(organizationMemberInvitation);
     }
 }
