@@ -34,30 +34,30 @@ public class DefaultEmailServiceImpl implements EmailService {
     private String domainToConfirmInvitation;
 
     @Override
-    public void sengOrganizationInvite(String to, String subject, String organizationName, String organizationId) {
+    public void sengOrganizationInvite(String to, String organizationName, String invitationId) {
 
         try {
-            String content = templateEngine.process("emailtemplate", createContextForOrganizationMemberEmail(organizationName, organizationId));
-            javaMailSender.send(createMessage(subject, content, to));
+            String content = templateEngine.process("emailtemplate", createContextForOrganizationMemberEmail(invitationId, organizationName));
+            javaMailSender.send(createMessage(content, to));
         } catch (MessagingException e) {
             LOGGER.error("Message creation failed", e);
         }
 
     }
 
-    private Context createContextForOrganizationMemberEmail(String organizationId, String organizationName) {
+    private Context createContextForOrganizationMemberEmail(final String invitationId, final String organizationName) {
         Context context = new Context();
-        context.setVariable("confirmationUrl", domainToConfirmInvitation + organizationId);
+        context.setVariable("confirmationUrl", domainToConfirmInvitation + invitationId);
         context.setVariable("organization", organizationName);
         return context;
     }
 
 
-    private MimeMessage createMessage(String subject, String text, String to) throws MessagingException {
+    private MimeMessage createMessage(String text, String to) throws MessagingException {
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(message, true, UTF_8_ENCODING);
         mimeMessageHelper.setPriority(1);
-        mimeMessageHelper.setSubject(subject);
+        mimeMessageHelper.setSubject("Organization Invitation");
         mimeMessageHelper.setFrom(fromMail);
         mimeMessageHelper.setTo(to);
         mimeMessageHelper.setText(text, true);

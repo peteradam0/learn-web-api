@@ -7,9 +7,9 @@ import org.springframework.boot.jackson.JsonComponent;
 @JsonComponent
 @Getter
 @Setter
-public class OrganizationMemberData {
+public class OrganizationMemberInvData {
     private String id;
-    private String userEmail;
-    private String organizationName;
+    private String organizationId;
+    private String userId;
     private boolean confirmed;
 }

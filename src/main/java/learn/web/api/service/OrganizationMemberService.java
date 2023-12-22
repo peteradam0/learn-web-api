@@ -1,7 +1,7 @@
 package learn.web.api.service;
 
-import learn.web.api.model.OrganizationMember;
+import learn.web.api.model.OrganizationMemberInvitation;
 
 public interface OrganizationMemberService {
-    void createOrganizationMember(OrganizationMember organizationMember);
+    OrganizationMemberInvitation createOrganizationMember(OrganizationMemberInvitation organizationMemberInvitation);
 }

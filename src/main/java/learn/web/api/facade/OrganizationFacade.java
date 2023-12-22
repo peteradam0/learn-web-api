@@ -2,6 +2,8 @@ package learn.web.api.facade;
 
 import learn.web.api.facade.dto.OrganizationData;
 import learn.web.api.facade.dto.OrganizationMemberData;
+import learn.web.api.facade.dto.OrganizationMemberInvData;
+import learn.web.api.facade.dto.UserData;
 
 import java.util.List;
 
@@ -14,5 +16,6 @@ public interface OrganizationFacade {
 
     void deleteOrganization(String name);
 
-    void addMemberToOrganization(OrganizationMemberData organizationMemberData);
+    OrganizationMemberInvData addMemberToOrganization(OrganizationMemberData organizationMemberData);
+
 }

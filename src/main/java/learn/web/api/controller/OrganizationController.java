@@ -42,14 +42,13 @@ public class OrganizationController {
 
     @PostMapping("/organizations/invite")
     public ResponseEntity<?> handleAddOrganizationMember(@RequestBody OrganizationMemberData organizationMemberData) {
-        try{
+        try {
             emailFacade.sendOrganizationMemberInvitation(organizationMemberData);
-        }catch (Exception e){
+            return ResponseEntity.ok("sent");
+        } catch (Exception e) {
             LOGGER.error("Organization member not added", e);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Organization member not added");
         }
-
-        return ResponseEntity.ok("sent");
     }
 
     @DeleteMapping("/organizations/{name}")
@@ -78,7 +77,7 @@ public class OrganizationController {
         return ResponseEntity.ok(organizationDataList);
     }
 
-    @PostMapping("/organizations/member")
+    @PostMapping("/organizations/members")
     public ResponseEntity<String> handleCreateOrganizationMember(@RequestBody OrganizationMemberData organizationMemberData) {
         try {
             organizationFacade.addMemberToOrganization(organizationMemberData);

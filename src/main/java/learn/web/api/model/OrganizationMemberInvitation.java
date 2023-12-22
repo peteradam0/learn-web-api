@@ -9,10 +9,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "OrganizationMember")
-public class OrganizationMember {
+@Document(collection = "OrganizationMemberInvitation")
+public class OrganizationMemberInvitation {
     @Id
     private String id;
     private String organizationId;
     private String userId;
+    private boolean confirmed;
 }

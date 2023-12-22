@@ -3,11 +3,13 @@ package learn.web.api.facade.impl;
 import learn.web.api.facade.OrganizationFacade;
 import learn.web.api.facade.dto.OrganizationData;
 import learn.web.api.facade.dto.OrganizationMemberData;
+import learn.web.api.facade.dto.OrganizationMemberInvData;
 import learn.web.api.facade.populator.impl.OrganizationDataToOrganizationPopulator;
+import learn.web.api.facade.populator.impl.OrganizationInvToOrganizationInvDataPopulator;
 import learn.web.api.facade.populator.impl.OrganizationMemberDataToOrganizationMember;
 import learn.web.api.facade.populator.impl.OrganizationToOrganizationDataPopulator;
 import learn.web.api.model.Organization;
-import learn.web.api.model.OrganizationMember;
+import learn.web.api.model.OrganizationMemberInvitation;
 import learn.web.api.service.OrganizationMemberService;
 import learn.web.api.service.OrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,9 @@ public class DefaultOrganizationFacade implements OrganizationFacade {
 
     @Autowired
     private OrganizationMemberDataToOrganizationMember organizationMemberDataToOrganizationMember;
+
+    @Autowired
+    private OrganizationInvToOrganizationInvDataPopulator organizationInvToOrganizationInvDataPopulator;
 
     @Override
     public OrganizationData createOrganization(OrganizationData organizationData) {
@@ -69,9 +74,13 @@ public class DefaultOrganizationFacade implements OrganizationFacade {
     }
 
     @Override
-    public void addMemberToOrganization(OrganizationMemberData organizationMemberData) {
-        OrganizationMember organizationMember = new OrganizationMember();
-        organizationMemberDataToOrganizationMember.populate(organizationMemberData, organizationMember);
-        organizationMemberService.createOrganizationMember(organizationMember);
+    public OrganizationMemberInvData addMemberToOrganization(OrganizationMemberData organizationMemberData) {
+        OrganizationMemberInvitation organizationMemberInvitation = new OrganizationMemberInvitation();
+        organizationMemberDataToOrganizationMember.populate(organizationMemberData, organizationMemberInvitation);
+        OrganizationMemberInvitation createdInvitation = organizationMemberService.createOrganizationMember(organizationMemberInvitation);
+        OrganizationMemberInvData organizationMemberDataResult = new OrganizationMemberInvData();
+        organizationInvToOrganizationInvDataPopulator.populate(createdInvitation,organizationMemberDataResult);
+        return organizationMemberDataResult;
     }
+
 }
