@@ -92,6 +92,7 @@ public class DefaultOrganizationFacade implements OrganizationFacade {
             OrganizationMemberInvitation updatedInvitation = memberInvitation.get();
             updatedInvitation.setConfirmed(true);
             organizationMemberService.updateOrganizationMember(updatedInvitation);
+            organizationService.addMember(updatedInvitation);
 
         } else {
             throw new RuntimeException("Member invitation not found");

@@ -26,9 +26,9 @@ public class DefaultOrganizationMemberService implements OrganizationMemberServi
     }
 
     @Override
-    public OrganizationMemberInvitation updateOrganizationMember(OrganizationMemberInvitation organizationMemberInvitation) {
+    public void updateOrganizationMember(OrganizationMemberInvitation organizationMemberInvitation) {
         Optional<OrganizationMemberInvitation> toDelete = organizationMemberInvitationDao.findById(organizationMemberInvitation.getId());
         toDelete.ifPresent(memberInvitation -> organizationMemberInvitationDao.delete(memberInvitation));
-        return organizationMemberInvitationDao.save(organizationMemberInvitation);
+        organizationMemberInvitationDao.save(organizationMemberInvitation);
     }
 }

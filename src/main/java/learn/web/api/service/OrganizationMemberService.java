@@ -9,5 +9,6 @@ public interface OrganizationMemberService {
 
     Optional<OrganizationMemberInvitation> getMemberInvitationById(String id);
 
-    OrganizationMemberInvitation updateOrganizationMember(OrganizationMemberInvitation organizationMemberInvitation);
+    void updateOrganizationMember(OrganizationMemberInvitation organizationMemberInvitation);
+
 }
