@@ -22,7 +22,9 @@ public class OrganizationToOrganizationDataPopulator implements Populator<Organi
         target.setName(source.getName());
         target.setImageUrl(source.getImageUrl());
         target.setId(source.getId());
-        populateMembers(source, target);
+        if(source.getMembers() != null){
+            populateMembers(source, target);
+        }
     }
 
     private void populateMembers(Organization source, OrganizationData target) {

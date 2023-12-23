@@ -21,4 +21,5 @@ public class CourseData {
     private String createdAt;
     private boolean isPublished;
     private List<ChapterData> chapterData;
+    private OrganizationData organization;
 }

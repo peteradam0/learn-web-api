@@ -37,7 +37,7 @@ public class CourseParticipationController {
             courseParticipationData = courseParticipationFacade.getParticipation(courseId);
         } catch (Exception e) {
             LOGGER.debug("Participation not found", e);
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Participation not found");
+            return ResponseEntity.status(HttpStatus.OK).body("No participation to this course was found for the current user");
         }
         return ResponseEntity.ok(courseParticipationData);
     }
