@@ -1,5 +1,6 @@
 package learn.web.api.facade.impl;
 
+import learn.web.api.exception.ServiceLayerException;
 import learn.web.api.facade.OrganizationFacade;
 import learn.web.api.facade.dto.OrganizationData;
 import learn.web.api.facade.dto.OrganizationMemberData;
@@ -96,6 +97,22 @@ public class DefaultOrganizationFacade implements OrganizationFacade {
 
         } else {
             throw new RuntimeException("Member invitation not found");
+        }
+    }
+
+    @Override
+    public List<OrganizationData> getOrganizationsOfMember(String memberId) {
+        List<Organization> organizations = organizationService.getOrganizationsOfMember(memberId);
+        if (organizations != null) {
+            List<OrganizationData> organizationDataList = new ArrayList<>();
+            for (Organization organization : organizations) {
+                OrganizationData organizationData = new OrganizationData();
+                organizationToOrganizationDataPopulator.populate(organization, organizationData);
+                organizationDataList.add(organizationData);
+            }
+            return organizationDataList;
+        } else {
+            throw new ServiceLayerException("This user has no organizations");
         }
     }
 

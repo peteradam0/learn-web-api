@@ -6,7 +6,7 @@ import learn.web.api.model.User;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserDataToUserPopulator implements Populator<WebhookUserData, User> {
+public class WebhookUserDataToUserPopulator implements Populator<WebhookUserData, User> {
     @Override
     public void populate(WebhookUserData source, User target) {
         target.setClerkId(source.getData().getId());

@@ -11,7 +11,7 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/v1")
-public class Webhooks {
+public class ClerkUserController {
 
     @Autowired
     private UserFacade userFacade;

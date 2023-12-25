@@ -1,18 +1,19 @@
 package learn.web.api.facade.impl;
 
+import learn.web.api.exception.FacadeLayerException;
 import learn.web.api.facade.*;
 import learn.web.api.facade.dto.*;
-import learn.web.api.facade.populator.impl.CourseDataToCoursePopulator;
-import learn.web.api.facade.populator.impl.CourseToCourseDataPopulator;
-import learn.web.api.facade.populator.impl.CourseToCourseDataResponsePopulator;
-import learn.web.api.facade.populator.impl.UserDataToCourseAuthorData;
+import learn.web.api.facade.populator.impl.*;
 import learn.web.api.model.Course;
+import learn.web.api.model.Organizations;
+import learn.web.api.model.UserRole;
 import learn.web.api.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Component
 public class DefaultCourseFacade implements CourseFacade {
@@ -33,6 +34,9 @@ public class DefaultCourseFacade implements CourseFacade {
     private SessionFacade sessionFacade;
 
     @Autowired
+    private OrganizationFacade organizationFacade;
+
+    @Autowired
     private ChapterFacade chapterFacade;
 
     @Autowired
@@ -40,6 +44,9 @@ public class DefaultCourseFacade implements CourseFacade {
 
     @Autowired
     private UserFacade userFacade;
+
+    @Autowired
+    private WebhookUserDataToUserPopulator webhookUserDataToUserPopulator;
 
     @Autowired
     private CourseParticipationFacade courseParticipationFacade;
@@ -58,12 +65,12 @@ public class DefaultCourseFacade implements CourseFacade {
     }
 
     @Override
-    public List<CourseData> getCourseDataForUser() {
+    public List<CourseData> getCreatedCourseDataForAdmin() {
 
         String userId = sessionFacade.getCurrentUserId();
-
+        //TODO: check if this user is actually an admin
         List<CourseData> courseDataListData = new ArrayList<>();
-        for (Course course : courseService.getCoursesForUser(userId)) {
+        for (Course course : courseService.getCoursesForAdminUser(userId)) {
             CourseData courseData = new CourseData();
             courseToCourseDataPopulator.populate(course, courseData);
             courseDataListData.add(courseData);
@@ -82,12 +89,40 @@ public class DefaultCourseFacade implements CourseFacade {
     }
 
     @Override
-    public List<CourseData> getPublishedCourses() {
-        List<CourseData> courseDataListData = new ArrayList<>();
-        for (Course course : courseService.getPublishedCourses()) {
-            populateCourseData(courseDataListData, course);
+    public List<CourseData> getSelfCourses() {
+
+        List<Course> allPublishedCourses = courseService.getAllPublishedCourses();
+        UserData userData = userFacade.getUserDataById(sessionFacade.getCurrentUserId());
+
+        if (userData != null) {
+            List<CourseData> courseDataList = new ArrayList<>();
+            if (userData.getUserRole() == UserRole.ADMIN) {
+                populateCourseDataForAdminUser(allPublishedCourses, courseDataList);
+
+            } else {
+                populateCourseDateForConsumer(userData, allPublishedCourses, courseDataList);
+
+            }
+            return courseDataList;
+
+        } else {
+            throw new FacadeLayerException("Current user not found, token missing");
         }
-        return courseDataListData;
+    }
+
+    private void populateCourseDateForConsumer(UserData userData, List<Course> allPublishedCourses, List<CourseData> courseDataList) {
+        for (Course course : allPublishedCourses) {
+            OrganizationData courseOrganization = organizationFacade.getOrganizationByName(course.getOrganization().getName());
+            if ((courseOrganization != null && courseOrganization.getMembers().contains(userData))
+                    || Objects.equals((Objects.requireNonNull(course.getOrganization())).getName(), Organizations.Public.name()))
+                populateCourseData(courseDataList, course);
+        }
+    }
+
+    private void populateCourseDataForAdminUser(List<Course> allPublishedCourses, List<CourseData> courseDataList) {
+        for (Course course : allPublishedCourses) {
+            populateCourseData(courseDataList, course);
+        }
     }
 
     @Override
@@ -117,13 +152,12 @@ public class DefaultCourseFacade implements CourseFacade {
         List<String> courseIdList = courseParticipationFacade.getAllParticipations().stream()
                 .map(CourseParticipationData::getCourseId).toList();
 
-        return getCourses().stream()
+        return getSelfCourses().stream()
                 .filter(courseData -> courseIdList.contains(courseData.getId())).toList();
     }
 
     private void populateCourseData(List<CourseData> courseDataListData, Course course) {
         CourseAuthorData courseAuthorData = getCourseAuthorData(course);
-
         CourseData courseData = new CourseData();
         courseData.setCourseAuthorData(courseAuthorData);
         courseToCourseDataPopulator.populate(course, courseData);

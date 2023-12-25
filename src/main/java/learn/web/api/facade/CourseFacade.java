@@ -6,11 +6,15 @@ import java.util.List;
 
 public interface CourseFacade {
     CourseCreateResponseData createCourse(CourseCreateRequestData courseCreateRequestData);
-    List<CourseData> getCourseDataForUser();
+    List<CourseData> getCreatedCourseDataForAdmin();
 
     List<CourseData> getCourses();
 
-    List<CourseData> getPublishedCourses();
+    /**
+     * Will return published courses, based on the role of the user.
+     * @return list of CourseData
+     */
+    List<CourseData> getSelfCourses();
 
     //TODO: A course should be only editable by a admin or maintainer
     CourseData getCourseData(String courseId);

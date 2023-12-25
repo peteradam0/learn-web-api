@@ -19,4 +19,6 @@ public interface OrganizationFacade {
     OrganizationMemberInvData addMemberToOrganization(OrganizationMemberData organizationMemberData);
 
     void confirmInvitation(String id);
+
+    List<OrganizationData> getOrganizationsOfMember(String memberId);
 }

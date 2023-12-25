@@ -23,7 +23,7 @@ public class DefaultCourseService implements CourseService {
     }
 
     @Override
-    public List<Course> getCoursesForUser(String userId) {
+    public List<Course> getCoursesForAdminUser(String userId) {
         return courseDao.findByUserId(userId);
     }
 
@@ -45,7 +45,7 @@ public class DefaultCourseService implements CourseService {
     }
 
     @Override
-    public List<Course> getPublishedCourses() {
+    public List<Course> getAllPublishedCourses() {
         return courseDao.findCoursesByIsPublished(true);
     }
 

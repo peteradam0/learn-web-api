@@ -78,4 +78,9 @@ public class DefaultOrganizationService implements OrganizationService {
         }
 
     }
+
+    @Override
+    public List<Organization> getOrganizationsOfMember(String memberId) {
+        return null;
+    }
 }

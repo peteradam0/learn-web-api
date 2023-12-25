@@ -44,7 +44,7 @@ public class CourseController {
 
         List<CourseData> courseDataList = new ArrayList<>();
         try {
-            courseDataList = courseFacade.getCourseDataForUser();
+            courseDataList = courseFacade.getCreatedCourseDataForAdmin();
         } catch (Exception e) {
             LOGGER.error("Get courses for user failed", e);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(courseDataList);
@@ -64,11 +64,11 @@ public class CourseController {
         return ResponseEntity.ok(courseDataList);
     }
 
-    @GetMapping("/courses/published")
+    @GetMapping("/courses/self")
     public ResponseEntity<List<CourseData>> handleGetPublishedCourses() {
         List<CourseData> courseDataList = new ArrayList<>();
         try {
-            courseDataList = courseFacade.getPublishedCourses();
+            courseDataList = courseFacade.getSelfCourses();
         } catch (Exception e) {
             LOGGER.error("Get published courses for user failed", e);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(courseDataList);

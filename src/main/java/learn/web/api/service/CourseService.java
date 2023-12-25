@@ -7,7 +7,7 @@ import java.util.List;
 public interface CourseService {
     Course createCourse(Course course);
 
-    List<Course> getCoursesForUser(String userId);
+    List<Course> getCoursesForAdminUser(String userId);
 
     List<Course> getCourses();
 
@@ -15,5 +15,6 @@ public interface CourseService {
 
     void changePublication(String courseId);
 
-    List<Course> getPublishedCourses();
+    List<Course> getAllPublishedCourses();
+
 }
