@@ -25,4 +25,16 @@ public class DefaultSessionFacade implements SessionFacade {
 
         throw new FacadeLayerException("UserId not found on the session");
     }
+
+    @Override
+    public String getCanvasToken() {
+        HttpSession session = httpSessionFactory.getObject();
+        String userId = (String) session.getAttribute("CanvasToken");
+
+        if(StringUtils.hasText(userId)){
+            return userId;
+        }
+
+        throw new FacadeLayerException("UserId not found on the session");
+    }
 }

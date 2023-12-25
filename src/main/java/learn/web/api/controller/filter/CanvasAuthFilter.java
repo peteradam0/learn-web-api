@@ -1,6 +1,7 @@
 package learn.web.api.controller.filter;
 
 import jakarta.servlet.FilterChain;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import learn.web.api.utils.JwtValidator;
@@ -12,45 +13,43 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.Optional;
 
 @Component
-public class AuthenticationFilter extends OncePerRequestFilter {
+public class CanvasAuthFilter extends OncePerRequestFilter {
 
-    private final Logger LOGGER = LoggerFactory.getLogger(AuthenticationFilter.class);
-
-    private final List<String> publicRoutes = Arrays.asList(
-            "/api/v1/webhooks",
-            "/swagger-ui/index.html",
-            "/learn-web-docs/swagger-config",
-            "/learn-web-docs",
-            "/swagger-ui/swagger-initializer.js",
-            "/api/v1/organizations/send"
-    );
+    private final Logger LOGGER = LoggerFactory.getLogger(CanvasAuthFilter.class);
 
     @Autowired
     private JwtValidator jwtValidator;
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
-        return publicRoutes.contains(request.getServletPath()) || request.getServletPath().contains("/suggestions");
+        return !request.getServletPath().contains("/suggestions");
     }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) {
 
         try {
-            String authTokenHeader = request.getHeader("Authorization");
-            String token = TokenExtractor.extractToken(authTokenHeader);
-            String userId = jwtValidator.getUserfromToken(token);
+            String token = request.getHeader("csrf_token");
 
-            request.getSession().setAttribute("userId", userId);
-
+            if (token.isEmpty()) {
+                throw new RuntimeException("Canvas toke not found");
+            }
+            request.getSession().setAttribute("CanvasToken", TokenExtractor.extractToken(token));
             filterChain.doFilter(request, response);
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             LOGGER.info(e.getMessage());
         }
 
+    }
+
+    public Optional<String> readCookie(String key, HttpServletRequest request) {
+        return Arrays.stream(request.getCookies())
+                .filter(c -> key.equals(c.getName()))
+                .map(Cookie::getValue)
+                .findAny();
     }
 }
