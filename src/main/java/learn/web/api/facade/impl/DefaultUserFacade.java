@@ -1,6 +1,6 @@
 package learn.web.api.facade.impl;
 
-import learn.web.api.facade.SessionFacade;
+import learn.web.api.service.SessionService;
 import learn.web.api.facade.UserFacade;
 import learn.web.api.facade.dto.UserData;
 import learn.web.api.facade.dto.WebhookUserData;
@@ -22,7 +22,7 @@ public class DefaultUserFacade implements UserFacade {
     private UserService userService;
 
     @Autowired
-    private SessionFacade sessionFacade;
+    private SessionService sessionService;
 
     @Autowired
     private UserToUserDataPopulator userToUserDataPopulator;
@@ -40,7 +40,7 @@ public class DefaultUserFacade implements UserFacade {
 
     @Override
     public UserData getCurrentUserData() {
-        User user = userService.getUserById(sessionFacade.getCurrentUserId());
+        User user = userService.getUserById(sessionService.getCurrentUserId());
         UserData userData = new UserData();
         userToUserDataPopulator.populate(user, userData);
         return userData;

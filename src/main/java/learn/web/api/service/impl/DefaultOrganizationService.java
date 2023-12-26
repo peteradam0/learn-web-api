@@ -1,7 +1,9 @@
 package learn.web.api.service.impl;
 
+import learn.web.api.dao.CanvasDao;
 import learn.web.api.dao.OrganizationDao;
 import learn.web.api.dao.UserDao;
+import learn.web.api.facade.dto.CanvasUser;
 import learn.web.api.model.Organization;
 import learn.web.api.model.OrganizationMemberInvitation;
 import learn.web.api.model.User;
@@ -21,6 +23,9 @@ public class DefaultOrganizationService implements OrganizationService {
 
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private CanvasDao canvasDao;
 
     @Override
     public Organization createOrganization(Organization organization) {
@@ -82,5 +87,10 @@ public class DefaultOrganizationService implements OrganizationService {
     @Override
     public List<Organization> getOrganizationsOfMember(String memberId) {
         return null;
+    }
+
+    @Override
+    public List<CanvasUser> getAllCanvasUsers() {
+        return canvasDao.findAllCanvasUsers();
     }
 }

@@ -2,13 +2,8 @@ package learn.web.api.facade.impl;
 
 import learn.web.api.exception.ServiceLayerException;
 import learn.web.api.facade.OrganizationFacade;
-import learn.web.api.facade.dto.OrganizationData;
-import learn.web.api.facade.dto.OrganizationMemberData;
-import learn.web.api.facade.dto.OrganizationMemberInvData;
-import learn.web.api.facade.populator.impl.OrganizationDataToOrganizationPopulator;
-import learn.web.api.facade.populator.impl.OrganizationInvToOrganizationInvDataPopulator;
-import learn.web.api.facade.populator.impl.OrganizationMemberDataToOrganizationMember;
-import learn.web.api.facade.populator.impl.OrganizationToOrganizationDataPopulator;
+import learn.web.api.facade.dto.*;
+import learn.web.api.facade.populator.impl.*;
 import learn.web.api.model.Organization;
 import learn.web.api.model.OrganizationMemberInvitation;
 import learn.web.api.service.OrganizationMemberService;
@@ -40,6 +35,9 @@ public class DefaultOrganizationFacade implements OrganizationFacade {
 
     @Autowired
     private OrganizationInvToOrganizationInvDataPopulator organizationInvToOrganizationInvDataPopulator;
+
+    @Autowired
+    private CanvasUserToUserSuggestionPopulator canvasUserToUserSuggestionPopulator;
 
     @Override
     public OrganizationData createOrganization(OrganizationData organizationData) {
@@ -114,6 +112,19 @@ public class DefaultOrganizationFacade implements OrganizationFacade {
         } else {
             throw new ServiceLayerException("This user has no organizations");
         }
+    }
+
+    @Override
+    public List<UserSuggestionData> getUserSuggestionsForOrganization(String organizationName) {
+        List<CanvasUser> canvasUserList = organizationService.getAllCanvasUsers();
+
+        List<UserSuggestionData> userSuggestionDataList = new ArrayList<>();
+        for(CanvasUser canvasUser: organizationService.getAllCanvasUsers()){
+            UserSuggestionData userSuggestionData = new UserSuggestionData();
+            canvasUserToUserSuggestionPopulator.populate(canvasUser,userSuggestionData);
+            userSuggestionDataList.add(userSuggestionData);
+        }
+        return userSuggestionDataList;
     }
 
 }

@@ -1,5 +1,6 @@
 package learn.web.api.service;
 
+import learn.web.api.facade.dto.CanvasUser;
 import learn.web.api.facade.dto.OrganizationData;
 import learn.web.api.model.Organization;
 import learn.web.api.model.OrganizationMemberInvitation;
@@ -21,5 +22,7 @@ public interface OrganizationService {
     void addMember(OrganizationMemberInvitation updatedInvitation);
 
     List<Organization> getOrganizationsOfMember(String memberId);
+
+    List<CanvasUser> getAllCanvasUsers();
 }
 

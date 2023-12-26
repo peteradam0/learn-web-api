@@ -1,9 +1,6 @@
 package learn.web.api.facade;
 
-import learn.web.api.facade.dto.OrganizationData;
-import learn.web.api.facade.dto.OrganizationMemberData;
-import learn.web.api.facade.dto.OrganizationMemberInvData;
-import learn.web.api.facade.dto.UserData;
+import learn.web.api.facade.dto.*;
 
 import java.util.List;
 
@@ -21,4 +18,6 @@ public interface OrganizationFacade {
     void confirmInvitation(String id);
 
     List<OrganizationData> getOrganizationsOfMember(String memberId);
+
+    List<UserSuggestionData> getUserSuggestionsForOrganization(String organizationName);
 }

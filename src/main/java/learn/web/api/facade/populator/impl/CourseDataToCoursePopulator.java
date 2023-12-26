@@ -1,7 +1,7 @@
 package learn.web.api.facade.populator.impl;
 
 import learn.web.api.facade.OrganizationFacade;
-import learn.web.api.facade.SessionFacade;
+import learn.web.api.service.SessionService;
 import learn.web.api.facade.dto.CourseCreateRequestData;
 import learn.web.api.facade.dto.OrganizationData;
 import learn.web.api.facade.populator.Populator;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 public class CourseDataToCoursePopulator implements Populator<CourseCreateRequestData, Course> {
 
     @Autowired
-    private SessionFacade sessionFacade;
+    private SessionService sessionService;
 
     @Autowired
     private OrganizationFacade organizationFacade;
@@ -25,7 +25,7 @@ public class CourseDataToCoursePopulator implements Populator<CourseCreateReques
     @Override
     public void populate(CourseCreateRequestData source, Course target) {
         target.setTitle(source.getTitle());
-        target.setUserId(sessionFacade.getCurrentUserId());
+        target.setUserId(sessionService.getCurrentUserId());
         target.setDescription(source.getDescription());
         target.setImageUrl(source.getImageUrl());
         target.setVideoUrl(source.getVideoUrl());

@@ -8,6 +8,7 @@ import learn.web.api.model.Course;
 import learn.web.api.model.Organizations;
 import learn.web.api.model.UserRole;
 import learn.web.api.service.CourseService;
+import learn.web.api.service.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -31,7 +32,7 @@ public class DefaultCourseFacade implements CourseFacade {
     private CourseToCourseDataPopulator courseToCourseDataPopulator;
 
     @Autowired
-    private SessionFacade sessionFacade;
+    private SessionService sessionService;
 
     @Autowired
     private OrganizationFacade organizationFacade;
@@ -67,7 +68,7 @@ public class DefaultCourseFacade implements CourseFacade {
     @Override
     public List<CourseData> getCreatedCourseDataForAdmin() {
 
-        String userId = sessionFacade.getCurrentUserId();
+        String userId = sessionService.getCurrentUserId();
         //TODO: check if this user is actually an admin
         List<CourseData> courseDataListData = new ArrayList<>();
         for (Course course : courseService.getCoursesForAdminUser(userId)) {
@@ -92,7 +93,7 @@ public class DefaultCourseFacade implements CourseFacade {
     public List<CourseData> getSelfCourses() {
 
         List<Course> allPublishedCourses = courseService.getAllPublishedCourses();
-        UserData userData = userFacade.getUserDataById(sessionFacade.getCurrentUserId());
+        UserData userData = userFacade.getUserDataById(sessionService.getCurrentUserId());
 
         if (userData != null) {
             List<CourseData> courseDataList = new ArrayList<>();

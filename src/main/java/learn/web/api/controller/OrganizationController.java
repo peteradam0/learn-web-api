@@ -2,22 +2,20 @@ package learn.web.api.controller;
 
 import learn.web.api.facade.EmailFacade;
 import learn.web.api.facade.OrganizationFacade;
-import learn.web.api.facade.SessionFacade;
 import learn.web.api.facade.dto.OrganizationData;
 import learn.web.api.facade.dto.OrganizationMemberData;
 import learn.web.api.facade.dto.UserData;
+import learn.web.api.facade.dto.UserSuggestionData;
+import learn.web.api.service.SessionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.concurrent.atomic.AtomicReference;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -33,7 +31,7 @@ public class OrganizationController {
     private EmailFacade emailFacade;
 
     @Autowired
-    private SessionFacade sessionFacade;
+    private SessionService sessionService;
 
     @PostMapping("/organizations")
     public ResponseEntity<?> handleCreateOrganization(@RequestBody OrganizationData organizationData) {
@@ -120,16 +118,13 @@ public class OrganizationController {
     }
 
     @GetMapping("/organizations/{name}/members/suggestions")
-    public ResponseEntity<String> handleGetOrganizationMembersSuggestions(@PathVariable String name) {
-
-        RestTemplate restTemplate = new RestTemplate();
-        HttpHeaders headers = new HttpHeaders();
-        String token = sessionFacade.getCanvasToken();
-        headers.set("Authorization", "Bearer "+token);
-
-        HttpEntity<String> entity = new HttpEntity<String>(headers);
-        ResponseEntity<String> response  = restTemplate.exchange("http://canvas.docker/api/v1/accounts/self/users", HttpMethod.GET,entity, String.class);
-
-        return response;
+    public ResponseEntity<?> handleGetOrganizationMembersSuggestions(@PathVariable String name) {
+        try {
+            List<UserSuggestionData> members = organizationFacade.getUserSuggestionsForOrganization(name);
+            return ResponseEntity.ok(members);
+        } catch (Exception e) {
+            LOGGER.error("Organizations members not found", e);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("");
+        }
     }
 }
