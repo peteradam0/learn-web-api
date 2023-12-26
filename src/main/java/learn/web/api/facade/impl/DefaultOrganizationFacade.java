@@ -6,12 +6,16 @@ import learn.web.api.facade.dto.*;
 import learn.web.api.facade.populator.impl.*;
 import learn.web.api.model.Organization;
 import learn.web.api.model.OrganizationMemberInvitation;
+import learn.web.api.model.User;
 import learn.web.api.service.OrganizationMemberService;
 import learn.web.api.service.OrganizationService;
+import learn.web.api.service.SessionService;
+import learn.web.api.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,7 +23,11 @@ import java.util.Optional;
 public class DefaultOrganizationFacade implements OrganizationFacade {
 
     @Autowired
+    private SessionService sessionService;
+    @Autowired
     private OrganizationService organizationService;
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private OrganizationMemberService organizationMemberService;
@@ -43,8 +51,15 @@ public class DefaultOrganizationFacade implements OrganizationFacade {
     public OrganizationData createOrganization(OrganizationData organizationData) {
         Organization organization = new Organization();
         organizationDataToOrganizationPopulator.populate(organizationData, organization);
+        User user = userService.getUserById(sessionService.getCurrentUserId());
+        populateAdminMember(organization, user);
         organizationService.createOrganization(organization);
         return organizationData;
+    }
+
+    private void populateAdminMember(final Organization organization, final User user) {
+        List<User> members = Collections.singletonList(user);
+        organization.setMembers(members);
     }
 
     @Override
@@ -117,14 +132,33 @@ public class DefaultOrganizationFacade implements OrganizationFacade {
     @Override
     public List<UserSuggestionData> getUserSuggestionsForOrganization(String organizationName) {
         List<CanvasUser> canvasUserList = organizationService.getAllCanvasUsers();
+        List<User> organizationMembers = organizationService.getOrganizationByName(organizationName).getMembers();
 
+        if (canvasUserList == null || organizationMembers == null) {
+            throw new ServiceLayerException("No suggestions were found or this organization has no users");
+        }
+
+        List<String> namesList = organizationMembers.stream()
+                .map(User::getEmail)
+                .toList();
+
+        return createSuggestions(namesList);
+    }
+
+    public List<UserSuggestionData> createSuggestions(final List<String> namesList) {
         List<UserSuggestionData> userSuggestionDataList = new ArrayList<>();
-        for(CanvasUser canvasUser: organizationService.getAllCanvasUsers()){
-            UserSuggestionData userSuggestionData = new UserSuggestionData();
-            canvasUserToUserSuggestionPopulator.populate(canvasUser,userSuggestionData);
-            userSuggestionDataList.add(userSuggestionData);
+        for (CanvasUser canvasUser : organizationService.getAllCanvasUsers()) {
+            filterOutAlreadyAddedUsers(namesList, canvasUser, userSuggestionDataList);
         }
         return userSuggestionDataList;
+    }
+
+    private void filterOutAlreadyAddedUsers(List<String> namesList, CanvasUser canvasUser, List<UserSuggestionData> userSuggestionDataList) {
+        if (!namesList.contains(canvasUser.getLogin_id())) {
+            UserSuggestionData userSuggestionData = new UserSuggestionData();
+            canvasUserToUserSuggestionPopulator.populate(canvasUser, userSuggestionData);
+            userSuggestionDataList.add(userSuggestionData);
+        }
     }
 
 }
