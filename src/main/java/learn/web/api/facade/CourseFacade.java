@@ -22,4 +22,6 @@ public interface CourseFacade {
     void changePublication(String courseId);
 
     List<CourseData> getInProgressCourses();
+
+    List<CourseSuggestionData> getCourseSuggestions();
 }

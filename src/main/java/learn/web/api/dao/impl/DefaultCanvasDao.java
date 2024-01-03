@@ -1,6 +1,7 @@
 package learn.web.api.dao.impl;
 
 import learn.web.api.dao.CanvasDao;
+import learn.web.api.facade.dto.CanvasCourse;
 import learn.web.api.facade.dto.CanvasUser;
 import learn.web.api.service.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ import java.util.List;
 public class DefaultCanvasDao implements CanvasDao {
 
     private final String USERS_ROOT_URI = "http://canvas.docker/api/v1/accounts/self/users";
+
+    private final String COURSES_ROOT_URI = "http://canvas.docker/api/v1/courses";
     @Autowired
     private RestTemplate restTemplate;
 
@@ -33,6 +36,17 @@ public class DefaultCanvasDao implements CanvasDao {
         }
 
         return List.of(users.getBody());
+    }
+
+    @Override
+    public List<CanvasCourse> findAllCanvasCourses() {
+        ResponseEntity<CanvasCourse[]> courses = restTemplate.exchange(COURSES_ROOT_URI, HttpMethod.GET, createHeaders(), CanvasCourse[].class);
+
+        if (courses.getBody() == null) {
+            throw new RuntimeException("No courses found in Canvas LMS");
+        }
+
+        return List.of(courses.getBody());
     }
 
     private HttpEntity<String> createHeaders() {

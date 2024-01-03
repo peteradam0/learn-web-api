@@ -52,6 +52,9 @@ public class DefaultCourseFacade implements CourseFacade {
     @Autowired
     private CourseParticipationFacade courseParticipationFacade;
 
+    @Autowired
+    private CanvasCourseToCourseSuggestionPopulator courseSuggestionPopulator;
+
     @Override
     public CourseCreateResponseData createCourse(CourseCreateRequestData courseCreateRequestData) {
 
@@ -155,6 +158,25 @@ public class DefaultCourseFacade implements CourseFacade {
 
         return getSelfCourses().stream()
                 .filter(courseData -> courseIdList.contains(courseData.getId())).toList();
+    }
+
+    @Override
+    public List<CourseSuggestionData> getCourseSuggestions() {
+
+        List<CanvasCourse> canvasCourses = courseService.getCourseSuggestions();
+
+        if (canvasCourses == null) {
+            throw new FacadeLayerException("Canvas courses not found");
+        }
+
+        List<CourseSuggestionData> courseSuggestionDataList = new ArrayList<>();
+        for (CanvasCourse course : canvasCourses) {
+            CourseSuggestionData courseSuggestionData = new CourseSuggestionData();
+            courseSuggestionPopulator.populate(course, courseSuggestionData);
+            courseSuggestionDataList.add(courseSuggestionData);
+        }
+        return courseSuggestionDataList;
+
     }
 
     private void populateCourseData(List<CourseData> courseDataListData, Course course) {

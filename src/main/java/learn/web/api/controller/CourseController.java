@@ -160,5 +160,17 @@ public class CourseController {
         return ResponseEntity.ok(chapterData);
     }
 
+    @GetMapping("/courses/suggestions")
+    public ResponseEntity<?> handleGetSuggestions() {
+        List<CourseSuggestionData> courseSuggestionData = new ArrayList<>();
+        try {
+            courseSuggestionData = courseFacade.getCourseSuggestions();
+        } catch (Exception e) {
+            LOGGER.error("Get course suggestions failed", e);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(courseSuggestionData);
+        }
+        return ResponseEntity.ok(courseSuggestionData);
+    }
+
 
 }

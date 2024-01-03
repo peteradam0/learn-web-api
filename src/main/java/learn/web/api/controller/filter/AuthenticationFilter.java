@@ -33,7 +33,7 @@ public class AuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
-        return publicRoutes.contains(request.getServletPath()) || request.getServletPath().contains("/suggestions");
+        return publicRoutes.contains(request.getServletPath());
     }
 
     @Override

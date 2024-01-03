@@ -1,5 +1,6 @@
 package learn.web.api.service;
 
+import learn.web.api.facade.dto.CanvasCourse;
 import learn.web.api.model.Course;
 
 import java.util.List;
@@ -17,4 +18,5 @@ public interface CourseService {
 
     List<Course> getAllPublishedCourses();
 
+    List<CanvasCourse> getCourseSuggestions();
 }

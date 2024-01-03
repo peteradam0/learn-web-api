@@ -1,6 +1,8 @@
 package learn.web.api.service.impl;
 
+import learn.web.api.dao.CanvasDao;
 import learn.web.api.dao.CourseDao;
+import learn.web.api.facade.dto.CanvasCourse;
 import learn.web.api.model.Course;
 import learn.web.api.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,8 @@ public class DefaultCourseService implements CourseService {
     @Autowired
     private CourseDao courseDao;
 
+    @Autowired
+    private CanvasDao canvasDao;
 
     @Override
     public Course createCourse(Course course) {
@@ -47,6 +51,11 @@ public class DefaultCourseService implements CourseService {
     @Override
     public List<Course> getAllPublishedCourses() {
         return courseDao.findCoursesByIsPublished(true);
+    }
+
+    @Override
+    public List<CanvasCourse> getCourseSuggestions() {
+        return canvasDao.findAllCanvasCourses();
     }
 
 }
