@@ -6,6 +6,8 @@ import learn.web.api.service.VideoEventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class DefaultVideoEventService implements VideoEventService {
 
@@ -15,5 +17,10 @@ public class DefaultVideoEventService implements VideoEventService {
     @Override
     public VideoEvent createVideoEvent(VideoEvent videoEventToCreate) {
         return videoEventDao.save(videoEventToCreate);
+    }
+
+    @Override
+    public List<VideoEvent> getVideoEvents() {
+        return videoEventDao.findAll();
     }
 }
