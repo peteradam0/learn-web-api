@@ -32,6 +32,7 @@ public class CreateVideoEventToVideoEventPopulator implements Populator<CreateEv
         target.setDescription(source.getDescription());
         target.setImageUrl(source.getImageUrl());
         target.setActive(false);
+        target.setRoomId("");
         target.setOrganizer(userService.getUserById(sessionService.getCurrentUserId()));
         target.setUsers(getUsers(source.getUsers()));
         target.setOrganization(organizationService.getOrganizationByName(source.getOrganization()));

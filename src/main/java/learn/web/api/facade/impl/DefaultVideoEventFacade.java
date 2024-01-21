@@ -3,6 +3,7 @@ package learn.web.api.facade.impl;
 import learn.web.api.facade.VideoEventFacade;
 import learn.web.api.facade.dto.CreateEventData;
 import learn.web.api.facade.dto.DeleteVideoEventData;
+import learn.web.api.facade.dto.StartVideoEventData;
 import learn.web.api.facade.dto.VideoEventData;
 import learn.web.api.facade.populator.impl.CreateVideoEventToVideoEventPopulator;
 import learn.web.api.facade.populator.impl.VideoEventToVideoEventDataPopulator;
@@ -55,5 +56,10 @@ public class DefaultVideoEventFacade implements VideoEventFacade {
     @Override
     public void removeVideoEvent(DeleteVideoEventData deleteVideoEventData) {
         videoEventService.removeVideoEvent(deleteVideoEventData.getName(), deleteVideoEventData.getOrganization());
+    }
+
+    @Override
+    public void startVideoEvent(StartVideoEventData startVideoEventData) {
+        videoEventService.startEvent(startVideoEventData.getOrganization(), startVideoEventData.getName(), startVideoEventData.getRoomId());
     }
 }

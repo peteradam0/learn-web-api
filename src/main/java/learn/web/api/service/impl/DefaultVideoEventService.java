@@ -1,6 +1,7 @@
 package learn.web.api.service.impl;
 
 import learn.web.api.dao.VideoEventDao;
+import learn.web.api.exception.ServiceLayerException;
 import learn.web.api.model.Organization;
 import learn.web.api.model.VideoEvent;
 import learn.web.api.service.OrganizationService;
@@ -33,5 +34,20 @@ public class DefaultVideoEventService implements VideoEventService {
     public void removeVideoEvent(String name, String organization) {
         Organization org = organizationService.getOrganizationByName(organization);
         videoEventDao.removeVideoEventByNameAndOrganization(name, org);
+    }
+
+    @Override
+    public void startEvent(String organization, String name, String roomId) {
+        Organization org = organizationService.getOrganizationByName(organization);
+        VideoEvent videoEvent = videoEventDao.getVideoEventByNameAndOrganization(name, org);
+
+        if (!videoEvent.isActive()) {
+            videoEventDao.delete(videoEvent);
+            videoEvent.setRoomId(roomId);
+            videoEvent.setActive(true);
+            videoEventDao.save(videoEvent);
+        }
+
+        throw new ServiceLayerException("Event already started");
     }
 }

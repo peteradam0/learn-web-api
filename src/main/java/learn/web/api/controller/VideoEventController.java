@@ -3,6 +3,7 @@ package learn.web.api.controller;
 import learn.web.api.facade.VideoEventFacade;
 import learn.web.api.facade.dto.CreateEventData;
 import learn.web.api.facade.dto.DeleteVideoEventData;
+import learn.web.api.facade.dto.StartVideoEventData;
 import learn.web.api.facade.dto.VideoEventData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,5 +57,17 @@ public class VideoEventController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Removal failed");
         }
         return ResponseEntity.ok("Video Event removed successfully ");
+    }
+
+    @PostMapping ("/events/start")
+    public ResponseEntity<?> handleStartVideoEvent(@RequestBody StartVideoEventData startVideoEventData) {
+
+        try {
+            videoEventFacade.startVideoEvent(startVideoEventData);
+        } catch (Exception e) {
+            LOGGER.debug("Removal failed", e);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Start of video event failed");
+        }
+        return ResponseEntity.ok("Start successful");
     }
 }
