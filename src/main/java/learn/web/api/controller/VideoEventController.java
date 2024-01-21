@@ -2,6 +2,7 @@ package learn.web.api.controller;
 
 import learn.web.api.facade.VideoEventFacade;
 import learn.web.api.facade.dto.CreateEventData;
+import learn.web.api.facade.dto.DeleteVideoEventData;
 import learn.web.api.facade.dto.VideoEventData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,26 +35,26 @@ public class VideoEventController {
     }
 
     @GetMapping("/events")
-    public ResponseEntity<?> handleGetCurrentUserData() {
+    public ResponseEntity<?> handleGetVideoEventData() {
         List<VideoEventData> videoEventData;
         try {
             videoEventData = videoEventFacade.getVideoEvents();
         } catch (Exception e) {
             LOGGER.debug("Get video events failed", e);
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("\"Get video events failed");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Get video events failed");
         }
         return ResponseEntity.ok(videoEventData);
     }
 
-    @DeleteMapping ("/events")
-    public ResponseEntity<?> handleGetCurrentUserData(@RequestBody DeleteVideoEventData deleteVideoEventData) {
-        List<VideoEventData> videoEventData;
+    @PostMapping ("/events/delete")
+    public ResponseEntity<?> handleDeleteVideoEvent(@RequestBody DeleteVideoEventData deleteVideoEventData) {
+
         try {
-            videoEventData = videoEventFacade.getVideoEvents();
+            videoEventFacade.removeVideoEvent(deleteVideoEventData);
         } catch (Exception e) {
-            LOGGER.debug("Get video events failed", e);
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("\"Get video events failed");
+            LOGGER.debug("Removal failed", e);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Removal failed");
         }
-        return ResponseEntity.ok(videoEventData);
+        return ResponseEntity.ok("Video Event removed successfully ");
     }
 }

@@ -9,7 +9,5 @@ import org.springframework.boot.jackson.JsonComponent;
 @Setter
 public class DeleteVideoEventData {
     private String name;
-    private String description;
-    private String imageUrl;
     private String organization;
 }

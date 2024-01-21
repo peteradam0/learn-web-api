@@ -8,4 +8,6 @@ public interface VideoEventService {
     VideoEvent createVideoEvent(VideoEvent videoEventToCreate);
 
     List<VideoEvent> getVideoEvents();
+
+    void removeVideoEvent(String name, String organization);
 }
