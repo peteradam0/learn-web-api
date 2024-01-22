@@ -18,5 +18,6 @@ public class VideoEventData {
     private List<UserData> users;
     private boolean active;
     private UserData organizer;
+    private String roomId;
 
 }

@@ -7,6 +7,7 @@ import learn.web.api.model.User;
 import learn.web.api.model.VideoEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,10 @@ public class VideoEventToVideoEventDataPopulator implements Populator<VideoEvent
         target.setUsers(convertUsers(source.getUsers()));
         target.setActive(source.isActive());
         target.setOrganizer(convertOrganizer(source.getOrganizer()));
+
+        if(StringUtils.hasText(source.getRoomId())){
+            target.setRoomId(source.getRoomId());
+        }
     }
 
     private UserData convertOrganizer(User user) {
