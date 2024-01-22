@@ -17,5 +17,6 @@ public class VideoEventData {
     private String organization;
     private List<UserData> users;
     private boolean active;
+    private UserData organizer;
 
 }

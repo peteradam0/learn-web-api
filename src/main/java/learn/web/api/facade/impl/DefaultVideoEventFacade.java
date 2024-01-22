@@ -62,4 +62,22 @@ public class DefaultVideoEventFacade implements VideoEventFacade {
     public void startVideoEvent(StartVideoEventData startVideoEventData) {
         videoEventService.startEvent(startVideoEventData.getOrganization(), startVideoEventData.getName(), startVideoEventData.getRoomId());
     }
+
+    @Override
+    public List<VideoEventData> getEventsForCurrentUser() {
+        List<VideoEvent> videoEvents = videoEventService.getVideoEventsForCurrentUser();
+
+        if (videoEvents == null) {
+            return new ArrayList<>();
+        }
+
+        List<VideoEventData> videoEventDataList = new ArrayList<>();
+        videoEvents.forEach(videoEvent -> {
+            VideoEventData videoEventData = new VideoEventData();
+            videoEventDataPopulator.populate(videoEvent, videoEventData);
+            videoEventDataList.add(videoEventData);
+        });
+
+        return videoEventDataList;
+    }
 }

@@ -25,6 +25,13 @@ public class VideoEventToVideoEventDataPopulator implements Populator<VideoEvent
         target.setImageUrl(source.getImageUrl());
         target.setUsers(convertUsers(source.getUsers()));
         target.setActive(source.isActive());
+        target.setOrganizer(convertOrganizer(source.getOrganizer()));
+    }
+
+    private UserData convertOrganizer(User user) {
+        UserData organizer = new UserData();
+        userToUserDataPopulator.populate(user, organizer);
+        return organizer;
     }
 
     private List<UserData> convertUsers(List<User> users) {

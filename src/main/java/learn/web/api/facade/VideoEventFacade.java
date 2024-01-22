@@ -15,4 +15,6 @@ public interface VideoEventFacade {
    void removeVideoEvent(DeleteVideoEventData deleteVideoEventData);
 
     void startVideoEvent(StartVideoEventData startVideoEventData);
+
+    List<VideoEventData> getEventsForCurrentUser();
 }

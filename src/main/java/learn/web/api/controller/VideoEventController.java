@@ -70,4 +70,16 @@ public class VideoEventController {
         }
         return ResponseEntity.ok("Start successful");
     }
+
+    @GetMapping ("/events/active")
+    public ResponseEntity<?> handleGetStartedEvents() {
+        List<VideoEventData> videoEventData;
+        try {
+            videoEventData =  videoEventFacade.getEventsForCurrentUser();
+        } catch (Exception e) {
+            LOGGER.debug("Get Failed", e);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No events found");
+        }
+        return ResponseEntity.ok(videoEventData);
+    }
 }

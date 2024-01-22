@@ -12,4 +12,6 @@ public interface VideoEventService {
     void removeVideoEvent(String name, String organization);
 
     void startEvent(String organization, String username, String roomId);
+
+    List<VideoEvent> getVideoEventsForCurrentUser();
 }
