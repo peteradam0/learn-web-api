@@ -78,4 +78,4 @@ jobs:
           context: .
           file: Dockerfile
           push: true
-          tags: tericcabrel/bmi:latest
+          tags: adampeter/bmi:latest
