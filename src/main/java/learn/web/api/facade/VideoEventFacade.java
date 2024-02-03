@@ -1,9 +1,6 @@
 package learn.web.api.facade;
 
-import learn.web.api.facade.dto.CreateEventData;
-import learn.web.api.facade.dto.DeleteVideoEventData;
-import learn.web.api.facade.dto.StartVideoEventData;
-import learn.web.api.facade.dto.VideoEventData;
+import learn.web.api.facade.dto.*;
 
 import java.util.List;
 
@@ -17,4 +14,6 @@ public interface VideoEventFacade {
     void startVideoEvent(StartVideoEventData startVideoEventData);
 
     List<VideoEventData> getEventsForCurrentUser();
+
+    UserData getEventUserPermission(String roomId);
 }

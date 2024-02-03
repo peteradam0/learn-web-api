@@ -1,13 +1,14 @@
 package learn.web.api.facade.impl;
 
 import learn.web.api.facade.VideoEventFacade;
-import learn.web.api.facade.dto.CreateEventData;
-import learn.web.api.facade.dto.DeleteVideoEventData;
-import learn.web.api.facade.dto.StartVideoEventData;
-import learn.web.api.facade.dto.VideoEventData;
+import learn.web.api.facade.dto.*;
 import learn.web.api.facade.populator.impl.CreateVideoEventToVideoEventPopulator;
+import learn.web.api.facade.populator.impl.UserToUserDataPopulator;
 import learn.web.api.facade.populator.impl.VideoEventToVideoEventDataPopulator;
+import learn.web.api.model.User;
 import learn.web.api.model.VideoEvent;
+import learn.web.api.service.SessionService;
+import learn.web.api.service.UserService;
 import learn.web.api.service.VideoEventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -26,6 +27,15 @@ public class DefaultVideoEventFacade implements VideoEventFacade {
 
     @Autowired
     private VideoEventToVideoEventDataPopulator videoEventDataPopulator;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private SessionService sessionService;
+
+    @Autowired
+    private UserToUserDataPopulator userToUserDataPopulator;
 
     @Override
     public CreateEventData creteVideoEvent(CreateEventData createEventData) {
@@ -79,5 +89,19 @@ public class DefaultVideoEventFacade implements VideoEventFacade {
         });
 
         return videoEventDataList;
+    }
+
+    @Override
+    public UserData getEventUserPermission(String roomId) {
+        User currentUser = userService.getUserById(sessionService.getCurrentUserId());
+        VideoEvent videoEvent = videoEventService.getVideoEventByRoomId( roomId);
+
+        if(videoEvent.getUsers().contains(currentUser) || videoEvent.getOrganizer().equals(currentUser)){
+            UserData userData = new UserData();
+            userToUserDataPopulator.populate(currentUser, userData);
+            return userData;
+        }
+
+        return new UserData();
     }
 }

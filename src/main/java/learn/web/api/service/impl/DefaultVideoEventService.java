@@ -72,4 +72,9 @@ public class DefaultVideoEventService implements VideoEventService {
         return videoEvents.stream().filter(videoEvent -> !videoEvent.getUsers().contains(user)
                 || !(Objects.equals(videoEvent.getOrganizer().getEmail(), user.getEmail()))).toList();
     }
+
+    @Override
+    public VideoEvent getVideoEventByRoomId(String roomId) {
+        return videoEventDao.getVideoEventByRoomId(roomId);
+    }
 }

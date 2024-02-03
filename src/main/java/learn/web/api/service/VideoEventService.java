@@ -14,4 +14,6 @@ public interface VideoEventService {
     void startEvent(String organization, String username, String roomId);
 
     List<VideoEvent> getVideoEventsForCurrentUser();
+
+    VideoEvent getVideoEventByRoomId(String roomId);
 }

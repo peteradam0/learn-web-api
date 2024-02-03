@@ -12,4 +12,6 @@ public interface VideoEventDao extends MongoRepository<VideoEvent, String> {
     VideoEvent getVideoEventByNameAndOrganization(String name, Organization organization);
 
     List<VideoEvent> getVideoEventByActive(boolean active);
+
+    VideoEvent getVideoEventByRoomId(String roomId);
 }

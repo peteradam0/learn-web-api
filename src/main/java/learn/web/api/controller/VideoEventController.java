@@ -1,10 +1,7 @@
 package learn.web.api.controller;
 
 import learn.web.api.facade.VideoEventFacade;
-import learn.web.api.facade.dto.CreateEventData;
-import learn.web.api.facade.dto.DeleteVideoEventData;
-import learn.web.api.facade.dto.StartVideoEventData;
-import learn.web.api.facade.dto.VideoEventData;
+import learn.web.api.facade.dto.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,5 +78,17 @@ public class VideoEventController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No events found");
         }
         return ResponseEntity.ok(videoEventData);
+    }
+
+    @GetMapping ("/events/{roomId}")
+    public ResponseEntity<?> handleGetUserPermission(@PathVariable String roomId) {
+        UserData userData;
+        try {
+            userData =  videoEventFacade.getEventUserPermission(roomId);
+        } catch (Exception e) {
+            LOGGER.debug("Get Permissions failed", e);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No events found");
+        }
+        return ResponseEntity.ok(userData);
     }
 }
