@@ -69,8 +69,8 @@ public class DefaultVideoEventService implements VideoEventService {
 
         if (user == null || videoEvents == null) return new ArrayList<>();
 
-        return videoEvents.stream().filter(videoEvent -> !videoEvent.getUsers().contains(user)
-                || !(Objects.equals(videoEvent.getOrganizer().getEmail(), user.getEmail()))).toList();
+        return videoEvents.stream().filter(videoEvent -> videoEvent.getUsers().contains(user)
+                || (Objects.equals(videoEvent.getOrganizer().getEmail(), user.getEmail()))).toList();
     }
 
     @Override

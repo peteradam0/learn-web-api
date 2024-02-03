@@ -13,6 +13,7 @@ import org.thymeleaf.util.ListUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Component
 public class CreateVideoEventToVideoEventPopulator implements Populator<CreateEventData, VideoEvent> {
@@ -34,24 +35,25 @@ public class CreateVideoEventToVideoEventPopulator implements Populator<CreateEv
         target.setActive(false);
         target.setRoomId("");
         target.setOrganizer(userService.getUserById(sessionService.getCurrentUserId()));
-        target.setUsers(getUsers(source.getUsers()));
+        target.setUsers(getUsers(source.getUsers(),source.getOrganization()));
         target.setOrganization(organizationService.getOrganizationByName(source.getOrganization()));
     }
 
-    private List<User> getUsers(List<String> userEmails) {
-        if (ListUtils.isEmpty(userEmails)) {
+    private List<User> getUsers(List<String> userEmails, String organization) {
+        if (ListUtils.isEmpty(userEmails) && Objects.equals(organization, "Public")) {
+            return userService.getUsers();
+        } else if (ListUtils.isEmpty(userEmails)) {
             return new ArrayList<>();
+        }else {
+            List<User> users = new ArrayList<>();
+            userEmails.forEach(email -> {
+                User user = userService.getUserByEmail(email);
+                if (user != null) {
+                    users.add(user);
+                }
+            });
+
+            return users;
         }
-
-        List<User> users = new ArrayList<>();
-        userEmails.forEach(email -> {
-            User user = userService.getUserByEmail(email);
-            if (user != null) {
-                users.add(user);
-            }
-        });
-
-        return users;
     }
-
 }
