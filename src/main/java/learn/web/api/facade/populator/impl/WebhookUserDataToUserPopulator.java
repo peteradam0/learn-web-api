@@ -1,14 +1,14 @@
 package learn.web.api.facade.populator.impl;
 
-import learn.web.api.facade.dto.WebhookUserData;
+import learn.web.api.facade.dto.ClerkEventData;
 import learn.web.api.facade.populator.Populator;
 import learn.web.api.model.User;
 import org.springframework.stereotype.Component;
 
 @Component
-public class WebhookUserDataToUserPopulator implements Populator<WebhookUserData, User> {
+public class WebhookUserDataToUserPopulator implements Populator<ClerkEventData, User> {
     @Override
-    public void populate(WebhookUserData source, User target) {
+    public void populate(ClerkEventData source, User target) {
         target.setClerkId(source.getData().getId());
         target.setEmail(source.getData().getEmail_addresses().get(0).getEmail_address());
         target.setUsername(source.getData().getUsername());

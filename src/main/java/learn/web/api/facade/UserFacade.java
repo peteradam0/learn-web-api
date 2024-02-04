@@ -1,16 +1,16 @@
 package learn.web.api.facade;
 
 import learn.web.api.facade.dto.UserData;
-import learn.web.api.facade.dto.WebhookUserData;
+import learn.web.api.facade.dto.ClerkEventData;
 
 import java.util.List;
 
 public interface UserFacade {
-    public void createUser(WebhookUserData user);
+    public void createUser(ClerkEventData user);
 
     public UserData getCurrentUserData();
 
-    void updateUser(WebhookUserData webhookUserData);
+    void updateUser(ClerkEventData clerkEventData);
 
     UserData getUserDataById(String userId);
 

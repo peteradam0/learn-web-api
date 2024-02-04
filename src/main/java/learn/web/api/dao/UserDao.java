@@ -7,4 +7,5 @@ public interface UserDao extends MongoRepository<User, String> {
     User findByClerkId(String clerkId);
     User findUserByEmail(String email);
 
+    User findUserByUsername(String username);
 }

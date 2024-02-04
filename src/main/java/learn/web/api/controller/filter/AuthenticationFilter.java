@@ -25,7 +25,8 @@ public class AuthenticationFilter extends OncePerRequestFilter {
             "/learn-web-docs/swagger-config",
             "/learn-web-docs",
             "/swagger-ui/swagger-initializer.js",
-            "/api/v1/organizations/send"
+            "/api/v1/organizations/send",
+            "/api/v1/liveweb"
     );
 
     @Autowired

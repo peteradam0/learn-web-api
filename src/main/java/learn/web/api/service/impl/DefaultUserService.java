@@ -49,4 +49,9 @@ public class DefaultUserService implements UserService {
     public User getUserByEmail(String email) {
         return userDao.findUserByEmail(email);
     }
+
+    @Override
+    public User getUserByUsername(String username) {
+        return userDao.findUserByUsername(username);
+    }
 }

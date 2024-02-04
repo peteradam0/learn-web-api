@@ -3,7 +3,7 @@ package learn.web.api.facade.impl;
 import learn.web.api.service.SessionService;
 import learn.web.api.facade.UserFacade;
 import learn.web.api.facade.dto.UserData;
-import learn.web.api.facade.dto.WebhookUserData;
+import learn.web.api.facade.dto.ClerkEventData;
 import learn.web.api.facade.populator.impl.WebhookUserDataToUserPopulator;
 import learn.web.api.facade.populator.impl.UserToUserDataPopulator;
 import learn.web.api.model.User;
@@ -31,9 +31,9 @@ public class DefaultUserFacade implements UserFacade {
     private WebhookUserDataToUserPopulator webhookUserDataToUserPopulator;
 
     @Override
-    public void createUser(WebhookUserData webhookUserData) {
+    public void createUser(ClerkEventData clerkEventData) {
         User user = new User();
-        webhookUserDataToUserPopulator.populate(webhookUserData, user);
+        webhookUserDataToUserPopulator.populate(clerkEventData, user);
         user.setUserRole(UserRole.CUSTOMER);
         userService.createUser(user);
     }
@@ -47,9 +47,9 @@ public class DefaultUserFacade implements UserFacade {
     }
 
     @Override
-    public void updateUser(WebhookUserData webhookUserData) {
+    public void updateUser(ClerkEventData clerkEventData) {
         User user = new User();
-        webhookUserDataToUserPopulator.populate(webhookUserData, user);
+        webhookUserDataToUserPopulator.populate(clerkEventData, user);
         userService.updateUser(user);
     }
 

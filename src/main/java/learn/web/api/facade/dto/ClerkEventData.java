@@ -7,7 +7,7 @@ import org.springframework.boot.jackson.JsonComponent;
 @JsonComponent
 @Getter
 @Setter
-public class WebhookUserData {
+public class ClerkEventData {
     EmailData data;
     String type;
 

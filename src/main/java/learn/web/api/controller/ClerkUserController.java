@@ -1,13 +1,10 @@
 package learn.web.api.controller;
 
-import com.svix.exceptions.WebhookVerificationException;
 import jakarta.servlet.http.HttpServletRequest;
 import learn.web.api.facade.UserFacade;
-import learn.web.api.facade.dto.WebhookUserData;
+import learn.web.api.facade.dto.ClerkEventData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -17,20 +14,20 @@ public class ClerkUserController {
     private UserFacade userFacade;
 
     @GetMapping("/webhooks")
-    public String handleGetMembers(HttpServletRequest request) {
+    public String handleTestRequest(HttpServletRequest request) {
         return "pong";
     }
 
     @PostMapping("/webhooks")
-    public String handlePostMembers(HttpServletRequest request, @RequestBody WebhookUserData webhookUserData) throws IOException, WebhookVerificationException {
+    public String handlePostMembers(HttpServletRequest request, @RequestBody ClerkEventData clerkEventData) {
 
-        if(webhookUserData.getData().getEmail_addresses() != null) {
-            switch (webhookUserData.getType()) {
+        if(clerkEventData.getData().getEmail_addresses() != null) {
+            switch (clerkEventData.getType()) {
                 case "user.created":
-                    userFacade.createUser(webhookUserData);
+                    userFacade.createUser(clerkEventData);
                     break;
                 case "user.updated":
-                    userFacade.updateUser(webhookUserData);
+                    userFacade.updateUser(clerkEventData);
                     break;
                 default:
             }

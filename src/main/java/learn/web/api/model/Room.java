@@ -11,18 +11,12 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "VideoEvent")
-public class VideoEvent {
+@Document(collection = "Room")
+public class Room {
 
     @Id
     private String id;
-    private String name;
-    private String description;
-    private String imageUrl;
-    private Organization organization;
-    private List<User> users;
-    private boolean active;
-    private User organizer;
     private String roomId;
-    private Room room;
+    private String sid;
+    private List<User> participants;
 }
