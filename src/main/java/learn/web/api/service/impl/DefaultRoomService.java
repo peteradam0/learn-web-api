@@ -74,4 +74,9 @@ public class DefaultRoomService implements RoomService {
 
     }
 
+    @Override
+    public Room getRoomById(String roomId) {
+        return roomDao.findByRoomId(roomId);
+    }
+
 }

@@ -10,5 +10,7 @@ public interface RoomService {
     void addParticipant(String username, String roomId);
 
     void removeParticipant(String username, String roomId);
+
+    Room getRoomById(String roomId);
 }
 

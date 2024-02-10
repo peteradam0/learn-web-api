@@ -82,12 +82,24 @@ public class VideoEventController {
 
     @GetMapping ("/events/{roomId}")
     public ResponseEntity<?> handleGetUserPermission(@PathVariable String roomId) {
-        UserData userData;
+        ParticipantData participantData;
         try {
-            userData =  videoEventFacade.getEventUserPermission(roomId);
+            participantData =  videoEventFacade.getEventUserPermission(roomId);
         } catch (Exception e) {
             LOGGER.debug("Get Permissions failed", e);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No events found");
+        }
+        return ResponseEntity.ok(participantData);
+    }
+
+    @GetMapping ("/events/room/{roomId}")
+    public ResponseEntity<?> handleGetRoomParticipants(@PathVariable String roomId) {
+        List<ParticipantData> userData;
+        try {
+            userData =  videoEventFacade.getRoomParticipants(roomId);
+        } catch (Exception e) {
+            LOGGER.debug("Get Participants", e);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No participants found");
         }
         return ResponseEntity.ok(userData);
     }
