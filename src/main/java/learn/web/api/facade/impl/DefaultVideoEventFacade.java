@@ -104,6 +104,8 @@ public class DefaultVideoEventFacade implements VideoEventFacade {
         if (videoEvent.getUsers().contains(currentUser) || videoEvent.getOrganizer().equals(currentUser)) {
             ParticipantData participantData = new ParticipantData();
             participantData.setUsername(currentUser.getUsername());
+            participantData.setImageUrl(currentUser.getImageUrl());
+            participantData.setEmail(currentUser.getEmail());
             participantData.setAdmin(Objects.equals(videoEvent.getOrganizer().getUsername(), currentUser.getUsername()));
             return participantData;
         }
@@ -121,10 +123,23 @@ public class DefaultVideoEventFacade implements VideoEventFacade {
             participants.forEach(participant -> {
                 ParticipantData userData = new ParticipantData();
                 userData.setUsername(participant.getUsername());
+                userData.setImageUrl(participant.getImageUrl());
+                userData.setEmail(participant.getEmail());
                 userData.setAdmin(Objects.equals(videoEvent.getOrganizer().getUsername(), participant.getUsername()));
                 userDataList.add(userData);
             });
         }
         return userDataList;
+    }
+
+    @Override
+    public ParticipantData getParticipantByUsername(String username) {
+        User user = userService.getUserByUsername(username);
+        ParticipantData userData = new ParticipantData();
+        userData.setUsername(user.getUsername());
+        userData.setImageUrl(user.getImageUrl());
+        userData.setEmail(user.getEmail());
+        userData.setAdmin(false);
+        return userData;
     }
 }

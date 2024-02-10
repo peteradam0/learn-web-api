@@ -10,4 +10,6 @@ import org.springframework.boot.jackson.JsonComponent;
 public class ParticipantData {
     private String username;
     private boolean admin;
+    private String imageUrl;
+    private String email;
 }

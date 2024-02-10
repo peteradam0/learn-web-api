@@ -103,4 +103,16 @@ public class VideoEventController {
         }
         return ResponseEntity.ok(userData);
     }
+
+    @GetMapping ("/events/participants/{username}")
+    public ResponseEntity<?> handleGetRoomParticipant(@PathVariable String username) {
+        ParticipantData userData;
+        try {
+            userData =  videoEventFacade.getParticipantByUsername(username);
+        } catch (Exception e) {
+            LOGGER.debug("Get Participant", e);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No participant found");
+        }
+        return ResponseEntity.ok(userData);
+    }
 }

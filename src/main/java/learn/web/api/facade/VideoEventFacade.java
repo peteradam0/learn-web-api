@@ -2,6 +2,7 @@ package learn.web.api.facade;
 
 import learn.web.api.facade.dto.*;
 
+import javax.mail.Part;
 import java.util.List;
 
 public interface VideoEventFacade {
@@ -18,4 +19,6 @@ public interface VideoEventFacade {
     ParticipantData getEventUserPermission(String roomId);
 
     List<ParticipantData> getRoomParticipants(String roomId);
+
+    ParticipantData getParticipantByUsername(String username);
 }
