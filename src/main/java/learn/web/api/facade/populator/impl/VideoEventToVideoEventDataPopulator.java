@@ -31,6 +31,10 @@ public class VideoEventToVideoEventDataPopulator implements Populator<VideoEvent
         if(StringUtils.hasText(source.getRoomId())){
             target.setRoomId(source.getRoomId());
         }
+
+        if(source.getDate() != null) {
+            target.setDate(source.getDate());
+        }
     }
 
     private UserData convertOrganizer(User user) {

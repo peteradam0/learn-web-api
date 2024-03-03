@@ -25,4 +25,6 @@ public class VideoEvent {
     private User organizer;
     private String roomId;
     private Room room;
+    private String date;
+
 }

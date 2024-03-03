@@ -37,6 +37,7 @@ public class CreateVideoEventToVideoEventPopulator implements Populator<CreateEv
         target.setOrganizer(userService.getUserById(sessionService.getCurrentUserId()));
         target.setUsers(getUsers(source.getUsers(),source.getOrganization()));
         target.setOrganization(organizationService.getOrganizationByName(source.getOrganization()));
+        target.setDate(source.getDate());
     }
 
     private List<User> getUsers(List<String> userEmails, String organization) {

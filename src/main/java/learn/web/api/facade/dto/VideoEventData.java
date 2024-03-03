@@ -19,5 +19,6 @@ public class VideoEventData {
     private boolean active;
     private UserData organizer;
     private String roomId;
+    private String date;
 
 }

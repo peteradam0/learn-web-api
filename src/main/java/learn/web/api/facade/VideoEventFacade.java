@@ -16,6 +16,8 @@ public interface VideoEventFacade {
 
     List<VideoEventData> getEventsForCurrentUser();
 
+    List<VideoEventData> getUpcomingEventsForCurrentUser();
+
     ParticipantData getEventUserPermission(String roomId);
 
     List<ParticipantData> getRoomParticipants(String roomId);

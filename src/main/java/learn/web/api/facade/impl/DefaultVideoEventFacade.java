@@ -97,6 +97,24 @@ public class DefaultVideoEventFacade implements VideoEventFacade {
     }
 
     @Override
+    public List<VideoEventData> getUpcomingEventsForCurrentUser() {
+        List<VideoEvent> videoEvents = videoEventService.getUpcomingEvents();
+
+        if (videoEvents == null) {
+            return new ArrayList<>();
+        }
+
+        List<VideoEventData> videoEventDataList = new ArrayList<>();
+        videoEvents.forEach(videoEvent -> {
+            VideoEventData videoEventData = new VideoEventData();
+            videoEventDataPopulator.populate(videoEvent, videoEventData);
+            videoEventDataList.add(videoEventData);
+        });
+
+        return videoEventDataList;
+    }
+
+    @Override
     public ParticipantData getEventUserPermission(String roomId) {
         User currentUser = userService.getUserById(sessionService.getCurrentUserId());
         VideoEvent videoEvent = videoEventService.getVideoEventByRoomId(roomId);

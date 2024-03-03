@@ -15,5 +15,7 @@ public interface VideoEventService {
 
     List<VideoEvent> getVideoEventsForCurrentUser();
 
+    List<VideoEvent> getUpcomingEvents();
+
     VideoEvent getVideoEventByRoomId(String roomId);
 }

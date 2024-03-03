@@ -74,6 +74,17 @@ public class DefaultVideoEventService implements VideoEventService {
     }
 
     @Override
+    public List<VideoEvent> getUpcomingEvents() {
+        User user = userService.getUserById(sessionService.getCurrentUserId());
+        List<VideoEvent> videoEvents = videoEventDao.findAll();
+        if (user == null || videoEvents == null) return new ArrayList<>();
+
+        return videoEvents.stream().filter(videoEvent -> videoEvent.getUsers().contains(user)
+                || (Objects.equals(videoEvent.getOrganizer().getEmail(), user.getEmail()))).toList();
+
+    }
+
+    @Override
     public VideoEvent getVideoEventByRoomId(String roomId) {
         return videoEventDao.getVideoEventByRoomId(roomId);
     }

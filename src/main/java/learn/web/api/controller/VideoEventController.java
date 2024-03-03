@@ -80,6 +80,18 @@ public class VideoEventController {
         return ResponseEntity.ok(videoEventData);
     }
 
+    @GetMapping ("/events/upcoming")
+    public ResponseEntity<?> handleGetUpcomingEvents() {
+        List<VideoEventData> videoEventData;
+        try {
+            videoEventData =  videoEventFacade.getUpcomingEventsForCurrentUser();
+        } catch (Exception e) {
+            LOGGER.debug("Get Failed", e);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No events found");
+        }
+        return ResponseEntity.ok(videoEventData);
+    }
+
     @GetMapping ("/events/{roomId}")
     public ResponseEntity<?> handleGetUserPermission(@PathVariable String roomId) {
         ParticipantData participantData;

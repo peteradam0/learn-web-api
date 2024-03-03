@@ -16,5 +16,6 @@ public class CreateEventData {
     private String imageUrl;
     private String organization;
     private List<String> users;
+    private String date;
 
 }
