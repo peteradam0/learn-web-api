@@ -19,14 +19,19 @@ public class AuthenticationFilter extends OncePerRequestFilter {
 
     private final Logger LOGGER = LoggerFactory.getLogger(AuthenticationFilter.class);
 
+    private final String API_VERSION = "/v1";
+
+    private final String DEFAULT_URL = "/api" + API_VERSION;
+
     private final List<String> publicRoutes = Arrays.asList(
-            "/api/v1/webhooks",
+            DEFAULT_URL + "/ping",
+            DEFAULT_URL + "/webhooks",
             "/swagger-ui/index.html",
             "/learn-web-docs/swagger-config",
             "/learn-web-docs",
             "/swagger-ui/swagger-initializer.js",
-            "/api/v1/organizations/send",
-            "/api/v1/liveweb"
+            DEFAULT_URL + "/organizations/send",
+            DEFAULT_URL + "/liveweb"
     );
 
     @Autowired
