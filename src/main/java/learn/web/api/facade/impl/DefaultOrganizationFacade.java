@@ -74,6 +74,7 @@ public class DefaultOrganizationFacade implements OrganizationFacade {
     public List<OrganizationData> getOrganizations() {
 
         List<OrganizationData> organizationDataList = new ArrayList<>();
+
         for (Organization organization : organizationService.getOrganizations()) {
             OrganizationData organizationData = new OrganizationData();
             organizationToOrganizationDataPopulator.populate(organization, organizationData);

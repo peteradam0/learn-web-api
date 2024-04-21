@@ -28,18 +28,19 @@ public class DefaultOrganizationService implements OrganizationService {
     private CanvasDao canvasDao;
 
     @Override
-    public Organization createOrganization(Organization organization) {
+    public void createOrganization(Organization organization) {
         Organization foundOrganizations = organizationDao.findOrganizationByName(organization.getName());
 
         if (foundOrganizations == null) {
-            return organizationDao.save(organization);
+            organizationDao.save(organization);
+            return;
         }
         throw new RuntimeException("Organization already exists, create failed");
     }
 
     @Override
     public List<Organization> getOrganizations() {
-        return organizationDao.findAll();
+        return organizationDao.findAllActiveOrganizations();
     }
 
     @Override

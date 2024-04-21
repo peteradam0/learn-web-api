@@ -22,7 +22,7 @@ import java.util.List;
 @Component
 public class JwtValidator {
 
-    private static final List<String> allowedIssusers = Collections.singletonList("https://distinct-dory-88.clerk.accounts.dev");
+    private static final List<String> allowedIssuers = Collections.singletonList("https://distinct-dory-88.clerk.accounts.dev");
 
     private String getKeycloakCertificateUrl(DecodedJWT token) {
         return token.getIssuer() + "/.well-known/jwks.json";
@@ -56,7 +56,7 @@ public class JwtValidator {
         try {
             final DecodedJWT jwt = JWT.decode(token);
 
-            if (!allowedIssusers.contains(jwt.getIssuer())) {
+            if (!allowedIssuers.contains(jwt.getIssuer())) {
                 throw new InvalidParameterException(String.format("Unknown Issuer %s", jwt.getIssuer()));
             }
 

@@ -1,7 +1,6 @@
 package learn.web.api.service;
 
 import learn.web.api.facade.dto.CanvasUser;
-import learn.web.api.facade.dto.OrganizationData;
 import learn.web.api.model.Organization;
 import learn.web.api.model.OrganizationMemberInvitation;
 
@@ -9,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface OrganizationService {
-    Organization createOrganization(Organization organization);
+    void createOrganization(Organization organization);
 
     List<Organization> getOrganizations();
 
