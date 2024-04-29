@@ -19,4 +19,6 @@ public interface CourseService {
     List<Course> getAllPublishedCourses();
 
     List<CanvasCourse> getCourseSuggestions();
+
+    void deleteCourse(String courseId);
 }

@@ -100,6 +100,18 @@ public class CourseController {
         return ResponseEntity.ok(courseData);
     }
 
+    @DeleteMapping("/courses/{courseId}")
+    public ResponseEntity<String> handleDeleteCourse(@PathVariable String courseId) {
+        try {
+            courseFacade.deleteCourse(courseId);
+        } catch (Exception e) {
+            LOGGER.error("Course deletion failed for user failed", e);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("");
+        }
+        return ResponseEntity.ok("Course deletion was successful success");
+
+    }
+
     @PutMapping("/courses/{courseId}")
     public ResponseEntity<String> handlePublication(@PathVariable String courseId, @RequestBody PublicationData publicationData) {
 

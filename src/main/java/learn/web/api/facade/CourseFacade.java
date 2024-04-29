@@ -24,4 +24,6 @@ public interface CourseFacade {
     List<CourseData> getInProgressCourses();
 
     List<CourseSuggestionData> getCourseSuggestions();
+
+    void deleteCourse(String courseId);
 }

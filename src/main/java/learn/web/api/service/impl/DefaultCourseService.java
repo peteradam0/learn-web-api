@@ -2,6 +2,7 @@ package learn.web.api.service.impl;
 
 import learn.web.api.dao.CanvasDao;
 import learn.web.api.dao.CourseDao;
+import learn.web.api.exception.ServiceLayerException;
 import learn.web.api.facade.dto.CanvasCourse;
 import learn.web.api.model.Course;
 import learn.web.api.service.CourseService;
@@ -56,6 +57,17 @@ public class DefaultCourseService implements CourseService {
     @Override
     public List<CanvasCourse> getCourseSuggestions() {
         return canvasDao.findAllCanvasCourses();
+    }
+
+    @Override
+    public void deleteCourse(String courseId) {
+        Course course = courseDao.findCoursesById(courseId);
+
+        if (course == null) {
+            throw new ServiceLayerException("Course with id " + courseId + "not found, it will not be deleted");
+        }
+
+        courseDao.delete(course);
     }
 
 }

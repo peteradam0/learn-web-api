@@ -179,6 +179,11 @@ public class DefaultCourseFacade implements CourseFacade {
 
     }
 
+    @Override
+    public void deleteCourse(String courseId) {
+        courseService.deleteCourse(courseId);
+    }
+
     private void populateCourseData(List<CourseData> courseDataListData, Course course) {
         CourseAuthorData courseAuthorData = getCourseAuthorData(course);
         CourseData courseData = new CourseData();
