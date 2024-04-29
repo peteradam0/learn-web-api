@@ -12,6 +12,8 @@ public interface OrganizationService {
 
     List<Organization> getOrganizations();
 
+    List<Organization> getOrganizationsExclude(String organizationToExclude);
+
     void deleteOrganization(String name);
 
     Organization getOrganizationByName(String name);

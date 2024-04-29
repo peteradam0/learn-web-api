@@ -40,7 +40,12 @@ public class DefaultOrganizationService implements OrganizationService {
 
     @Override
     public List<Organization> getOrganizations() {
-        return organizationDao.findAllActiveOrganizations();
+        return organizationDao.findAll();
+    }
+
+    @Override
+    public List<Organization> getOrganizationsExclude(String organizationToExclude) {
+        return organizationDao.findAllActiveOrganizationsExclude(organizationToExclude);
     }
 
     @Override

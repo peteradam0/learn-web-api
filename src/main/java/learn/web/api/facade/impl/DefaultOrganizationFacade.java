@@ -72,16 +72,25 @@ public class DefaultOrganizationFacade implements OrganizationFacade {
 
     @Override
     public List<OrganizationData> getOrganizations() {
+        return createOrganizationData(organizationService.getOrganizations());
+    }
+
+    private List<OrganizationData> createOrganizationData(List<Organization> organizationList) {
 
         List<OrganizationData> organizationDataList = new ArrayList<>();
 
-        for (Organization organization : organizationService.getOrganizations()) {
+        for (Organization organization : organizationList) {
             OrganizationData organizationData = new OrganizationData();
             organizationToOrganizationDataPopulator.populate(organization, organizationData);
             organizationDataList.add(organizationData);
         }
 
         return organizationDataList;
+    }
+
+    @Override
+    public List<OrganizationData> getOrganizationsExclude(String toExclude) {
+        return createOrganizationData(organizationService.getOrganizationsExclude(toExclude));
     }
 
     @Override

@@ -30,9 +30,6 @@ public class OrganizationController {
     @Autowired
     private EmailFacade emailFacade;
 
-    @Autowired
-    private SessionService sessionService;
-
     @PostMapping("/organizations")
     public ResponseEntity<?> handleCreateOrganization(@RequestBody OrganizationData organizationData) {
 
@@ -124,6 +121,17 @@ public class OrganizationController {
             return ResponseEntity.ok(members);
         } catch (Exception e) {
             LOGGER.error("Organizations members not found", e);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("");
+        }
+    }
+
+    @GetMapping("/organizations/exclude/{name}")
+    public ResponseEntity<?> getOrganizationsExclude(@PathVariable String name) {
+        try {
+            List<OrganizationData> organizationData = organizationFacade.getOrganizationsExclude(name);
+            return ResponseEntity.ok(organizationData);
+        } catch (Exception e) {
+            LOGGER.error("Organizations not found", e);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("");
         }
     }

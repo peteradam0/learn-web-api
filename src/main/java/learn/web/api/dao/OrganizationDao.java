@@ -10,8 +10,8 @@ import java.util.List;
 public interface OrganizationDao extends MongoRepository<Organization, String> {
     Organization findOrganizationByName(String name);
 
-   @Query("{'name' :  {$ne : 'Public'}}")
-    List<Organization> findAllActiveOrganizations();
+   @Query("{'name' :  {$ne : $name}}")
+    List<Organization> findAllActiveOrganizationsExclude(String name);
 
     List<Organization> findOrganizationByMembersContains(User member);
 }

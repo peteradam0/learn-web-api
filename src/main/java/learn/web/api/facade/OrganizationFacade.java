@@ -11,6 +11,8 @@ public interface OrganizationFacade {
 
     List<OrganizationData> getOrganizations();
 
+    List<OrganizationData> getOrganizationsExclude(String toExclude);
+
     void deleteOrganization(String name);
 
     OrganizationMemberInvData addMemberToOrganization(OrganizationMemberData organizationMemberData);
