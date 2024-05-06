@@ -76,7 +76,7 @@ public class CourseController {
         return ResponseEntity.ok(courseDataList);
     }
 
-    @GetMapping("/courses/progress")
+    @GetMapping("/courses/in-progress")
     public ResponseEntity<List<CourseData>> handleGetInProgressCourses() {
         List<CourseData> courseDataList = new ArrayList<>();
         try {
@@ -87,6 +87,19 @@ public class CourseController {
         }
         return ResponseEntity.ok(courseDataList);
     }
+
+    @GetMapping("/courses/not-in-progress")
+    public ResponseEntity<List<CourseData>> handleGetNotInProgressCourses() {
+        List<CourseData> courseDataList = new ArrayList<>();
+        try {
+            courseDataList = courseFacade.getNotInProgressCourses();
+        } catch (Exception e) {
+            LOGGER.error("Get not in progress courses for user failed", e);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(courseDataList);
+        }
+        return ResponseEntity.ok(courseDataList);
+    }
+
 
     @GetMapping("/courses/{courseId}")
     public ResponseEntity<CourseData> handleGetCourses(@PathVariable String courseId) {

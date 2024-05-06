@@ -153,13 +153,20 @@ public class DefaultCourseFacade implements CourseFacade {
 
     @Override
     public List<CourseData> getInProgressCourses() {
-        List<String> courseIdList = courseParticipationFacade.getAllParticipations().stream()
-                .map(CourseParticipationData::getCourseId).toList();
-
         return getSelfCourses().stream()
-                .filter(courseData -> courseIdList.contains(courseData.getId())).toList();
+                .filter(courseData -> getParticipationCourseIds().contains(courseData.getId())).toList();
     }
 
+    private List<String> getParticipationCourseIds() {
+        return courseParticipationFacade.getAllParticipations().stream()
+                .map(CourseParticipationData::getCourseId).toList();
+    }
+
+    @Override
+    public List<CourseData> getNotInProgressCourses() {
+        return getSelfCourses().stream()
+                .filter(courseData -> !getParticipationCourseIds().contains(courseData.getId())).toList();
+    }
     @Override
     public List<CourseSuggestionData> getCourseSuggestions() {
 
@@ -183,6 +190,7 @@ public class DefaultCourseFacade implements CourseFacade {
     public void deleteCourse(String courseId) {
         courseService.deleteCourse(courseId);
     }
+
 
     private void populateCourseData(List<CourseData> courseDataListData, Course course) {
         CourseAuthorData courseAuthorData = getCourseAuthorData(course);
