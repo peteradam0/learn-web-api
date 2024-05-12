@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DefaultUserService implements UserService {
@@ -41,8 +42,11 @@ public class DefaultUserService implements UserService {
 
     @Override
     public void deleteUser(String id) {
-        User user = userDao.findByClerkId(id);
-        userDao.delete(user);
+        Optional<User> user = userDao.findById(id);
+
+        user.ifPresent(value -> userDao.delete(value));
+
+
     }
 
     @Override

@@ -21,12 +21,17 @@ public class DefaultCourseParticipationService implements CourseParticipationSer
 
     @Override
     public void createParticipation(CourseParticipation courseParticipation) {
-        courseParticipationDao.save(courseParticipation);
+        CourseParticipation participation = courseParticipationDao.findByCourseIdAndUserId(courseParticipation.getCourseId(), courseParticipation.getUserId());
+
+        if (participation == null) {
+            courseParticipationDao.save(courseParticipation);
+        }
+
     }
 
     @Override
     public CourseParticipation getParticipation(String courseId, String currentUserId) {
-        CourseParticipation courseParticipation = courseParticipationDao.getCourseParticipationByCourseIdAndAndUserId(courseId, currentUserId);
+        CourseParticipation courseParticipation = courseParticipationDao.findByCourseIdAndUserId(courseId, currentUserId);
 
         if (courseParticipation.getCourseId() != null) {
             return courseParticipation;
@@ -41,9 +46,9 @@ public class DefaultCourseParticipationService implements CourseParticipationSer
 
     @Override
     public void createChapterParticipation(String courseId, String chapterId, String currentUserId) {
-        CourseParticipation courseParticipation = courseParticipationDao.getCourseParticipationByCourseIdAndAndUserId(courseId, currentUserId);
+        CourseParticipation courseParticipation = courseParticipationDao.findByCourseIdAndUserId(courseId, currentUserId);
         List<String> completedChapters = courseParticipation.getCompletedChapterIds();
-        if (completedChapters!= null && !completedChapters.contains(chapterId)) {
+        if (completedChapters != null && !completedChapters.contains(chapterId)) {
             completedChapters.add(chapterId);
             courseParticipation.setCompletedChapterIds(completedChapters);
             courseParticipationDao.save(courseParticipation);
@@ -52,7 +57,7 @@ public class DefaultCourseParticipationService implements CourseParticipationSer
             completedChapters.add(chapterId);
             courseParticipation.setCompletedChapterIds(completedChapters);
             courseParticipationDao.save(courseParticipation);
-        }else{
+        } else {
             LOGGER.debug("Chapter already was completed before");
         }
 

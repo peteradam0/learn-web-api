@@ -9,6 +9,6 @@ import java.util.List;
 @Repository
 public interface CourseParticipationDao extends MongoRepository<CourseParticipation, String> {
 
-    CourseParticipation getCourseParticipationByCourseIdAndAndUserId(String courseId, String userId);
+    CourseParticipation findByCourseIdAndUserId(String courseId, String userId);
     List<CourseParticipation> getCourseParticipationByUserId(String userId);
 }
