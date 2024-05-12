@@ -51,7 +51,7 @@ public class DefaultOrganizationFacade implements OrganizationFacade {
     public OrganizationData createOrganization(OrganizationData organizationData) {
         Organization organization = new Organization();
         organizationDataToOrganizationPopulator.populate(organizationData, organization);
-        User user = userService.getUserById(sessionService.getCurrentUserId());
+        User user = userService.getUserByClerkId(sessionService.getCurrentUserId());
         populateAdminMember(organization, user);
         organizationService.createOrganization(organization);
         return organizationData;

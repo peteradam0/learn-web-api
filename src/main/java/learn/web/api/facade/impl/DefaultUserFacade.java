@@ -1,5 +1,6 @@
 package learn.web.api.facade.impl;
 
+import learn.web.api.facade.dto.UserRoleChangeData;
 import learn.web.api.service.SessionService;
 import learn.web.api.facade.UserFacade;
 import learn.web.api.facade.dto.UserData;
@@ -40,7 +41,7 @@ public class DefaultUserFacade implements UserFacade {
 
     @Override
     public UserData getCurrentUserData() {
-        User user = userService.getUserById(sessionService.getCurrentUserId());
+        User user = userService.getUserByClerkId(sessionService.getCurrentUserId());
         UserData userData = new UserData();
         userToUserDataPopulator.populate(user, userData);
         return userData;
@@ -54,8 +55,15 @@ public class DefaultUserFacade implements UserFacade {
     }
 
     @Override
+    public void updateUserRole(String userId, UserRoleChangeData userRoleChangeData) {
+        User user =userService.getUserById(userId);
+        user.setUserRole(UserRole.valueOf(userRoleChangeData.getRole()));
+        userService.updateUser(user);
+    }
+
+    @Override
     public UserData getUserDataById(String userId) {
-        User user = userService.getUserById(userId);
+        User user = userService.getUserByClerkId(userId);
         UserData userData = new UserData();
         if (user != null) {
             userToUserDataPopulator.populate(user, userData);

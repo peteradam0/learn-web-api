@@ -64,7 +64,7 @@ public class DefaultVideoEventService implements VideoEventService {
 
     @Override
     public List<VideoEvent> getVideoEventsForCurrentUser() {
-        User user = userService.getUserById(sessionService.getCurrentUserId());
+        User user = userService.getUserByClerkId(sessionService.getCurrentUserId());
         List<VideoEvent> videoEvents = videoEventDao.getVideoEventByActive(true);
 
         if (user == null || videoEvents == null) return new ArrayList<>();
@@ -75,7 +75,7 @@ public class DefaultVideoEventService implements VideoEventService {
 
     @Override
     public List<VideoEvent> getUpcomingEvents() {
-        User user = userService.getUserById(sessionService.getCurrentUserId());
+        User user = userService.getUserByClerkId(sessionService.getCurrentUserId());
         List<VideoEvent> videoEvents = videoEventDao.findAll();
         if (user == null || videoEvents == null) return new ArrayList<>();
 

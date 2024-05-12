@@ -116,7 +116,7 @@ public class DefaultVideoEventFacade implements VideoEventFacade {
 
     @Override
     public ParticipantData getEventUserPermission(String roomId) {
-        User currentUser = userService.getUserById(sessionService.getCurrentUserId());
+        User currentUser = userService.getUserByClerkId(sessionService.getCurrentUserId());
         VideoEvent videoEvent = videoEventService.getVideoEventByRoomId(roomId);
 
         if (videoEvent.getUsers().contains(currentUser) || videoEvent.getOrganizer().equals(currentUser)) {

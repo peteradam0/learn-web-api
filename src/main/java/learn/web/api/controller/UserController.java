@@ -2,6 +2,7 @@ package learn.web.api.controller;
 
 import learn.web.api.facade.UserFacade;
 import learn.web.api.facade.dto.UserData;
+import learn.web.api.facade.dto.UserRoleChangeData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,4 +55,16 @@ public class UserController {
         }
         return ResponseEntity.ok("deleted");
     }
+
+    @PutMapping("/users/{userId}")
+    public ResponseEntity<String> handleUpdateUser(@RequestBody UserRoleChangeData userRoleChangeData, @PathVariable String userId) {
+        try {
+            userFacade.updateUserRole(userId, userRoleChangeData);
+        } catch (Exception e) {
+            LOGGER.debug("User update failed", e);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User update failed");
+        }
+        return ResponseEntity.ok("updated");
+    }
 }
+

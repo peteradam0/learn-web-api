@@ -1,6 +1,7 @@
 package learn.web.api.service.impl;
 
 import learn.web.api.dao.UserDao;
+import learn.web.api.exception.ServiceLayerException;
 import learn.web.api.model.User;
 import learn.web.api.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +22,20 @@ public class DefaultUserService implements UserService {
     }
 
     @Override
-    public User getUserById(String userId) {
+    public User getUserByClerkId(String userId) {
         return userDao.findByClerkId(userId);
     }
+
+    @Override
+    public User getUserById(String userId) {
+        Optional<User> user = userDao.findById(userId);
+
+        if (user.isPresent()) {
+            return user.get();
+        }
+        throw new ServiceLayerException("User not found");
+    }
+
 
     @Override
     public void updateUser(User user) {
