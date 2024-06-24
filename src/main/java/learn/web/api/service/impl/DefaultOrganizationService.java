@@ -10,6 +10,7 @@ import learn.web.api.model.User;
 import learn.web.api.service.OrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,8 +92,22 @@ public class DefaultOrganizationService implements OrganizationService {
     }
 
     @Override
+    @Transactional
     public List<Organization> getOrganizationsOfMember(String memberId) {
-        return null;
+        List<Organization> organizations = organizationDao.findAll();
+        Optional<User> user = userDao.findById(memberId);
+
+        if(user.isPresent()){
+            List<Organization> userOrganizations = new ArrayList<>();
+
+            organizations.forEach(organization -> {
+                organization.getMembers().contains(user);
+                userOrganizations.add(organization);
+            });
+
+            return userOrganizations;
+        }
+     return new ArrayList<>();
     }
 
     @Override

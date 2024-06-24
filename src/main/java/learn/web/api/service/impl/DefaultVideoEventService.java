@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Service
 public class DefaultVideoEventService implements VideoEventService {
@@ -66,22 +65,42 @@ public class DefaultVideoEventService implements VideoEventService {
     public List<VideoEvent> getVideoEventsForCurrentUser() {
         User user = userService.getUserByClerkId(sessionService.getCurrentUserId());
         List<VideoEvent> videoEvents = videoEventDao.getVideoEventByActive(true);
+        List<Organization> userOrganizations = organizationService.getOrganizationsOfMember(user.getId());
+        if (user == null || videoEvents == null)
+            return new ArrayList<>();
 
-        if (user == null || videoEvents == null) return new ArrayList<>();
+        List<VideoEvent> videoEventForUser = new ArrayList<>();
 
-        return videoEvents.stream().filter(videoEvent -> videoEvent.getUsers().contains(user)
-                || (Objects.equals(videoEvent.getOrganizer().getEmail(), user.getEmail()))).toList();
+        for (Organization organization : userOrganizations) {
+            for (VideoEvent videoEvent : videoEvents) {
+                if (organization.getName().equals(videoEvent.getOrganization().getName())) {
+                    videoEventForUser.add(videoEvent);
+                }
+            }
+        }
+
+        return videoEventForUser;
     }
 
     @Override
     public List<VideoEvent> getUpcomingEvents() {
         User user = userService.getUserByClerkId(sessionService.getCurrentUserId());
-        List<VideoEvent> videoEvents = videoEventDao.findAll();
-        if (user == null || videoEvents == null) return new ArrayList<>();
+        List<VideoEvent> videoEvents = videoEventDao.getVideoEventByActive(false);
+        List<Organization> userOrganizations = organizationService.getOrganizationsOfMember(user.getId());
+        if (user == null || videoEvents == null)
+            return new ArrayList<>();
 
-        return videoEvents.stream().filter(videoEvent -> videoEvent.getUsers().contains(user)
-                || (Objects.equals(videoEvent.getOrganizer().getEmail(), user.getEmail()))).toList();
+        List<VideoEvent> videoEventForUser = new ArrayList<>();
 
+        for (Organization organization : userOrganizations) {
+            for (VideoEvent videoEvent : videoEvents) {
+                if (organization.getName().equals(videoEvent.getOrganization().getName())) {
+                    videoEventForUser.add(videoEvent);
+                }
+            }
+        }
+
+        return videoEventForUser;
     }
 
     @Override
