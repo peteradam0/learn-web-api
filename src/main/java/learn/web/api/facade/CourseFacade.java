@@ -23,7 +23,7 @@ public interface CourseFacade {
 
     List<CourseData> getInProgressCourses();
 
-    List<CourseSuggestionData> getCourseSuggestions();
+    List<CourseSuggestionData> getCourseSuggestions(String canvasDomain);
 
     void deleteCourse(String courseId);
 

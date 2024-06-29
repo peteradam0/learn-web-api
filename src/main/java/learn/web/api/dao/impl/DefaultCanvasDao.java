@@ -17,9 +17,9 @@ import java.util.List;
 @Component
 public class DefaultCanvasDao implements CanvasDao {
 
-    private final String USERS_ROOT_URI = "http://canvas.docker/api/v1/accounts/self/users";
+    private final String USERS_URI = "/api/v1/accounts/self/users";
 
-    private final String COURSES_ROOT_URI = "http://canvas.docker/api/v1/courses";
+    private final String COURSES_URI = "/api/v1/courses";
     @Autowired
     private RestTemplate restTemplate;
 
@@ -28,8 +28,8 @@ public class DefaultCanvasDao implements CanvasDao {
 
 
     @Override
-    public List<CanvasUser> findAllCanvasUsers() {
-        ResponseEntity<CanvasUser[]> users = restTemplate.exchange(USERS_ROOT_URI, HttpMethod.GET, createHeaders(), CanvasUser[].class);
+    public List<CanvasUser> findAllCanvasUsers(final String canvasDomain) {
+        ResponseEntity<CanvasUser[]> users = restTemplate.exchange(canvasDomain + USERS_URI, HttpMethod.GET, createHeaders(), CanvasUser[].class);
 
         if (users.getBody() == null) {
             throw new RuntimeException("No users found in Canvas LMS");
@@ -39,8 +39,8 @@ public class DefaultCanvasDao implements CanvasDao {
     }
 
     @Override
-    public List<CanvasCourse> findAllCanvasCourses() {
-        ResponseEntity<CanvasCourse[]> courses = restTemplate.exchange(COURSES_ROOT_URI, HttpMethod.GET, createHeaders(), CanvasCourse[].class);
+    public List<CanvasCourse> findAllCanvasCourses(final String canvasDomain) {
+        ResponseEntity<CanvasCourse[]> courses = restTemplate.exchange(canvasDomain + COURSES_URI, HttpMethod.GET, createHeaders(), CanvasCourse[].class);
 
         if (courses.getBody() == null) {
             throw new RuntimeException("No courses found in Canvas LMS");

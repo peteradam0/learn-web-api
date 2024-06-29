@@ -168,9 +168,9 @@ public class DefaultCourseFacade implements CourseFacade {
                 .filter(courseData -> !getParticipationCourseIds().contains(courseData.getId())).toList();
     }
     @Override
-    public List<CourseSuggestionData> getCourseSuggestions() {
+    public List<CourseSuggestionData> getCourseSuggestions(final String canvasDomain) {
 
-        List<CanvasCourse> canvasCourses = courseService.getCourseSuggestions();
+        List<CanvasCourse> canvasCourses = courseService.getCourseSuggestions(canvasDomain);
 
         if (canvasCourses == null) {
             throw new FacadeLayerException("Canvas courses not found");

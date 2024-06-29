@@ -13,6 +13,8 @@ public class CanvasUser {
     private String sortable_name;
     private String short_name;
     private String sis_user_id;
+
+    private String email;
     private String integration_id;
     private String sis_import_id;
     private String login_id;

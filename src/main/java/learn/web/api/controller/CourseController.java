@@ -185,11 +185,11 @@ public class CourseController {
         return ResponseEntity.ok(chapterData);
     }
 
-    @GetMapping("/courses/suggestions")
-    public ResponseEntity<?> handleGetSuggestions() {
+    @PostMapping("/courses/create/suggestions")
+    public ResponseEntity<?> handleGetSuggestions(@RequestBody CanvasRequestData canvasDomainData) {
         List<CourseSuggestionData> courseSuggestionData = new ArrayList<>();
         try {
-            courseSuggestionData = courseFacade.getCourseSuggestions();
+            courseSuggestionData = courseFacade.getCourseSuggestions(canvasDomainData.getCanvasDomain());
         } catch (Exception e) {
             LOGGER.error("Get course suggestions failed", e);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(courseSuggestionData);

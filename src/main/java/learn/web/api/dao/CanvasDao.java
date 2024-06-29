@@ -6,7 +6,7 @@ import learn.web.api.facade.dto.CanvasUser;
 import java.util.List;
 
 public interface CanvasDao {
-    List<CanvasUser> findAllCanvasUsers();
+    List<CanvasUser> findAllCanvasUsers(String canvasDomain);
 
-    List<CanvasCourse> findAllCanvasCourses();
+    List<CanvasCourse> findAllCanvasCourses( String canvasDomain);
 }

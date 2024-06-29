@@ -55,8 +55,8 @@ public class DefaultCourseService implements CourseService {
     }
 
     @Override
-    public List<CanvasCourse> getCourseSuggestions() {
-        return canvasDao.findAllCanvasCourses();
+    public List<CanvasCourse> getCourseSuggestions(final String canvasDomain) {
+        return canvasDao.findAllCanvasCourses(canvasDomain);
     }
 
     @Override

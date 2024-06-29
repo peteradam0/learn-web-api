@@ -140,8 +140,8 @@ public class DefaultOrganizationFacade implements OrganizationFacade {
     }
 
     @Override
-    public List<UserSuggestionData> getUserSuggestionsForOrganization(String organizationName) {
-        List<CanvasUser> canvasUserList = organizationService.getAllCanvasUsers();
+    public List<UserSuggestionData> getUserSuggestionsForOrganization(String organizationName, String canvasDomain) {
+        List<CanvasUser> canvasUserList = organizationService.getAllCanvasUsers(canvasDomain);
         List<User> organizationMembers = organizationService.getOrganizationByName(organizationName).getMembers();
 
         if (canvasUserList == null || organizationMembers == null) {
@@ -152,12 +152,12 @@ public class DefaultOrganizationFacade implements OrganizationFacade {
                 .map(User::getEmail)
                 .toList();
 
-        return createSuggestions(namesList);
+        return createSuggestions(namesList, canvasDomain);
     }
 
-    public List<UserSuggestionData> createSuggestions(final List<String> namesList) {
+    public List<UserSuggestionData> createSuggestions(final List<String> namesList, final String canvasDomain) {
         List<UserSuggestionData> userSuggestionDataList = new ArrayList<>();
-        for (CanvasUser canvasUser : organizationService.getAllCanvasUsers()) {
+        for (CanvasUser canvasUser : organizationService.getAllCanvasUsers(canvasDomain)) {
             filterOutAlreadyAddedUsers(namesList, canvasUser, userSuggestionDataList);
         }
         return userSuggestionDataList;

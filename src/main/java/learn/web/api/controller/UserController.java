@@ -1,6 +1,8 @@
 package learn.web.api.controller;
 
 import learn.web.api.facade.UserFacade;
+import learn.web.api.facade.dto.CanvasRequestData;
+import learn.web.api.facade.dto.CourseSuggestionData;
 import learn.web.api.facade.dto.UserData;
 import learn.web.api.facade.dto.UserRoleChangeData;
 import org.slf4j.Logger;
@@ -66,5 +68,18 @@ public class UserController {
         }
         return ResponseEntity.ok("updated");
     }
+
+//    @PostMapping("/users/create/suggestions")
+//    public ResponseEntity<?> handleGetSuggestions(@RequestBody CanvasRequestData canvasDomainData) {
+//        List<CourseSuggestionData> courseSuggestionData = new ArrayList<>();
+//        try {
+//            courseSuggestionData = courseFacade.getCourseSuggestions(canvasDomainData.getCanvasDomain());
+//        } catch (Exception e) {
+//            LOGGER.error("Get course suggestions failed", e);
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(courseSuggestionData);
+//        }
+//        return ResponseEntity.ok(courseSuggestionData);
+//    }
+
 }
 

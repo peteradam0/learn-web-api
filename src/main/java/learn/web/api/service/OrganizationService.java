@@ -24,6 +24,6 @@ public interface OrganizationService {
 
     List<Organization> getOrganizationsOfMember(String memberId);
 
-    List<CanvasUser> getAllCanvasUsers();
+    List<CanvasUser> getAllCanvasUsers(String canvasDomain);
 }
 

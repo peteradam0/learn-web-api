@@ -9,6 +9,6 @@ import org.springframework.stereotype.Component;
 public class CanvasUserToUserSuggestionPopulator implements Populator<CanvasUser, UserSuggestionData> {
     @Override
     public void populate(CanvasUser source, UserSuggestionData target) {
-        target.setEmail(source.getLogin_id());
+        target.setEmail(source.getName());
     }
 }

@@ -111,7 +111,7 @@ public class DefaultOrganizationService implements OrganizationService {
     }
 
     @Override
-    public List<CanvasUser> getAllCanvasUsers() {
-        return canvasDao.findAllCanvasUsers();
+    public List<CanvasUser> getAllCanvasUsers(final String canvasDomain) {
+        return canvasDao.findAllCanvasUsers(canvasDomain);
     }
 }

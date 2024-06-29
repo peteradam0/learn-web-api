@@ -2,10 +2,7 @@ package learn.web.api.controller;
 
 import learn.web.api.facade.EmailFacade;
 import learn.web.api.facade.OrganizationFacade;
-import learn.web.api.facade.dto.OrganizationData;
-import learn.web.api.facade.dto.OrganizationMemberData;
-import learn.web.api.facade.dto.UserData;
-import learn.web.api.facade.dto.UserSuggestionData;
+import learn.web.api.facade.dto.*;
 import learn.web.api.service.SessionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -114,10 +111,10 @@ public class OrganizationController {
 
     }
 
-    @GetMapping("/organizations/{name}/members/suggestions")
-    public ResponseEntity<?> handleGetOrganizationMembersSuggestions(@PathVariable String name) {
+    @PostMapping("/organizations/{name}/members/create/suggestions")
+    public ResponseEntity<?> handleGetOrganizationMembersSuggestions(@PathVariable final String name, @RequestBody CanvasRequestData canvasRequestData) {
         try {
-            List<UserSuggestionData> members = organizationFacade.getUserSuggestionsForOrganization(name);
+            List<UserSuggestionData> members = organizationFacade.getUserSuggestionsForOrganization(name, canvasRequestData.getCanvasDomain());
             return ResponseEntity.ok(members);
         } catch (Exception e) {
             LOGGER.error("Organizations members not found", e);
