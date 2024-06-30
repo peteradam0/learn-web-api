@@ -1,10 +1,11 @@
 package learn.web.api.controller;
 
+import learn.web.api.facade.OrganizationFacade;
 import learn.web.api.facade.UserFacade;
 import learn.web.api.facade.dto.CanvasRequestData;
-import learn.web.api.facade.dto.CourseSuggestionData;
 import learn.web.api.facade.dto.UserData;
 import learn.web.api.facade.dto.UserRoleChangeData;
+import learn.web.api.facade.dto.UserSuggestionData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ public class UserController {
 
     @Autowired
     private UserFacade userFacade;
+
+    @Autowired
+    private OrganizationFacade organizationFacade;
 
     @GetMapping("/user")
     public ResponseEntity<?> handleGetCurrentUserData() {
@@ -47,6 +51,18 @@ public class UserController {
         return ResponseEntity.ok(userData);
     }
 
+    @PostMapping ("/users/invitation")
+    public ResponseEntity<?> handleUserInvitation(@RequestBody  UserSuggestionData userSuggestionData) {
+
+        try {
+            userFacade.sendUserInvite(userSuggestionData.getEmail());
+        } catch (Exception e) {
+            LOGGER.debug("Participation not found", e);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Users not found");
+        }
+        return ResponseEntity.ok(null);
+    }
+
     @DeleteMapping("/users/{userId}")
     public ResponseEntity<String> handleDeleteUser(@PathVariable String userId) {
         try {
@@ -69,17 +85,18 @@ public class UserController {
         return ResponseEntity.ok("updated");
     }
 
-//    @PostMapping("/users/create/suggestions")
-//    public ResponseEntity<?> handleGetSuggestions(@RequestBody CanvasRequestData canvasDomainData) {
-//        List<CourseSuggestionData> courseSuggestionData = new ArrayList<>();
-//        try {
-//            courseSuggestionData = courseFacade.getCourseSuggestions(canvasDomainData.getCanvasDomain());
-//        } catch (Exception e) {
-//            LOGGER.error("Get course suggestions failed", e);
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(courseSuggestionData);
-//        }
-//        return ResponseEntity.ok(courseSuggestionData);
-//    }
+    @PostMapping("/users/create/suggestions")
+    public ResponseEntity<?> handleGetSuggestions(@RequestBody CanvasRequestData canvasDomainData) {
+        List<UserSuggestionData> members = new ArrayList<>();
+
+        try {
+            members = organizationFacade.getUserSuggestions(canvasDomainData.getCanvasDomain());
+        } catch (Exception e) {
+            LOGGER.error("Get user suggestions failed", e);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(members);
+        }
+        return ResponseEntity.ok(members);
+    }
 
 }
 

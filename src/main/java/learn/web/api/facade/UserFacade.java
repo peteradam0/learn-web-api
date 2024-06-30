@@ -1,7 +1,7 @@
 package learn.web.api.facade;
 
-import learn.web.api.facade.dto.UserData;
 import learn.web.api.facade.dto.ClerkEventData;
+import learn.web.api.facade.dto.UserData;
 import learn.web.api.facade.dto.UserRoleChangeData;
 
 import java.util.List;
@@ -22,4 +22,6 @@ public interface UserFacade {
     List<UserData> getUsers();
 
     void deleteUser(String id);
+
+   void sendUserInvite(String email);
 }

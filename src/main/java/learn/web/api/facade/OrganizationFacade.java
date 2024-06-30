@@ -22,4 +22,6 @@ public interface OrganizationFacade {
     List<OrganizationData> getOrganizationsOfMember(String memberId);
 
     List<UserSuggestionData> getUserSuggestionsForOrganization(String organizationName, String canvasDomain);
+
+    List<UserSuggestionData> getUserSuggestions(String canvasDomain);
 }

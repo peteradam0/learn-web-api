@@ -35,15 +35,30 @@ public class DefaultEmailServiceImpl implements EmailService {
 
     @Override
     public void sengOrganizationInvite(String to, String organizationName, String invitationId) {
-
         try {
             String content = templateEngine.process("emailtemplate", createContextForOrganizationMemberEmail(invitationId, organizationName));
             javaMailSender.send(createMessage(content, to));
         } catch (MessagingException e) {
             LOGGER.error("Message creation failed", e);
         }
-
     }
+
+    @Override
+    public void sendUserInvite(String email) {
+        try {
+            String content = templateEngine.process("usertemplate", createContextForEmail());
+            javaMailSender.send(createMessage(content, email));
+        } catch (MessagingException e) {
+            LOGGER.error("Message creation failed", e);
+        }
+    }
+
+    private Context createContextForEmail() {
+        Context context = new Context();
+        context.setVariable("confirmationUrl", "http://localhost:3000");
+        return context;
+    }
+
 
     private Context createContextForOrganizationMemberEmail(final String invitationId, final String organizationName) {
         Context context = new Context();

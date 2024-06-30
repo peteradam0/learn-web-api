@@ -8,6 +8,7 @@ import learn.web.api.facade.populator.impl.UserToUserDataPopulator;
 import learn.web.api.facade.populator.impl.WebhookUserDataToUserPopulator;
 import learn.web.api.model.User;
 import learn.web.api.model.UserRole;
+import learn.web.api.service.EmailService;
 import learn.web.api.service.SessionService;
 import learn.web.api.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,9 @@ public class DefaultUserFacade implements UserFacade {
 
     @Autowired
     private UserToUserDataPopulator userToUserDataPopulator;
+
+    @Autowired
+    private EmailService emailService;
 
     @Autowired
     private WebhookUserDataToUserPopulator webhookUserDataToUserPopulator;
@@ -96,5 +100,10 @@ public class DefaultUserFacade implements UserFacade {
     @Override
     public void deleteUser(String id) {
         userService.deleteUser(id);
+    }
+
+    @Override
+    public void sendUserInvite(String email) {
+        emailService.sendUserInvite(email);
     }
 }
