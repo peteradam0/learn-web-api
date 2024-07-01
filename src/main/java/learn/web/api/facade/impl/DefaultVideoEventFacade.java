@@ -119,7 +119,7 @@ public class DefaultVideoEventFacade implements VideoEventFacade {
         User currentUser = userService.getUserByClerkId(sessionService.getCurrentUserId());
         VideoEvent videoEvent = videoEventService.getVideoEventByRoomId(roomId);
 
-        if (videoEvent.getUsers().contains(currentUser) || videoEvent.getOrganizer().equals(currentUser)) {
+        if (currentUserInEventUsers(videoEvent.getUsers(), currentUser) || videoEvent.getOrganizer().equals(currentUser)) {
             ParticipantData participantData = new ParticipantData();
             participantData.setUsername(currentUser.getUsername());
             participantData.setImageUrl(currentUser.getImageUrl());
@@ -128,6 +128,11 @@ public class DefaultVideoEventFacade implements VideoEventFacade {
             return participantData;
         }
         return new ParticipantData();
+    }
+
+    private boolean currentUserInEventUsers(final List<User> videoEventUsers, User currentUser) {
+        return videoEventUsers.stream()
+                .anyMatch(videoUser -> Objects.equals(videoUser.getEmail(), currentUser.getEmail()));
     }
 
     @Override
